@@ -1,0 +1,102 @@
+{
+  "stand": "2026-08-14",
+  "hinweis": "Sechs Deployment-Situationen aus dem Security-Operations-Alltag. Alle Angaben sind erfunden. Zu jedem Szenario stehen die vier Antworten fest; das passende Modell ist nicht vorgegeben, sondern wird gegen die genannte Hardware nachgerechnet.",
+  "antwortmoeglichkeiten": {
+    "quelle": ["hub", "eigenes-fine-tuning", "provider-modell"],
+    "ort": ["lokal", "on-premise", "cloud", "provider-api"],
+    "runtime": ["eigenes-skript", "lm-studio", "ollama", "vllm", "provider"],
+    "zugriff": ["in-process", "lokale-api", "interne-api", "externe-api"]
+  },
+  "szenarien": [
+    {
+      "id": "s1",
+      "titel": "Der Prototyp auf dem eigenen Rechner",
+      "text": "Eine Analystin im SOC will ausprobieren, ob ein Sprachmodell aus CVE-Meldungen ein Briefing für den CISO schreiben kann. Sie arbeitet allein an der Idee, es gibt kein Budget und keine Freigabe. Die CVE-Texte sind öffentlich, ihre Notizen dazu nicht — nichts davon darf das Gerät verlassen. Antwortzeiten von einigen Sekunden sind in Ordnung. Vorhanden ist ihr Arbeitsgerät, ein MacBook Pro M4 Max mit 128 GB. Sie will das Ergebnis aus einem Python-Notebook heraus aufrufen und später ohne Codeänderung auf einen Server umziehen.",
+      "hardware": "MacBook Pro M4 Max (128 GB)",
+      "kontext": 32768,
+      "batch": 1,
+      "loesung": {
+        "quelle": "hub",
+        "ort": "lokal",
+        "runtime": "ollama",
+        "zugriff": "lokale-api",
+        "begruendung": "Ein Prototyp ohne Freigabe läuft auf dem eigenen Gerät. Ollama ist in zwei Minuten eingerichtet und bringt eine OpenAI-kompatible API mit. Über die lokale API statt in-process, weil der spätere Umzug auf einen Server dann nur die base_url ändert."
+      }
+    },
+    {
+      "id": "s2",
+      "titel": "Der Team-Server im eigenen Rechenzentrum",
+      "text": "Das SOC hat 40 Analysten. Alle sollen Log-Auszüge und interne Runbooks an ein Modell schicken können, oft mehrere gleichzeitig. Die Daten enthalten Hostnamen, IP-Adressen und Benutzerkennungen aus dem Konzernnetz und dürfen das Haus nicht verlassen. Eine Antwort soll in wenigen Sekunden anfangen. Im Rechenzentrum steht eine NVIDIA A100 SXM mit 80 GB, die für diesen Zweck freigegeben ist. Gerechnet wird mit acht gleichzeitigen Anfragen und 8k Kontext. Mehrere Anwendungen sollen das Modell später nutzen, mit Authentifizierung und Kontingenten je Team.",
+      "hardware": "NVIDIA A100 SXM (80 GB)",
+      "kontext": 8192,
+      "batch": 8,
+      "loesung": {
+        "quelle": "hub",
+        "ort": "on-premise",
+        "runtime": "vllm",
+        "zugriff": "interne-api",
+        "begruendung": "Daten, die das Haus nicht verlassen dürfen, und vorhandene Hardware ergeben on-premise. Acht gleichzeitige Anfragen brauchen einen Scheduler, also vLLM. Authentifizierung und Kontingente gehören an die interne API-Grenze — sie sind nicht möglich, wenn jede Anwendung ihr eigenes Modell lädt."
+      }
+    },
+    {
+      "id": "s3",
+      "titel": "Das feingetunte Modell für die Ticket-Klassifikation",
+      "text": "Ein Team hat ein Modell auf 12.000 abgeschlossenen SOC-Tickets feingetunt, damit es die interne Kategorien-Systematik trifft. Der Adapter ist in das Basismodell gemerged. Das Modell soll den Ticket-Eingang von sechs Anwendungen bedienen, rund 16 Anfragen gleichzeitig, 4k Kontext. Eigene Hardware gibt es nicht und soll es nicht geben, aber der Konzern hat eine Cloud-Subscription mit einem eigenen Mandanten; der Vertrag schließt Training auf den Daten aus. Gebucht ist eine NVIDIA A100 PCIe mit 40 GB.",
+      "hardware": "NVIDIA A100 PCIe (40 GB)",
+      "kontext": 4096,
+      "batch": 16,
+      "loesung": {
+        "quelle": "eigenes-fine-tuning",
+        "ort": "cloud",
+        "runtime": "vllm",
+        "zugriff": "interne-api",
+        "begruendung": "Ein eigenes Fine-Tuning kann kein Provider hosten, also braucht es eigene Rechenzeit — im privaten Mandanten der Cloud, weil keine Hardware gekauft werden soll. Sechzehn gleichzeitige Anfragen sind ein Fall für vLLM, und sechs Anwendungen greifen über eine interne API zu."
+      }
+    },
+    {
+      "id": "s4",
+      "titel": "Die Auswertung über Nacht",
+      "text": "200.000 Firewall-Logzeilen sollen einmal pro Nacht in vier Kategorien einsortiert werden. Es gibt keinen Nutzer, der wartet: Der Job startet um 2 Uhr und ist um 6 Uhr fertig. Gebraucht wird zusätzlich die Wahrscheinlichkeit je Kategorie, damit unsichere Fälle an einen Menschen gehen. Der Job läuft auf der Workstation des Teams mit einer RTX 4090 (24 GB), 2k Kontext, 32 Zeilen im Batch. Außer dem Job selbst greift niemand auf das Modell zu.",
+      "hardware": "RTX 4090 (24 GB)",
+      "kontext": 2048,
+      "batch": 32,
+      "loesung": {
+        "quelle": "hub",
+        "ort": "lokal",
+        "runtime": "eigenes-skript",
+        "zugriff": "in-process",
+        "begruendung": "Wahrscheinlichkeiten je Kategorie heißt Zugriff auf die Logits, und die gibt nur ein eigenes Skript mit Transformers heraus. Ein Batch-Job ohne wartende Nutzer braucht weder Scheduler noch Netzwerkgrenze, also läuft das Modell in-process."
+      }
+    },
+    {
+      "id": "s5",
+      "titel": "Das Briefing bis Freitag",
+      "text": "Eine Beratung soll für einen Kunden aus öffentlichen CVE-Meldungen und Herstellermitteilungen wöchentliche Briefings erzeugen. Es gibt keine Hardware, keinen Betrieb und niemanden, der einen Server pflegen würde. Verarbeitet werden ausschließlich öffentliche Texte; interne Kundendaten kommen nicht vor. Gefragt ist die höchste Textqualität, die zu bekommen ist, drei Nutzer, ein paar hundert Anfragen pro Woche. Die erste Fassung soll am Freitag stehen.",
+      "hardware": null,
+      "kontext": 32768,
+      "batch": 1,
+      "loesung": {
+        "quelle": "provider-modell",
+        "ort": "provider-api",
+        "runtime": "provider",
+        "zugriff": "externe-api",
+        "begruendung": "Öffentliche Texte, keine Hardware, keine Betriebsmannschaft und höchste Qualitätsanforderung: Das ist der Fall, in dem ein Provider-Modell die richtige Antwort ist. Der Preis dafür sind Abhängigkeit von Modellversionen und Verfügbarkeit."
+      }
+    },
+    {
+      "id": "s6",
+      "titel": "Modelle vergleichen ohne Python",
+      "text": "Ein Security-Engineer ohne Python-Kenntnisse soll drei offene Modelle an denselben zwanzig CVE-Texten vergleichen und dem Team eine Empfehlung geben. Er hat ein Firmen-Notebook mit einer RTX 4060 Laptop-GPU (8 GB). Die CVE-Texte sind öffentlich, seine Bewertungsnotizen enthalten interne Systemnamen und bleiben deshalb auf dem Gerät. Er braucht eine Oberfläche zum Laden, Chatten und Umschalten zwischen den Modellen, 8k Kontext, immer nur eine Anfrage.",
+      "hardware": "RTX 4060 Laptop (8 GB)",
+      "kontext": 8192,
+      "batch": 1,
+      "loesung": {
+        "quelle": "hub",
+        "ort": "lokal",
+        "runtime": "lm-studio",
+        "zugriff": "lokale-api",
+        "begruendung": "Modelle laden, chatten und umschalten ohne Code ist genau die Aufgabe einer Desktop-Anwendung. LM Studio serviert auf Wunsch zusätzlich eine lokale OpenAI-kompatible API, über die das Team den Vergleich später automatisieren kann."
+      }
+    }
+  ]
+}

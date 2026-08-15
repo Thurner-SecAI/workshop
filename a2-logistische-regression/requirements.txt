@@ -1,0 +1,9 @@
+# Für das Notebook
+numpy>=1.26
+pandas>=2.0
+matplotlib>=3.8
+scikit-learn>=1.4
+jupyterlab>=4.0
+
+# Nur für prepare_data.py (Daten neu von Kaggle laden)
+kagglehub>=0.3

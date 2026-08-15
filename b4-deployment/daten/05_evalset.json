@@ -1,0 +1,246 @@
+{
+ "stand": "2026-08-15",
+ "quelle": "Kopie der 30 CVE-Testfälle aus dem Prompt-Engineering-Ordner. Die Texte sind erfunden, aber nach dem Muster echter Advisories gebaut.",
+ "hinweis": "Zu jedem Fall stehen drei Sollwerte fest. severity folgt den CVSS-Bändern, component ist der Produktname ohne Versionsangabe, action ist der dringlichste nächste Schritt. Die Sollwerte sind eine Festlegung, keine Wahrheit: Bei T08 nennt der Text eine neue Version und der Sollwert trotzdem patch. Solche Fälle bleiben drin, weil sie in einer echten Eval-Menge auch drinbleiben.",
+ "felder": {
+  "id": "Kennung des Falls, T01 bis T30",
+  "text": "die CVE-Kurzbeschreibung, englisch",
+  "severity": "Einstufung aus dem CVSS-Wert im Text",
+  "component": "betroffenes Produkt, ohne Versionsangabe",
+  "action": "dringlichster nächster Schritt"
+ },
+ "wertelisten": {
+  "severity": [
+   "critical",
+   "high",
+   "medium",
+   "low"
+  ],
+  "action": [
+   "upgrade",
+   "patch",
+   "rotate_credentials",
+   "disable_feature",
+   "isolate",
+   "monitor"
+  ]
+ },
+ "cvss_baender": {
+  "critical": "9.0 - 10.0",
+  "high": "7.0 - 8.9",
+  "medium": "4.0 - 6.9",
+  "low": "0.1 - 3.9"
+ },
+ "faelle": [
+  {
+   "id": "T01",
+   "text": "CVE-2026-3224: An authentication bypass in Devolutions Server up to and including 2025.3.15.0 allows unauthenticated attackers to forge JSON Web Tokens and sign in as any Entra ID user, including administrators. CVSS 9.8. A fixed release (2025.3.16.0) is available.",
+   "severity": "critical",
+   "component": "Devolutions Server",
+   "action": "upgrade"
+  },
+  {
+   "id": "T02",
+   "text": "A heap buffer overflow in the HTTP/3 request parser of nginx 1.27.0 through 1.27.4 lets a remote attacker crash the worker process with a crafted QUIC frame. CVSS 8.2. Version 1.27.5 contains the fix.",
+   "severity": "high",
+   "component": "nginx",
+   "action": "upgrade"
+  },
+  {
+   "id": "T03",
+   "text": "Jenkins 2.462.1 writes the plain text values of build credentials into the job console log when a pipeline step fails. Any user with read access to the job can retrieve them. CVSS 7.5. The affected credentials must be considered exposed.",
+   "severity": "high",
+   "component": "Jenkins",
+   "action": "rotate_credentials"
+  },
+  {
+   "id": "T04",
+   "text": "A deserialization flaw in the reporting servlet of Apache Tomcat 10.1.20 allows an authenticated user with the manager role to run arbitrary commands on the server. CVSS 8.8. Apache released 10.1.21 with a corrected object filter.",
+   "severity": "high",
+   "component": "Apache Tomcat",
+   "action": "upgrade"
+  },
+  {
+   "id": "T05",
+   "text": "The legacy SMBv1 file sharing protocol is still enabled on Windows Server 2022 file servers. No patch removes the protocol; Microsoft recommends turning the feature off, because the protocol has no message signing and is used by ransomware for lateral movement. CVSS 7.1.",
+   "severity": "high",
+   "component": "Windows Server 2022",
+   "action": "disable_feature"
+  },
+  {
+   "id": "T06",
+   "text": "An unauthenticated remote code execution flaw in the PostgreSQL extension pg_geo 3.2.1 allows attackers to run shell commands through a crafted geometry query. CVSS 9.6. No fixed release exists yet; the vendor advises removing the extension.",
+   "severity": "critical",
+   "component": "pg_geo",
+   "action": "disable_feature"
+  },
+  {
+   "id": "T07",
+   "text": "A stored cross site scripting flaw in the comment field of GitLab CE 17.4.0 lets a project member run script code in the browser of another member of the same project. CVSS 5.4. GitLab 17.4.2 escapes the field correctly.",
+   "severity": "medium",
+   "component": "GitLab CE",
+   "action": "upgrade"
+  },
+  {
+   "id": "T08",
+   "text": "OpenSSH 9.6p1 accepts a client certificate whose principal list is empty and maps it to the account name given by the client. Exploitation requires a certificate signed by the internal CA. CVSS 6.8. OpenSSH 9.7p1 rejects such certificates.",
+   "severity": "medium",
+   "component": "OpenSSH",
+   "action": "patch"
+  },
+  {
+   "id": "T09",
+   "text": "The management interface of a Fortinet FortiGate 600F firewall running FortiOS 7.4.3 is reachable from the internet. A published exploit chain grants full device administration without credentials. CVSS 9.4. Until the firmware update is scheduled, the interface must be taken off the public network.",
+   "severity": "critical",
+   "component": "FortiGate 600F",
+   "action": "isolate"
+  },
+  {
+   "id": "T10",
+   "text": "Grafana 11.1.0 leaks the internal host name of the data source in an error message shown to viewers. No credentials or query results are disclosed. CVSS 3.7. Grafana 11.1.3 shortens the message.",
+   "severity": "low",
+   "component": "Grafana",
+   "action": "upgrade"
+  },
+  {
+   "id": "T11",
+   "text": "A timing difference in the password comparison of Keycloak 25.0.2 allows an attacker on the same network segment to learn the length of a user password over many attempts. Exploitation is slow and noisy. CVSS 3.1. The vendor plans a fix for the next minor release and recommends watching the authentication logs.",
+   "severity": "low",
+   "component": "Keycloak",
+   "action": "monitor"
+  },
+  {
+   "id": "T12",
+   "text": "An SQL injection in the search endpoint of the internal ticket system Zammad 6.4.0 lets an authenticated agent read the full user table including password hashes. CVSS 8.1. Zammad 6.4.1 parameterises the query.",
+   "severity": "high",
+   "component": "Zammad",
+   "action": "upgrade"
+  },
+  {
+   "id": "T13",
+   "text": "An access control flaw in Nextcloud 28.0.1 lets an unauthenticated attacker read any file of a shared folder by guessing the share token, because the token is derived from the creation timestamp. CVSS 9.1. Nextcloud 28.0.3 generates random tokens.",
+   "severity": "critical",
+   "component": "Nextcloud",
+   "action": "upgrade"
+  },
+  {
+   "id": "T14",
+   "text": "PostgreSQL 16.2 runs the installation script of an extension with superuser rights even when a role with only CREATE privileges installs it, which allows privilege escalation on the database server. CVSS 8.8. PostgreSQL 16.3 contains the fix.",
+   "severity": "high",
+   "component": "PostgreSQL",
+   "action": "upgrade"
+  },
+  {
+   "id": "T15",
+   "text": "A race condition in the container runtime of Docker Engine 25.0.2 lets a process inside a container obtain a file descriptor of the host file system during startup. CVSS 8.6. Docker Engine 25.0.5 closes the descriptor before the container starts.",
+   "severity": "high",
+   "component": "Docker Engine",
+   "action": "upgrade"
+  },
+  {
+   "id": "T16",
+   "text": "Kubernetes 1.29.1 includes the service account token of the requesting pod in the response of the kubelet debug endpoint. Every pod on the node can read the tokens of the other pods. CVSS 7.7. The tokens on the affected nodes must be considered exposed.",
+   "severity": "high",
+   "component": "Kubernetes",
+   "action": "rotate_credentials"
+  },
+  {
+   "id": "T17",
+   "text": "Veeam Backup & Replication 12.1 stores the repository password in a configuration file that is readable by every local user of the backup server. CVSS 7.1. The password has to be treated as compromised.",
+   "severity": "high",
+   "component": "Veeam Backup & Replication",
+   "action": "rotate_credentials"
+  },
+  {
+   "id": "T18",
+   "text": "Exchange Server 2019 CU13 still offers legacy NTLM authentication on the Autodiscover endpoint, which allows an attacker in the network to relay the authentication to other services. CVSS 8.1. No patch removes the mechanism; Microsoft recommends switching the legacy authentication off.",
+   "severity": "high",
+   "component": "Exchange Server 2019",
+   "action": "disable_feature"
+  },
+  {
+   "id": "T19",
+   "text": "The administration portal of a Sophos XG 210 firewall running SFOS 19.5 is reachable from the internet, and a published exploit chain returns a root shell without credentials. CVSS 9.3. The firmware update is scheduled for the next maintenance window; until then the portal must be taken off the public network.",
+   "severity": "critical",
+   "component": "Sophos XG 210",
+   "action": "isolate"
+  },
+  {
+   "id": "T20",
+   "text": "An unauthenticated remote code execution flaw in the Visual Composer module of SAP NetWeaver 7.50 lets attackers upload and run arbitrary code. CVSS 9.9. No corrected release exists yet; SAP recommends switching the module off.",
+   "severity": "critical",
+   "component": "SAP NetWeaver",
+   "action": "disable_feature"
+  },
+  {
+   "id": "T21",
+   "text": "A stored cross site scripting flaw in the forum editor of Moodle 4.3.1 lets a student run script code in the browser of a teacher who opens the post. CVSS 5.4. Moodle 4.3.3 escapes the field correctly.",
+   "severity": "medium",
+   "component": "Moodle",
+   "action": "upgrade"
+  },
+  {
+   "id": "T22",
+   "text": "VMware ESXi 8.0 U2 returns a few uninitialised bytes of host memory to a virtual machine through a graphics device call. Exploitation requires local access inside a guest. CVSS 4.3. VMware published the patch ESXi80U2sb for the installed version.",
+   "severity": "medium",
+   "component": "VMware ESXi",
+   "action": "patch"
+  },
+  {
+   "id": "T23",
+   "text": "A crafted request keeps the header parser of Squid 6.6 in a loop and drives the proxy process to full CPU load until it is restarted. CVSS 6.5. The vendor patch for 6.6 limits the number of parser iterations.",
+   "severity": "medium",
+   "component": "Squid",
+   "action": "patch"
+  },
+  {
+   "id": "T24",
+   "text": "The HTTP server of Node.js 20.11.0 accepts header values with carriage return characters, which allows response splitting when a reverse proxy is in front of the application. CVSS 6.1. Node.js 20.11.1 rejects such headers.",
+   "severity": "medium",
+   "component": "Node.js",
+   "action": "upgrade"
+  },
+  {
+   "id": "T25",
+   "text": "pgAdmin 8.2 issues the session cookie without the Secure flag, so the cookie is also sent over an unencrypted connection. CVSS 3.7. pgAdmin 8.4 sets the flag.",
+   "severity": "low",
+   "component": "pgAdmin",
+   "action": "upgrade"
+  },
+  {
+   "id": "T26",
+   "text": "Splunk Enterprise 9.1.2 names the internal index in an error message that is shown to users without index access. No events or credentials are disclosed. CVSS 3.1. The vendor plans a fix for a later release and recommends watching the search audit log.",
+   "severity": "low",
+   "component": "Splunk Enterprise",
+   "action": "monitor"
+  },
+  {
+   "id": "T27",
+   "text": "A buffer overflow in the session handling of Citrix ADC 13.1-49.15 lets an unauthenticated attacker read memory contents including active session tokens. CVSS 9.4. Citrix released 13.1-51.15 with a corrected length check.",
+   "severity": "critical",
+   "component": "Citrix ADC",
+   "action": "upgrade"
+  },
+  {
+   "id": "T28",
+   "text": "Rundeck 5.0.1 writes the passphrase of the SSH key into the execution log when a job step fails. Every user with access to the job history can read it. CVSS 7.2. The key in question has to be considered exposed.",
+   "severity": "high",
+   "component": "Rundeck",
+   "action": "rotate_credentials"
+  },
+  {
+   "id": "T29",
+   "text": "Prometheus 2.49.1 shows the full query string of a failed expression on the error page of the expression browser. No credentials are involved. CVSS 2.7. The maintainers do not plan a change and recommend watching the access logs.",
+   "severity": "low",
+   "component": "Prometheus",
+   "action": "monitor"
+  },
+  {
+   "id": "T30",
+   "text": "Samba 4.19.3 returns the internal domain name in an error response to unauthenticated clients. No user data is exposed. CVSS 3.1. The vendor patch 4.19.4 removes the field from the response.",
+   "severity": "low",
+   "component": "Samba",
+   "action": "patch"
+  }
+ ]
+}

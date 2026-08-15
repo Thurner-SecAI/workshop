@@ -1,0 +1,39 @@
+{
+  "hinweis": "Zu jedem Pruefpunkt aus incident_report.json die Signalwoerter, an denen sich maschinell pruefen laesst, ob eine Antwort den Punkt abdeckt. Ein Punkt gilt als abgedeckt, wenn ein einzelner Satz aus jeder Signalgruppe mindestens ein Wort enthaelt. Alle Signale stehen klein geschrieben.",
+  "punkte": [
+    {
+      "punkt": "names srv-pam01 as affected by CVE-2026-3224",
+      "signale": [
+        ["srv-pam01"],
+        ["cve-2026-3224", "cve 2026-3224", "devolutions"]
+      ]
+    },
+    {
+      "punkt": "names the service account svc_backup as compromised",
+      "signale": [
+        ["svc_backup"],
+        ["compromis", "misuse", "misused", "abused", "unauthorized", "attacker", "stolen", "hijack"]
+      ]
+    },
+    {
+      "punkt": "mentions rotating or disabling the credentials in the vault",
+      "signale": [
+        ["rotat", "revok", "reset", "disable", "change the password", "new password", "invalidat"],
+        ["credential", "password", "vault", "token", "secret"]
+      ]
+    },
+    {
+      "punkt": "mentions the encrypted share on srv-fs02",
+      "signale": [
+        ["srv-fs02"],
+        [".locked", "encrypt", "ransom"]
+      ]
+    },
+    {
+      "punkt": "gives an order, not only a list of measures",
+      "signale": [
+        ["first", "then", "next", "after that", "afterwards", "immediately", "in this order", "before"]
+      ]
+    }
+  ]
+}

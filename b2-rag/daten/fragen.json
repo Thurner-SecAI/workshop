@@ -1,0 +1,52 @@
+[
+ {
+  "frage": "Welchen CVSS-Wert hat CVE-2026-3224?",
+  "erwartete_dok_ids": ["cve-2026-3224"],
+  "erwartete_antwort": "CVSS v3.1 Base Score 9.8, Einstufung critical."
+ },
+ {
+  "frage": "Welche Versionen von NorthPeak SecureGate sind von CVE-2026-3224 betroffen und in welcher Version ist die Schwachstelle behoben?",
+  "erwartete_dok_ids": ["cve-2026-3224"],
+  "erwartete_antwort": "Betroffen sind 7.2.0 bis 7.4.3 und 8.0.0 bis 8.1.1. Behoben in 7.4.4 beziehungsweise 8.1.2. Die Cloud-Variante ist nicht betroffen."
+ },
+ {
+  "frage": "Wie schnell muss ein Notfall-Patch auf Servern eingespielt werden?",
+  "erwartete_dok_ids": ["runbook-patch-management"],
+  "erwartete_antwort": "Innerhalb von 72 Stunden ab Freigabe durch das SOC."
+ },
+ {
+  "frage": "Wer entscheidet, ob ein Vorfall auf SEV-1 eingestuft wird?",
+  "erwartete_dok_ids": ["runbook-incident-response"],
+  "erwartete_antwort": "Der Incident Lead. Die Entscheidung wird im Ticket begründet, eine spätere Herabstufung ist möglich."
+ },
+ {
+  "frage": "Wie lange werden Firewall-Logs aufbewahrt?",
+  "erwartete_dok_ids": ["policy-logging-und-aufbewahrung"],
+  "erwartete_antwort": "365 Tage insgesamt: 90 Tage im schnellen Zugriff, danach 275 Tage im Archiv."
+ },
+ {
+  "frage": "Für welche Konten ist ein Phishing-resistentes MFA-Verfahren zwingend?",
+  "erwartete_dok_ids": ["policy-passwoerter-und-mfa"],
+  "erwartete_antwort": "Für administrative Konten mit Präfix adm-, Konten mit Zugriff auf das Finanzsystem, Konten der Geschäftsführung sowie Zugänge zum VPN-Gateway und zur Verwaltungsoberfläche von SentinelGrid. Zugelassen sind nur FIDO2-Schlüssel und gerätegebundene Passkeys."
+ },
+ {
+  "frage": "Was war die Grundursache des Vorfalls INC-2026-0311 vom 14. März 2026?",
+  "erwartete_dok_ids": ["postmortem-2026-03-14-vpn", "cve-2026-3224"],
+  "erwartete_antwort": "Ein nicht fristgerecht eingespielter Notfall-Patch für CVE-2026-3224. Der Change lief im Regelweg, das Wartungsfenster verstrich ohne Umsetzung."
+ },
+ {
+  "frage": "Wie viele Ereignisse pro Sekunde verarbeitet SentinelGrid im Normalbetrieb?",
+  "erwartete_dok_ids": ["systemdoku-sentinelgrid"],
+  "erwartete_antwort": "Rund 42.000 Ereignisse pro Sekunde, in der Spitze 78.000."
+ },
+ {
+  "frage": "Welcher Workaround schützt vor CVE-2026-4410, solange kein Patch verfügbar ist?",
+  "erwartete_dok_ids": ["cve-2026-4410"],
+  "erwartete_antwort": "Die Zahl der key_share-Einträge auf 4 begrenzen (max_key_share_entries = 4) und im Load Balancer die neuen TLS-Handshakes je Quell-IP auf 50 pro Sekunde begrenzen."
+ },
+ {
+  "frage": "Was passiert mit den Zugängen einer Mitarbeiterin an ihrem letzten Arbeitstag?",
+  "erwartete_dok_ids": ["runbook-zugriffskontrolle"],
+  "erwartete_antwort": "Um 18:00 Uhr wird das Konto automatisch deaktiviert, um 18:05 Uhr werden alle Sessions und Token verworfen und das VPN-Zertifikat gesperrt. Das Konto wird nach 90 Tagen gelöscht."
+ }
+]

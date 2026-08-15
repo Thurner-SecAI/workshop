@@ -1,0 +1,5 @@
+# Die Vector Database wird aus daten/chunks.json erzeugt und nicht versioniert.
+daten/chroma/
+
+.ipynb_checkpoints/
+__pycache__/

@@ -1,0 +1,95 @@
+{
+  "stand": "2026-08-14",
+  "quelle": "Datenblätter der Hersteller",
+  "hinweis": "vram_gb ist der ausgewiesene Speicher der Karte beziehungsweise das Unified Memory des Geräts, in Dezimal-Gigabyte. speicherbandbreite_gb_s ist die theoretische Spitzenbandbreite; gemessen wird davon in der Praxis rund 70 bis 90 Prozent. Bei Unified Memory steht dem Modell nicht der gesamte Speicher zur Verfügung, das Betriebssystem hält einen Teil zurück.",
+  "felder": {
+    "name": "Karte oder Gerät",
+    "vram_gb": "Speicher in GB",
+    "speicherbandbreite_gb_s": "Speicherbandbreite in GB/s",
+    "typ": "Laptop, Workstation oder Rechenzentrum",
+    "speicher": "dediziert oder unified",
+    "notiz": "wofür die Karte typischerweise steht"
+  },
+  "karten": [
+    {
+      "name": "RTX 4060 Laptop (8 GB)",
+      "vram_gb": 8,
+      "speicherbandbreite_gb_s": 256,
+      "typ": "Laptop",
+      "speicher": "dediziert",
+      "notiz": "Verbreitetes Firmen-Notebook mit GPU. Reicht für Modelle bis rund 7B in INT4."
+    },
+    {
+      "name": "MacBook Air M3 (16 GB)",
+      "vram_gb": 16,
+      "speicherbandbreite_gb_s": 100,
+      "typ": "Laptop",
+      "speicher": "unified",
+      "notiz": "Unified Memory, aber schmale Bandbreite. Modelle laufen, sie laufen langsam."
+    },
+    {
+      "name": "MacBook Pro M4 Max (128 GB)",
+      "vram_gb": 128,
+      "speicherbandbreite_gb_s": 546,
+      "typ": "Laptop",
+      "speicher": "unified",
+      "notiz": "Hält Modelle, die auf keine Consumer-GPU passen, bei einem Bruchteil der Bandbreite eines Rechenzentrums."
+    },
+    {
+      "name": "RTX 4090 (24 GB)",
+      "vram_gb": 24,
+      "speicherbandbreite_gb_s": 1008,
+      "typ": "Workstation",
+      "speicher": "dediziert",
+      "notiz": "Die Obergrenze im Consumer-Bereich. 24 GB sind die Grenze, an der die meisten Pläne scheitern."
+    },
+    {
+      "name": "Mac Studio M3 Ultra (256 GB)",
+      "vram_gb": 256,
+      "speicherbandbreite_gb_s": 819,
+      "typ": "Workstation",
+      "speicher": "unified",
+      "notiz": "Viel Speicher je Euro. Ein Entwicklerarbeitsplatz, kein Server für viele Anfragen."
+    },
+    {
+      "name": "NVIDIA T4 (16 GB)",
+      "vram_gb": 16,
+      "speicherbandbreite_gb_s": 320,
+      "typ": "Rechenzentrum",
+      "speicher": "dediziert",
+      "notiz": "Alte, günstige Cloud-Karte. Kein BF16, kein FP8 — für aktuelle Runtimes oft zu alt."
+    },
+    {
+      "name": "NVIDIA L4 (24 GB)",
+      "vram_gb": 24,
+      "speicherbandbreite_gb_s": 300,
+      "typ": "Rechenzentrum",
+      "speicher": "dediziert",
+      "notiz": "Sparsam und günstig, aber schmalbandig. Gut für kleine Modelle mit vielen Anfragen."
+    },
+    {
+      "name": "NVIDIA A100 PCIe (40 GB)",
+      "vram_gb": 40,
+      "speicherbandbreite_gb_s": 1555,
+      "typ": "Rechenzentrum",
+      "speicher": "dediziert",
+      "notiz": "Die kleinere A100. 40 GB reichen für ein 70B-Modell in INT4 nur ohne langen Kontext."
+    },
+    {
+      "name": "NVIDIA A100 SXM (80 GB)",
+      "vram_gb": 80,
+      "speicherbandbreite_gb_s": 2039,
+      "typ": "Rechenzentrum",
+      "speicher": "dediziert",
+      "notiz": "Der Standard für ein 70B-Modell auf einer einzelnen Karte."
+    },
+    {
+      "name": "NVIDIA H100 SXM (80 GB)",
+      "vram_gb": 80,
+      "speicherbandbreite_gb_s": 3350,
+      "typ": "Rechenzentrum",
+      "speicher": "dediziert",
+      "notiz": "Gleicher Speicher wie die A100, deutlich mehr Bandbreite — also mehr Tokens je Sekunde."
+    }
+  ]
+}

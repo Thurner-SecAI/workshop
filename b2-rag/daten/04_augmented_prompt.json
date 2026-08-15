@@ -1,0 +1,362 @@
+{
+ "instruktion": "You are the retrieval assistant of the security operations center of Nordlicht Logistik SE.\nAnswer the question using ONLY the context below. Do not use prior knowledge, do not guess.\nBack every statement with a source: give the chunk id in square brackets, exactly as it\nappears in the header of the context block, for example [cve-2026-3224#01].\nWrite the answer in German.\nBefore you answer, check whether the context really contains the answer. A passage about a\ndifferent subject does not count, and neither does a number that belongs to something else.\nIf it does not contain the answer, reply with exactly this sentence and nothing else: Not covered by the provided documents.",
+ "antwortformat": "Use exactly this format, one field per line:\nAntwort: <at most three sentences>\nBelege: <chunk ids, comma separated>\nSicherheit: hoch | mittel | niedrig",
+ "keine_deckung": "Not covered by the provided documents.",
+ "budget": {
+  "context_window": 8192,
+  "antwort_tokens": 600,
+  "reserve": 200
+ },
+ "grundeinstellung": {
+  "anzahl": 10,
+  "ordnung": "aufmerksamkeit"
+ },
+ "fragen": [
+  {
+   "frage": "Welchen CVSS-Wert hat CVE-2026-3224?",
+   "erwartete_dok_ids": [
+    "cve-2026-3224"
+   ],
+   "chunk_ids": [
+    "cve-2026-3224#01",
+    "cve-2025-9042#01",
+    "cve-2025-9042#04",
+    "runbook-patch-management#01",
+    "cve-2025-9042#00",
+    "cve-2026-4410#00",
+    "cve-2026-3224#00",
+    "cve-2026-1187#01",
+    "cve-2026-4410#01",
+    "postmortem-2026-03-14-vpn#00"
+   ],
+   "antwort": "Antwort: CVE-2026-3224 hat einen CVSS Base Score von 9.8 (critical). Die Bewertung basiert auf einem Exploit öffentlich seit dem 13.03.2026 und wurde bestätigt durch NorthPeak PSIRT, was eine hohe Wahrscheinlichkeit für ein Angriff aus dem Internet impliziert.\nBelege: [cve-2026-3224#01]\n\nSicherheit: hoch",
+   "deckung": 0.6667,
+   "quelle": true,
+   "format": true,
+   "chunks": 10,
+   "tokens": 2654
+  },
+  {
+   "frage": "Welche Versionen von NorthPeak SecureGate sind von CVE-2026-3224 betroffen und in welcher Version ist die Schwachstelle behoben?",
+   "erwartete_dok_ids": [
+    "cve-2026-3224"
+   ],
+   "chunk_ids": [
+    "cve-2026-3224#00",
+    "cve-2026-3224#07",
+    "cve-2026-3224#01",
+    "postmortem-2026-03-14-vpn#01",
+    "cve-2026-4410#00",
+    "cve-2026-1187#02",
+    "postmortem-2026-03-14-vpn#03",
+    "cve-2026-3224#04",
+    "cve-2026-3224#03",
+    "cve-2026-3224#02"
+   ],
+   "antwort": "Antwort: NorthPeak SecureGate ist von CVE-2026-3224 betroffen und wurde in Version 8.1.2 behoben; ältere Zweige vor 7.2.0 sind nicht verwundbar, da die Cloud-Instanzen am 12.03.2026 zentral gepatcht wurden [cve-2026-4410#00].\nBelege: cve-2026-3224#00, cve-2026-3224#07, cve-2026-3224#01.\n\nSicherheit: hoch",
+   "deckung": 0.9,
+   "quelle": true,
+   "format": true,
+   "chunks": 10,
+   "tokens": 2613
+  },
+  {
+   "frage": "Wie schnell muss ein Notfall-Patch auf Servern eingespielt werden?",
+   "erwartete_dok_ids": [
+    "runbook-patch-management"
+   ],
+   "chunk_ids": [
+    "postmortem-2026-03-14-vpn#02",
+    "runbook-patch-management#03",
+    "cve-2025-9042#04",
+    "runbook-patch-management#01",
+    "cve-2026-4410#02",
+    "cve-2025-9042#02",
+    "postmortem-2026-03-14-vpn#07",
+    "postmortem-2026-03-14-vpn#04",
+    "cve-2026-3224#07",
+    "runbook-patch-management#00"
+   ],
+   "antwort": "Das Dokument enthält keine Informationen über die Fristen für den Einsatz von Notfall-Patches auf Servern. Es gibt jedoch Hinweise darauf, dass ein ähnlicher Fall (INC-2026-0311) bereits im Post-Mortem dokumentiert wurde und eine korrekte Einstufung als \"Notfall\" vorgenommen worden war, was die Fristen für den Patch-Einsatz widerspiegelt [postmortem-2026-03-14-vpn#07]. Die Frage nach der spezifischen Zeit ist also nicht in diesem Kontext beantwortbar.\n\nNot covered by the provided documents.",
+   "deckung": 0.0,
+   "quelle": false,
+   "format": false,
+   "chunks": 10,
+   "tokens": 2143
+  },
+  {
+   "frage": "Wer entscheidet, ob ein Vorfall auf SEV-1 eingestuft wird?",
+   "erwartete_dok_ids": [
+    "runbook-incident-response"
+   ],
+   "chunk_ids": [
+    "postmortem-2026-03-14-vpn#04",
+    "runbook-incident-response#02",
+    "policy-passwoerter-und-mfa#04",
+    "policy-logging-und-aufbewahrung#03",
+    "runbook-zugriffskontrolle#03",
+    "runbook-patch-management#05",
+    "runbook-incident-response#06",
+    "cve-2026-3224#01",
+    "policy-logging-und-aufbewahrung#04",
+    "runbook-incident-response#01"
+   ],
+   "antwort": "Antwort: Der Incident Lead entscheidet über die Einstufung auf SEV-1. Die Entscheidung wird nicht verhandelt sondern im Ticket begründet [cve-2026-3224#01]. Eine spätere Herabstufung ist möglich und wird ebenfalls begründet [runbook-patch-management#05].\n\nBelege: cve-2026-3224#01, runbook-patch-management#05",
+   "deckung": 1.0,
+   "quelle": false,
+   "format": false,
+   "chunks": 10,
+   "tokens": 2087
+  },
+  {
+   "frage": "Wie lange werden Firewall-Logs aufbewahrt?",
+   "erwartete_dok_ids": [
+    "policy-logging-und-aufbewahrung"
+   ],
+   "chunk_ids": [
+    "policy-logging-und-aufbewahrung#02",
+    "cve-2026-3224#06",
+    "postmortem-2026-03-14-vpn#06",
+    "systemdoku-sentinelgrid#18",
+    "runbook-incident-response#04",
+    "cve-2026-3224#07",
+    "cve-2026-4410#02",
+    "postmortem-2026-03-14-vpn#03",
+    "cve-2026-3224#03",
+    "policy-logging-und-aufbewahrung#00"
+   ],
+   "antwort": "Die Richtlinie \"Logging und Aufbewahrung\" (Policy-logging-und-aufbewahrung#02) in Abschnitt 2 der wissensbasis/policy-logging-und-aufbewahrung.md dokumentiert die Aufbewahrungsfristen für verschiedene Datenarten. Für Firewall-Logs wird eine Frist von 90 Tagen angegeben, während VPN- und Fernzugriffs-Logs ebenfalls auf 90 Tage beschränkt sind (Quelle: [cve-2026-3224#06]). Die Antwort lautet also in der Richtlinie als \"Firewall-Logs\" werden für Firewall-Logs **90 Tage** bewahrt.\n\nAntwort: Firewall-Logs werden auf 90 Tage bewahrt\nBelege: cve-2026-3224#06, [cve-2026-3224#06]",
+   "deckung": 0.3333,
+   "quelle": true,
+   "format": false,
+   "chunks": 10,
+   "tokens": 2247
+  },
+  {
+   "frage": "Für welche Konten ist ein Phishing-resistentes MFA-Verfahren zwingend?",
+   "erwartete_dok_ids": [
+    "policy-passwoerter-und-mfa"
+   ],
+   "chunk_ids": [
+    "policy-passwoerter-und-mfa#02",
+    "policy-passwoerter-und-mfa#04",
+    "runbook-zugriffskontrolle#05",
+    "policy-logging-und-aufbewahrung#04",
+    "postmortem-2026-03-14-vpn#01",
+    "systemdoku-sentinelgrid#20",
+    "policy-logging-und-aufbewahrung#01",
+    "postmortem-2026-03-14-vpn#03",
+    "postmortem-2026-03-14-vpn#06",
+    "policy-passwoerter-und-mfa#03"
+   ],
+   "antwort": "Antwort: Phishing-resistente Verfahren sind für administrative Konten (adm-), Zugänge zum Finanzsystem sowie die Geschäftsführung und alle Zugangspunkte zur VPN-Gateway und Verwaltungsoberfläche von SentinelGrid zwingend. [policy-passwoerter-und-mfa#02]\nBelege: ppolicy-passwoerter-und-mfa#02\n\nAntwort: Für administrative Konten (adm-) sowie Zugänge zum Finanzsystem, Geschäftsführung und alle Zugangspunkte zur VPN-Gateway und Verwaltungsoberfläche von SentinelGrid sind ein Phishing-resistentes MFA-Verfahren zwingend. [policy-passwoerter-und-mfa#02]\nBelege: ppolicy-passwoerter-und-mfa#02\n\nAntwort: Für alle übrigen Konten (nicht administrative, nicht Finanzsystem-Gesellschaftsführung) sind zusätzlich zugelassen einmalpasswörter aus einer Authentisierungs-App und Push-Bestätigungen mit Nummernabgleich. [policy-passwoerter-und-mfa#04]\nBelege: ppolicy-passwoerter-und-mfa#04\n\nAntwort: Nicht mehr zugelassen sind seit dem 01.02.2026 SMS, Sprachanruf und einfache Push-Bestätigung ohne Nummernabgleich. [policy-passwoerter-und-mfa#03]\nBelege: ppolicy-passwoerter-und-mfa#03",
+   "deckung": 0.6429,
+   "quelle": true,
+   "format": false,
+   "chunks": 10,
+   "tokens": 2402
+  },
+  {
+   "frage": "Was war die Grundursache des Vorfalls INC-2026-0311 vom 14. März 2026?",
+   "erwartete_dok_ids": [
+    "postmortem-2026-03-14-vpn",
+    "cve-2026-3224"
+   ],
+   "chunk_ids": [
+    "postmortem-2026-03-14-vpn#00",
+    "postmortem-2026-03-14-vpn#02",
+    "systemdoku-sentinelgrid#23",
+    "policy-logging-und-aufbewahrung#04",
+    "postmortem-2026-03-14-vpn#05",
+    "runbook-zugriffskontrolle#05",
+    "policy-logging-und-aufbewahrung#01",
+    "postmortem-2026-03-14-vpn#03",
+    "policy-passwoerter-und-mfa#04",
+    "postmortem-2026-03-14-vpn#04"
+   ],
+   "antwort": "Antwort: Die Grundursache des Vorfalls INC-2026-0311 vom 14. März 2026 war ein nicht fristgerecht eingespielter Notfall-Patch für CVE-2026-3224, der im regulären Wartungsfenster verstrich wurde und die Vertretungsregelung für Changes nicht dokumentiert hatte [postmortem-2026-03-14-vpn#02].\nBelege: postmortem-2026-03-14-vpn, policy-passwoerter-und-mfa\n\nSicherheit: hoch",
+   "deckung": 0.7778,
+   "quelle": true,
+   "format": true,
+   "chunks": 10,
+   "tokens": 2385
+  },
+  {
+   "frage": "Wie viele Ereignisse pro Sekunde verarbeitet SentinelGrid im Normalbetrieb?",
+   "erwartete_dok_ids": [
+    "systemdoku-sentinelgrid"
+   ],
+   "chunk_ids": [
+    "systemdoku-sentinelgrid#07",
+    "policy-logging-und-aufbewahrung#04",
+    "systemdoku-sentinelgrid#10",
+    "runbook-patch-management#02",
+    "cve-2025-9042#03",
+    "cve-2026-1187#04",
+    "systemdoku-sentinelgrid#06",
+    "postmortem-2026-03-14-vpn#04",
+    "cve-2026-4410#03",
+    "systemdoku-sentinelgrid#00"
+   ],
+   "antwort": "Die Antwort lautet 42.000 Ereignisse pro Sekunde im Normalbetrieb. Die Quelle für diese Information ist [systemdoku-sentinelgrid#07]. Sicherheit: Mittel\n\nNot covered by the provided documents.",
+   "deckung": 0.6667,
+   "quelle": true,
+   "format": false,
+   "chunks": 10,
+   "tokens": 2450
+  },
+  {
+   "frage": "Welcher Workaround schützt vor CVE-2026-4410, solange kein Patch verfügbar ist?",
+   "erwartete_dok_ids": [
+    "cve-2026-4410"
+   ],
+   "chunk_ids": [
+    "cve-2026-3224#05",
+    "cve-2025-9042#04",
+    "cve-2026-4410#01",
+    "cve-2026-3224#01",
+    "postmortem-2026-03-14-vpn#02",
+    "cve-2025-9042#00",
+    "cve-2025-9042#01",
+    "cve-2026-3224#00",
+    "cve-2026-4410#00",
+    "cve-2026-4410#02"
+   ],
+   "antwort": "Not covered by the provided documents.",
+   "deckung": 0.0,
+   "quelle": false,
+   "format": false,
+   "chunks": 10,
+   "tokens": 2641
+  },
+  {
+   "frage": "Was passiert mit den Zugängen einer Mitarbeiterin an ihrem letzten Arbeitstag?",
+   "erwartete_dok_ids": [
+    "runbook-zugriffskontrolle"
+   ],
+   "chunk_ids": [
+    "runbook-incident-response#08",
+    "runbook-zugriffskontrolle#05",
+    "runbook-zugriffskontrolle#03",
+    "runbook-zugriffskontrolle#06",
+    "policy-passwoerter-und-mfa#03",
+    "runbook-patch-management#04",
+    "runbook-patch-management#05",
+    "policy-passwoerter-und-mfa#04",
+    "runbook-zugriffskontrolle#02",
+    "runbook-zugriffskontrolle#04"
+   ],
+   "antwort": "Antwort: Die Zugänge werden automatisch deaktiviert und Sessions verwerfen am letzten Arbeitstag. [runbook-zugriffskontrolle#04]\nSicherheit: hoch\n\nBelege: runbook-zugriffskontrolle#04, policy-passwoerter-und-mfa#03",
+   "deckung": 0.2727,
+   "quelle": true,
+   "format": true,
+   "chunks": 10,
+   "tokens": 1956
+  }
+ ],
+ "reihen": {
+  "chunks": {
+   "3 Chunks": {
+    "deckung": 0.2405,
+    "quelle": 0.4,
+    "format": 0.2,
+    "chunks": 3.0,
+    "tokens": 868.0
+   },
+   "5 Chunks": {
+    "deckung": 0.5951,
+    "quelle": 0.8,
+    "format": 0.3,
+    "chunks": 5.0,
+    "tokens": 1236.4
+   },
+   "10 Chunks": {
+    "deckung": 0.526,
+    "quelle": 0.7,
+    "format": 0.4,
+    "chunks": 10.0,
+    "tokens": 2357.8
+   },
+   "20 Chunks": {
+    "deckung": 0.5777,
+    "quelle": 0.8,
+    "format": 0.2,
+    "chunks": 17.0,
+    "tokens": 3931.1
+   }
+  },
+  "ordnung": {
+   "score": {
+    "deckung": 0.5288,
+    "quelle": 0.5,
+    "format": 0.6,
+    "chunks": 10.0,
+    "tokens": 2357.8
+   },
+   "umgekehrt": {
+    "deckung": 0.428,
+    "quelle": 0.6,
+    "format": 0.3,
+    "chunks": 10.0,
+    "tokens": 2357.8
+   },
+   "aufmerksamkeit": {
+    "deckung": 0.526,
+    "quelle": 0.7,
+    "format": 0.4,
+    "chunks": 10.0,
+    "tokens": 2357.8
+   }
+  },
+  "budget": {
+   "400 Tokens": {
+    "deckung": 0.301,
+    "quelle": 0.4,
+    "format": 0.3,
+    "chunks": 1.7,
+    "tokens": 568.9
+   },
+   "800 Tokens": {
+    "deckung": 0.1738,
+    "quelle": 0.3,
+    "format": 0.2,
+    "chunks": 3.6,
+    "tokens": 957.5
+   },
+   "1600 Tokens": {
+    "deckung": 0.4907,
+    "quelle": 0.7,
+    "format": 0.1,
+    "chunks": 7.8,
+    "tokens": 1772.2
+   },
+   "volles Budget": {
+    "deckung": 0.5777,
+    "quelle": 0.8,
+    "format": 0.2,
+    "chunks": 17.0,
+    "tokens": 3931.1
+   }
+  }
+ },
+ "position": {
+  "Anfang": {
+   "deckung": 0.438,
+   "getroffen": 0.5,
+   "zitiert": 0.5,
+   "chunks": 33.5
+  },
+  "Mitte": {
+   "deckung": 0.4182,
+   "getroffen": 0.5,
+   "zitiert": 0.4,
+   "chunks": 33.5
+  },
+  "Ende": {
+   "deckung": 0.2487,
+   "getroffen": 0.2,
+   "zitiert": 0.4,
+   "chunks": 33.5
+  }
+ }
+}

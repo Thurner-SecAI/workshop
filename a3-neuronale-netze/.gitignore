@@ -1,0 +1,3 @@
+# Beim Ausführen erzeugte Artefakte (data/mnist.npz bleibt versioniert)
+ziffern_netz.joblib
+/mnist.npz

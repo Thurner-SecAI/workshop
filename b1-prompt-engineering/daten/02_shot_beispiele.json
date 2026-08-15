@@ -1,0 +1,58 @@
+[
+  {
+    "id": "B01",
+    "text": "A template injection flaw in Atlassian Confluence Data Center 8.5.3 lets an unauthenticated attacker execute code on the server through a crafted page macro. CVSS 9.8. Atlassian published 8.5.5 with a corrected template engine.",
+    "severity": "critical",
+    "component": "Atlassian Confluence",
+    "action": "upgrade"
+  },
+  {
+    "id": "B02",
+    "text": "HAProxy 2.9.4 forwards requests with two conflicting Content-Length headers to the backend, which allows request smuggling past the access rules. CVSS 7.4. Release 2.9.6 rejects such requests.",
+    "severity": "high",
+    "component": "HAProxy",
+    "action": "upgrade"
+  },
+  {
+    "id": "B03",
+    "text": "Kibana 8.13.1 accepts an unvalidated redirect parameter in the login URL and sends the browser to an external host after a successful sign in. CVSS 5.3. The vendor hotfix 8.13.2 restricts the parameter to relative paths.",
+    "severity": "medium",
+    "component": "Kibana",
+    "action": "patch"
+  },
+  {
+    "id": "B04",
+    "text": "Elasticsearch 8.12.0 writes the API keys of ingest pipelines into the deprecation log in clear text. Every operator with log access can read them. CVSS 7.2. The keys in the log must be treated as compromised.",
+    "severity": "high",
+    "component": "Elasticsearch",
+    "action": "rotate_credentials"
+  },
+  {
+    "id": "B05",
+    "text": "The SSL VPN portal of a Cisco ASA 5516-X running 9.18.2 is reachable from the internet and a published exploit chain hijacks active sessions without credentials. CVSS 9.1. The firmware update needs a maintenance window; until then the portal has to be removed from the public interface.",
+    "severity": "critical",
+    "component": "Cisco ASA 5516-X",
+    "action": "isolate"
+  },
+  {
+    "id": "B06",
+    "text": "MinIO 2024.3.1 returns the internal bucket name in the body of a 403 response. No objects or credentials are disclosed. CVSS 3.5. The vendor plans a fix for a later release and recommends watching the access logs.",
+    "severity": "low",
+    "component": "MinIO",
+    "action": "monitor"
+  },
+  {
+    "id": "B07",
+    "text": "A deserialization flaw in the Redis module redis_ml 1.4.0 lets any client with command access run shell commands on the database host. CVSS 9.0. No fixed release exists; the vendor advises unloading the module.",
+    "severity": "critical",
+    "component": "redis_ml",
+    "action": "disable_feature"
+  },
+  {
+    "id": "B08",
+    "text": "The webhook receiver of Ansible AWX 24.0.0 accepts unsigned payloads and starts job templates on request. CVSS 8.0. There is no patch; the receiver can be switched off in the project settings.",
+    "severity": "high",
+    "component": "Ansible AWX",
+    "action": "disable_feature"
+  }
+]

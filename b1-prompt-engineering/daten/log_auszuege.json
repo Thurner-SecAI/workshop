@@ -1,0 +1,50 @@
+[
+  {
+    "id": "L1",
+    "frage": "How many failed SSH login attempts came from the IP address 203.0.113.44?",
+    "log": "2026-04-11T08:12:03Z sshd[2214]: Failed password for root from 203.0.113.44 port 51122 ssh2\n2026-04-11T08:12:05Z sshd[2214]: Failed password for root from 203.0.113.44 port 51124 ssh2\n2026-04-11T08:12:07Z sshd[2216]: Failed password for admin from 198.51.100.9 port 44120 ssh2\n2026-04-11T08:12:09Z sshd[2214]: Failed password for backup from 203.0.113.44 port 51130 ssh2\n2026-04-11T08:12:11Z sshd[2219]: Accepted publickey for deploy from 10.4.2.18 port 33002 ssh2\n2026-04-11T08:12:14Z sshd[2214]: Failed password for root from 203.0.113.44 port 51137 ssh2\n2026-04-11T08:12:19Z sshd[2221]: Failed password for root from 198.51.100.9 port 44126 ssh2",
+    "antwort": "4"
+  },
+  {
+    "id": "L2",
+    "frage": "How many distinct source IP addresses were blocked by the firewall?",
+    "log": "2026-04-11T09:01:00Z fw01 DENY tcp 192.0.2.17:5514 -> 10.4.2.10:445\n2026-04-11T09:01:04Z fw01 ALLOW tcp 10.4.2.31:51000 -> 10.4.2.10:443\n2026-04-11T09:01:07Z fw01 DENY tcp 192.0.2.17:5520 -> 10.4.2.11:445\n2026-04-11T09:01:12Z fw01 DENY tcp 198.51.100.77:6100 -> 10.4.2.10:3389\n2026-04-11T09:01:15Z fw01 ALLOW tcp 10.4.2.32:51222 -> 10.4.2.10:443\n2026-04-11T09:01:21Z fw01 DENY tcp 203.0.113.9:7001 -> 10.4.2.12:22\n2026-04-11T09:01:26Z fw01 DENY tcp 192.0.2.17:5533 -> 10.4.2.13:445",
+    "antwort": "3"
+  },
+  {
+    "id": "L3",
+    "frage": "How many user accounts were locked out?",
+    "log": "2026-04-11T10:20:11Z dc01 EventID=4740 account=j.weber caller=WKS-114\n2026-04-11T10:21:02Z dc01 EventID=4625 account=j.weber caller=WKS-114\n2026-04-11T10:22:40Z dc01 EventID=4740 account=s.klein caller=WKS-207\n2026-04-11T10:23:15Z dc01 EventID=4624 account=m.roth caller=WKS-003\n2026-04-11T10:25:51Z dc01 EventID=4740 account=t.brandt caller=WKS-114\n2026-04-11T10:26:03Z dc01 EventID=4625 account=t.brandt caller=WKS-114",
+    "antwort": "3"
+  },
+  {
+    "id": "L4",
+    "frage": "How many requests returned HTTP status 500?",
+    "log": "10.4.2.31 - - [11/Apr/2026:11:02:01] \"GET /api/tickets HTTP/1.1\" 200 1832\n10.4.2.31 - - [11/Apr/2026:11:02:03] \"POST /api/tickets HTTP/1.1\" 500 91\n10.4.2.44 - - [11/Apr/2026:11:02:04] \"GET /api/health HTTP/1.1\" 200 12\n10.4.2.31 - - [11/Apr/2026:11:02:07] \"POST /api/tickets HTTP/1.1\" 500 91\n10.4.2.55 - - [11/Apr/2026:11:02:09] \"GET /api/report HTTP/1.1\" 404 44\n10.4.2.31 - - [11/Apr/2026:11:02:12] \"POST /api/tickets HTTP/1.1\" 502 88\n10.4.2.31 - - [11/Apr/2026:11:02:15] \"POST /api/tickets HTTP/1.1\" 500 91",
+    "antwort": "3"
+  },
+  {
+    "id": "L5",
+    "frage": "How many hosts reported the same malware signature?",
+    "log": "2026-04-11T12:40:02Z edr host=WKS-114 signature=Trojan.Win32.Kryptik verdict=quarantined\n2026-04-11T12:41:18Z edr host=WKS-207 signature=Trojan.Win32.Kryptik verdict=quarantined\n2026-04-11T12:42:55Z edr host=SRV-DB01 signature=PUA.Win32.KeyGen verdict=allowed\n2026-04-11T12:44:31Z edr host=WKS-003 signature=Trojan.Win32.Kryptik verdict=blocked\n2026-04-11T12:47:09Z edr host=WKS-114 signature=Trojan.Win32.Kryptik verdict=quarantined",
+    "antwort": "3"
+  },
+  {
+    "id": "L6",
+    "frage": "How many privilege escalation attempts by the user 'svc_backup' were recorded?",
+    "log": "2026-04-11T13:00:14Z srv-app01 sudo: svc_backup : command not allowed ; COMMAND=/bin/bash\n2026-04-11T13:00:22Z srv-app01 sudo: m.roth : TTY=pts/0 ; COMMAND=/usr/bin/systemctl restart app\n2026-04-11T13:01:03Z srv-app01 sudo: svc_backup : command not allowed ; COMMAND=/usr/bin/passwd root\n2026-04-11T13:02:47Z srv-app01 sudo: svc_backup : TTY=unknown ; COMMAND=/usr/bin/rsync /data /backup\n2026-04-11T13:03:31Z srv-app01 sudo: svc_backup : command not allowed ; COMMAND=/bin/su -",
+    "antwort": "3"
+  },
+  {
+    "id": "L7",
+    "frage": "How many outbound connections went to the port 4444?",
+    "log": "2026-04-11T14:10:00Z proxy01 host=WKS-114 dst=185.199.110.153:443 bytes=8210\n2026-04-11T14:10:31Z proxy01 host=WKS-114 dst=91.201.66.8:4444 bytes=1204\n2026-04-11T14:11:02Z proxy01 host=SRV-WEB02 dst=185.199.110.153:443 bytes=15330\n2026-04-11T14:11:44Z proxy01 host=WKS-114 dst=91.201.66.8:4444 bytes=980\n2026-04-11T14:12:20Z proxy01 host=WKS-207 dst=91.201.66.8:8080 bytes=440\n2026-04-11T14:13:05Z proxy01 host=WKS-114 dst=91.201.66.8:4444 bytes=1122",
+    "antwort": "3"
+  },
+  {
+    "id": "L8",
+    "frage": "How many configuration changes were made outside the change window, which ends at 22:00 UTC?",
+    "log": "2026-04-11T20:15:00Z cfgmgmt user=m.roth change=firewall-rule-add status=applied\n2026-04-11T21:40:12Z cfgmgmt user=s.klein change=vpn-profile-update status=applied\n2026-04-11T22:05:44Z cfgmgmt user=m.roth change=firewall-rule-remove status=applied\n2026-04-11T22:31:09Z cfgmgmt user=admin change=admin-account-add status=applied\n2026-04-11T23:12:38Z cfgmgmt user=admin change=logging-disable status=applied",
+    "antwort": "3"
+  }
+]

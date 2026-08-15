@@ -1,0 +1,110 @@
+[
+  {
+    "host": "srv-pam01",
+    "component": "Devolutions Server",
+    "version": "2025.3.15.0",
+    "criticality": "critical",
+    "environment": "production",
+    "owner": "IT Operations",
+    "exposure": "internal"
+  },
+  {
+    "host": "srv-pam02",
+    "component": "Devolutions Server",
+    "version": "2025.3.15.0",
+    "criticality": "critical",
+    "environment": "production",
+    "owner": "IT Operations",
+    "exposure": "internal"
+  },
+  {
+    "host": "srv-pam-test",
+    "component": "Devolutions Server",
+    "version": "2025.2.9.0",
+    "criticality": "low",
+    "environment": "test",
+    "owner": "IT Operations",
+    "exposure": "internal"
+  },
+  {
+    "host": "srv-web01",
+    "component": "nginx",
+    "version": "1.27.4",
+    "criticality": "high",
+    "environment": "production",
+    "owner": "Web Team",
+    "exposure": "internet"
+  },
+  {
+    "host": "srv-web02",
+    "component": "nginx",
+    "version": "1.27.5",
+    "criticality": "high",
+    "environment": "production",
+    "owner": "Web Team",
+    "exposure": "internet"
+  },
+  {
+    "host": "srv-ci01",
+    "component": "Jenkins",
+    "version": "2.462.1",
+    "criticality": "high",
+    "environment": "production",
+    "owner": "Platform Team",
+    "exposure": "internal"
+  },
+  {
+    "host": "srv-app01",
+    "component": "Apache Tomcat",
+    "version": "10.1.20",
+    "criticality": "high",
+    "environment": "production",
+    "owner": "Application Team",
+    "exposure": "internal"
+  },
+  {
+    "host": "srv-app02",
+    "component": "Apache Tomcat",
+    "version": "10.1.21",
+    "criticality": "medium",
+    "environment": "staging",
+    "owner": "Application Team",
+    "exposure": "internal"
+  },
+  {
+    "host": "srv-db01",
+    "component": "pg_geo",
+    "version": "3.2.1",
+    "criticality": "critical",
+    "environment": "production",
+    "owner": "Data Team",
+    "exposure": "internal"
+  },
+  {
+    "host": "srv-git01",
+    "component": "GitLab CE",
+    "version": "17.4.1",
+    "criticality": "medium",
+    "environment": "production",
+    "owner": "Platform Team",
+    "exposure": "internal"
+  },
+  {
+    "host": "srv-mon01",
+    "component": "Grafana",
+    "version": "11.1.0",
+    "criticality": "low",
+    "environment": "production",
+    "owner": "Platform Team",
+    "exposure": "internal"
+  },
+  {
+    "host": "srv-iam01",
+    "component": "Keycloak",
+    "version": "25.0.2",
+    "criticality": "high",
+    "environment": "production",
+    "owner": "IT Security",
+    "exposure": "internal"
+  }
+]

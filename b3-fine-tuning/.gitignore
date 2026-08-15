@@ -1,0 +1,5 @@
+# Trainingsergebnisse — werden vom Notebook erzeugt, nicht versioniert.
+ausgabe/
+
+__pycache__/
+.ipynb_checkpoints/

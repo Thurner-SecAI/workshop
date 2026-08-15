@@ -1,0 +1,39 @@
+{
+  "names srv-pam01 as affected by CVE-2026-3224": [
+    "srv-pam01",
+    "pam01"
+  ],
+  "names the service account svc_backup as compromised": [
+    "svc_backup"
+  ],
+  "mentions rotating or disabling the credentials in the vault": [
+    "rotate",
+    "rotating",
+    "rotation",
+    "revoke",
+    "revoking",
+    "reset the password",
+    "new password",
+    "disable the account",
+    "disabling the account",
+    "disable svc_backup",
+    "change the password"
+  ],
+  "mentions the encrypted share on srv-fs02": [
+    "srv-fs02",
+    ".locked",
+    "encrypted share"
+  ],
+  "gives an order, not only a list of measures": [
+    "first",
+    "then",
+    "next",
+    "immediately",
+    "afterwards",
+    "second step",
+    "step 1",
+    "phase",
+    "initial response",
+    "within the first"
+  ]
+}

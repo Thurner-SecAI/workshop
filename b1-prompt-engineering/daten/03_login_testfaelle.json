@@ -1,0 +1,122 @@
+[
+  {
+    "id": "T01",
+    "frage": "How many failed login attempts came from 203.0.113.44?",
+    "log": "08:00 status=failed account=root src=203.0.113.44 method=password\n08:01 status=failed account=admin src=198.51.100.9 method=password\n08:02 status=success account=root src=203.0.113.44 method=password\n08:03 status=failed account=backup src=203.0.113.44 method=password\n08:04 status=failed account=root src=203.0.113.44 method=publickey",
+    "antwort": "3"
+  },
+  {
+    "id": "T02",
+    "frage": "How many failed login attempts used the account administrator?",
+    "log": "09:00 status=failed account=administrator src=10.0.0.8 method=password\n09:01 status=failed account=admin src=10.0.0.8 method=password\n09:02 status=success account=administrator src=10.0.0.9 method=password\n09:03 status=failed account=administrator src=10.0.0.9 method=password\n09:04 status=failed account=guest src=10.0.0.7 method=password",
+    "antwort": "2"
+  },
+  {
+    "id": "T03",
+    "frage": "How many failed login attempts for root came from 192.0.2.17?",
+    "log": "10:00 status=failed account=root src=192.0.2.17 method=password\n10:01 status=failed account=admin src=192.0.2.17 method=password\n10:02 status=failed account=root src=198.51.100.5 method=password\n10:03 status=success account=root src=192.0.2.17 method=password\n10:04 status=failed account=root src=192.0.2.17 method=password",
+    "antwort": "2"
+  },
+  {
+    "id": "T04",
+    "frage": "How many failed login attempts occurred after 22:00?",
+    "log": "21:58 status=failed account=root src=10.0.0.4 method=password\n22:01 status=failed account=root src=10.0.0.4 method=password\n22:03 status=success account=analyst src=10.0.0.5 method=password\n22:07 status=failed account=admin src=10.0.0.6 method=password\n22:10 status=failed account=guest src=10.0.0.7 method=password",
+    "antwort": "3"
+  },
+  {
+    "id": "T05",
+    "frage": "How many failed login attempts came from 10.0.0.9 and used the account admin?",
+    "log": "23:00 status=failed account=admin src=10.0.0.9 method=password\n23:01 status=failed account=root src=10.0.0.9 method=password\n23:02 status=failed account=admin src=10.0.0.8 method=password\n23:03 status=success account=admin src=10.0.0.9 method=password\n23:04 status=failed account=admin src=10.0.0.9 method=password",
+    "antwort": "2"
+  },
+  {
+    "id": "T06",
+    "frage": "How many failed login attempts used the publickey method?",
+    "log": "00:10 status=failed account=deploy src=10.1.0.4 method=publickey\n00:11 status=failed account=deploy src=10.1.0.4 method=password\n00:12 status=success account=deploy src=10.1.0.5 method=publickey\n00:13 status=failed account=root src=10.1.0.6 method=publickey\n00:14 status=failed account=admin src=10.1.0.7 method=publickey",
+    "antwort": "3"
+  },
+  {
+    "id": "T07",
+    "frage": "How many failed login attempts for svc_backup used the password method?",
+    "log": "01:00 status=failed account=svc_backup src=10.2.0.1 method=password\n01:01 status=failed account=svc_backup src=10.2.0.1 method=publickey\n01:02 status=success account=svc_backup src=10.2.0.2 method=password\n01:03 status=failed account=svc_web src=10.2.0.3 method=password\n01:04 status=failed account=svc_backup src=10.2.0.4 method=password",
+    "antwort": "2"
+  },
+  {
+    "id": "T08",
+    "frage": "How many failed login attempts came from 198.51.100.20 before 06:00?",
+    "log": "05:55 status=failed account=root src=198.51.100.20 method=password\n05:58 status=success account=root src=198.51.100.20 method=password\n05:59 status=failed account=admin src=198.51.100.20 method=password\n06:00 status=failed account=root src=198.51.100.20 method=password\n05:57 status=failed account=root src=198.51.100.21 method=password",
+    "antwort": "2"
+  },
+  {
+    "id": "T09",
+    "frage": "How many failed login attempts used the account guest?",
+    "log": "11:00 status=failed account=guest src=10.3.0.1 method=password\n11:01 status=failed account=guest2 src=10.3.0.2 method=password\n11:02 status=success account=guest src=10.3.0.3 method=password\n11:03 status=failed account=admin src=10.3.0.4 method=password\n11:04 status=failed account=guest src=10.3.0.5 method=publickey",
+    "antwort": "2"
+  },
+  {
+    "id": "T10",
+    "frage": "How many failed login attempts came from 192.0.2.8 using password?",
+    "log": "12:00 status=failed account=root src=192.0.2.8 method=password\n12:01 status=failed account=root src=192.0.2.8 method=publickey\n12:02 status=failed account=admin src=192.0.2.9 method=password\n12:03 status=success account=admin src=192.0.2.8 method=password\n12:04 status=failed account=admin src=192.0.2.8 method=password",
+    "antwort": "2"
+  },
+  {
+    "id": "T11",
+    "frage": "How many failed login attempts occurred from 14:00 through 14:05?",
+    "log": "13:59 status=failed account=root src=10.4.0.1 method=password\n14:00 status=failed account=root src=10.4.0.2 method=password\n14:03 status=success account=admin src=10.4.0.3 method=password\n14:05 status=failed account=guest src=10.4.0.4 method=password\n14:06 status=failed account=root src=10.4.0.5 method=password",
+    "antwort": "2"
+  },
+  {
+    "id": "T12",
+    "frage": "How many failed login attempts for root used publickey?",
+    "log": "15:00 status=failed account=root src=10.5.0.1 method=publickey\n15:01 status=failed account=root src=10.5.0.2 method=password\n15:02 status=failed account=admin src=10.5.0.3 method=publickey\n15:03 status=success account=root src=10.5.0.4 method=publickey\n15:04 status=failed account=root src=10.5.0.5 method=publickey",
+    "antwort": "2"
+  },
+  {
+    "id": "T13",
+    "frage": "How many failed login attempts came from 203.0.113.7?",
+    "log": "16:00 status=success account=root src=203.0.113.7 method=password\n16:01 status=failed account=root src=203.0.113.8 method=password\n16:02 status=failed account=admin src=203.0.113.7 method=password\n16:03 status=failed account=guest src=203.0.113.7 method=password\n16:04 status=blocked account=root src=203.0.113.7 method=password",
+    "antwort": "2"
+  },
+  {
+    "id": "T14",
+    "frage": "How many failed login attempts for analyst came from 10.6.0.5 after 17:00?",
+    "log": "16:59 status=failed account=analyst src=10.6.0.5 method=password\n17:01 status=failed account=analyst src=10.6.0.5 method=password\n17:02 status=failed account=admin src=10.6.0.5 method=password\n17:03 status=failed account=analyst src=10.6.0.6 method=password\n17:04 status=success account=analyst src=10.6.0.5 method=password",
+    "antwort": "1"
+  },
+  {
+    "id": "T15",
+    "frage": "How many failed login attempts used password and did not use the root account?",
+    "log": "18:00 status=failed account=root src=10.7.0.1 method=password\n18:01 status=failed account=admin src=10.7.0.2 method=password\n18:02 status=failed account=guest src=10.7.0.3 method=publickey\n18:03 status=success account=admin src=10.7.0.4 method=password\n18:04 status=failed account=analyst src=10.7.0.5 method=password",
+    "antwort": "2"
+  },
+  {
+    "id": "T16",
+    "frage": "How many failed login attempts came from 198.51.100.30 for the account deploy?",
+    "log": "19:00 status=failed account=deploy src=198.51.100.30 method=password\n19:01 status=failed account=deploy src=198.51.100.31 method=password\n19:02 status=success account=deploy src=198.51.100.30 method=publickey\n19:03 status=failed account=root src=198.51.100.30 method=password\n19:04 status=failed account=deploy src=198.51.100.30 method=publickey",
+    "antwort": "2"
+  },
+  {
+    "id": "T17",
+    "frage": "How many failed login attempts used the password method after 20:30?",
+    "log": "20:29 status=failed account=root src=10.8.0.1 method=password\n20:31 status=failed account=root src=10.8.0.2 method=password\n20:32 status=failed account=admin src=10.8.0.3 method=publickey\n20:33 status=success account=guest src=10.8.0.4 method=password\n20:34 status=failed account=analyst src=10.8.0.5 method=password",
+    "antwort": "2"
+  },
+  {
+    "id": "T18",
+    "frage": "How many failed login attempts for admin occurred before 07:30?",
+    "log": "07:20 status=failed account=admin src=10.9.0.1 method=password\n07:25 status=failed account=administrator src=10.9.0.2 method=password\n07:29 status=success account=admin src=10.9.0.3 method=password\n07:30 status=failed account=admin src=10.9.0.4 method=password\n07:15 status=failed account=admin src=10.9.0.5 method=publickey",
+    "antwort": "2"
+  },
+  {
+    "id": "T19",
+    "frage": "How many failed login attempts came from 192.0.2.50 using publickey after 03:00?",
+    "log": "02:59 status=failed account=root src=192.0.2.50 method=publickey\n03:01 status=failed account=root src=192.0.2.50 method=publickey\n03:02 status=failed account=root src=192.0.2.50 method=password\n03:03 status=failed account=admin src=192.0.2.51 method=publickey\n03:04 status=success account=admin src=192.0.2.50 method=publickey",
+    "antwort": "1"
+  },
+  {
+    "id": "T20",
+    "frage": "How many failed login attempts for svc_api came from 10.10.0.8 using password?",
+    "log": "04:00 status=failed account=svc_api src=10.10.0.8 method=password\n04:01 status=failed account=svc_api src=10.10.0.8 method=publickey\n04:02 status=failed account=svc_web src=10.10.0.8 method=password\n04:03 status=success account=svc_api src=10.10.0.8 method=password\n04:04 status=failed account=svc_api src=10.10.0.8 method=password",
+    "antwort": "2"
+  }
+]

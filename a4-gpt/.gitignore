@@ -1,0 +1,4 @@
+# Beim Ausführen erzeugte Artefakte
+/faust.txt
+.ipynb_checkpoints/
+__pycache__/

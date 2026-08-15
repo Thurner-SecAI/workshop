@@ -1,0 +1,1884 @@
+{
+ "verfahren": [
+  "bm25-okapi",
+  "cosine",
+  "gewichtete-summe",
+  "rrf"
+ ],
+ "parameter": {
+  "k1": 1.5,
+  "b": 0.75,
+  "alpha": 0.5,
+  "rrf_k": 60,
+  "embedding_modell": "nomic-embed-text"
+ },
+ "recall": {
+  "daten/fragen.json": {
+   "BM25": {
+    "@1": 0.8,
+    "@3": 1.0,
+    "@5": 1.0
+   },
+   "Semantic Search": {
+    "@1": 0.6,
+    "@3": 1.0,
+    "@5": 1.0
+   },
+   "Summe α = 0,5": {
+    "@1": 0.8,
+    "@3": 1.0,
+    "@5": 1.0
+   },
+   "RRF k = 60": {
+    "@1": 0.7,
+    "@3": 0.9,
+    "@5": 1.0
+   }
+  },
+  "dieselben Sachverhalte, umformuliert": {
+   "BM25": {
+    "@1": 0.1667,
+    "@3": 0.8333,
+    "@5": 0.8333
+   },
+   "Semantic Search": {
+    "@1": 0.3333,
+    "@3": 0.6667,
+    "@5": 0.6667
+   },
+   "Summe α = 0,5": {
+    "@1": 0.3333,
+    "@3": 0.8333,
+    "@5": 0.8333
+   },
+   "RRF k = 60": {
+    "@1": 0.5,
+    "@3": 0.6667,
+    "@5": 0.8333
+   }
+  },
+  "beide Sätze zusammen": {
+   "BM25": {
+    "@1": 0.5625,
+    "@3": 0.9375,
+    "@5": 0.9375
+   },
+   "Semantic Search": {
+    "@1": 0.5,
+    "@3": 0.875,
+    "@5": 0.875
+   },
+   "Summe α = 0,5": {
+    "@1": 0.625,
+    "@3": 0.9375,
+    "@5": 0.9375
+   },
+   "RRF k = 60": {
+    "@1": 0.625,
+    "@3": 0.8125,
+    "@5": 0.9375
+   }
+  }
+ },
+ "alpha_kurve": {
+  "@1": [
+   [
+    0.0,
+    0.5
+   ],
+   [
+    0.05,
+    0.625
+   ],
+   [
+    0.1,
+    0.75
+   ],
+   [
+    0.15,
+    0.6875
+   ],
+   [
+    0.2,
+    0.6875
+   ],
+   [
+    0.25,
+    0.75
+   ],
+   [
+    0.3,
+    0.6875
+   ],
+   [
+    0.35,
+    0.6875
+   ],
+   [
+    0.4,
+    0.6875
+   ],
+   [
+    0.45,
+    0.625
+   ],
+   [
+    0.5,
+    0.625
+   ],
+   [
+    0.55,
+    0.625
+   ],
+   [
+    0.6,
+    0.625
+   ],
+   [
+    0.65,
+    0.625
+   ],
+   [
+    0.7,
+    0.625
+   ],
+   [
+    0.75,
+    0.625
+   ],
+   [
+    0.8,
+    0.625
+   ],
+   [
+    0.85,
+    0.625
+   ],
+   [
+    0.9,
+    0.5625
+   ],
+   [
+    0.95,
+    0.5625
+   ],
+   [
+    1.0,
+    0.5625
+   ]
+  ],
+  "@3": [
+   [
+    0.0,
+    0.875
+   ],
+   [
+    0.05,
+    0.875
+   ],
+   [
+    0.1,
+    0.875
+   ],
+   [
+    0.15,
+    0.875
+   ],
+   [
+    0.2,
+    0.875
+   ],
+   [
+    0.25,
+    0.875
+   ],
+   [
+    0.3,
+    0.875
+   ],
+   [
+    0.35,
+    0.9375
+   ],
+   [
+    0.4,
+    0.9375
+   ],
+   [
+    0.45,
+    0.9375
+   ],
+   [
+    0.5,
+    0.9375
+   ],
+   [
+    0.55,
+    0.9375
+   ],
+   [
+    0.6,
+    0.9375
+   ],
+   [
+    0.65,
+    0.9375
+   ],
+   [
+    0.7,
+    0.9375
+   ],
+   [
+    0.75,
+    0.9375
+   ],
+   [
+    0.8,
+    0.9375
+   ],
+   [
+    0.85,
+    0.9375
+   ],
+   [
+    0.9,
+    0.9375
+   ],
+   [
+    0.95,
+    0.9375
+   ],
+   [
+    1.0,
+    0.9375
+   ]
+  ],
+  "@5": [
+   [
+    0.0,
+    0.875
+   ],
+   [
+    0.05,
+    0.875
+   ],
+   [
+    0.1,
+    0.875
+   ],
+   [
+    0.15,
+    0.875
+   ],
+   [
+    0.2,
+    0.9375
+   ],
+   [
+    0.25,
+    0.9375
+   ],
+   [
+    0.3,
+    0.9375
+   ],
+   [
+    0.35,
+    0.9375
+   ],
+   [
+    0.4,
+    0.9375
+   ],
+   [
+    0.45,
+    0.9375
+   ],
+   [
+    0.5,
+    0.9375
+   ],
+   [
+    0.55,
+    0.9375
+   ],
+   [
+    0.6,
+    0.9375
+   ],
+   [
+    0.65,
+    0.9375
+   ],
+   [
+    0.7,
+    0.9375
+   ],
+   [
+    0.75,
+    0.9375
+   ],
+   [
+    0.8,
+    0.9375
+   ],
+   [
+    0.85,
+    0.9375
+   ],
+   [
+    0.9,
+    0.9375
+   ],
+   [
+    0.95,
+    0.9375
+   ],
+   [
+    1.0,
+    0.9375
+   ]
+  ]
+ },
+ "fragen": [
+  {
+   "frage": "Welchen CVSS-Wert hat CVE-2026-3224?",
+   "erwartete_dok_ids": [
+    "cve-2026-3224"
+   ],
+   "treffer": {
+    "BM25": [
+     {
+      "chunk_id": "cve-2025-9042#04",
+      "score": 5.025674
+     },
+     {
+      "chunk_id": "postmortem-2026-03-14-vpn#00",
+      "score": 3.03961
+     },
+     {
+      "chunk_id": "cve-2026-3224#00",
+      "score": 2.632863
+     },
+     {
+      "chunk_id": "postmortem-2026-03-14-vpn#01",
+      "score": 1.909056
+     },
+     {
+      "chunk_id": "cve-2025-9042#00",
+      "score": 0.0
+     }
+    ],
+    "Semantic Search": [
+     {
+      "chunk_id": "cve-2026-3224#01",
+      "score": 0.783523
+     },
+     {
+      "chunk_id": "cve-2025-9042#01",
+      "score": 0.756978
+     },
+     {
+      "chunk_id": "cve-2026-4410#01",
+      "score": 0.753171
+     },
+     {
+      "chunk_id": "cve-2025-9042#04",
+      "score": 0.748449
+     },
+     {
+      "chunk_id": "cve-2026-1187#01",
+      "score": 0.729248
+     }
+    ],
+    "Summe α = 0,5": [
+     {
+      "chunk_id": "cve-2025-9042#04",
+      "score": 0.930168
+     },
+     {
+      "chunk_id": "postmortem-2026-03-14-vpn#00",
+      "score": 0.631276
+     },
+     {
+      "chunk_id": "cve-2026-3224#00",
+      "score": 0.619356
+     },
+     {
+      "chunk_id": "cve-2026-3224#01",
+      "score": 0.5
+     },
+     {
+      "chunk_id": "cve-2025-9042#01",
+      "score": 0.447149
+     }
+    ],
+    "RRF k = 60": [
+     {
+      "chunk_id": "cve-2025-9042#04",
+      "score": 0.032018
+     },
+     {
+      "chunk_id": "cve-2025-9042#01",
+      "score": 0.031281
+     },
+     {
+      "chunk_id": "cve-2026-3224#00",
+      "score": 0.030798
+     },
+     {
+      "chunk_id": "postmortem-2026-03-14-vpn#00",
+      "score": 0.030415
+     },
+     {
+      "chunk_id": "cve-2025-9042#00",
+      "score": 0.03009
+     }
+    ]
+   }
+  },
+  {
+   "frage": "Welche Versionen von NorthPeak SecureGate sind von CVE-2026-3224 betroffen und in welcher Version ist die Schwachstelle behoben?",
+   "erwartete_dok_ids": [
+    "cve-2026-3224"
+   ],
+   "treffer": {
+    "BM25": [
+     {
+      "chunk_id": "cve-2026-3224#02",
+      "score": 13.922931
+     },
+     {
+      "chunk_id": "cve-2026-3224#00",
+      "score": 11.413826
+     },
+     {
+      "chunk_id": "cve-2026-1187#02",
+      "score": 10.014351
+     },
+     {
+      "chunk_id": "cve-2026-4410#01",
+      "score": 6.911012
+     },
+     {
+      "chunk_id": "cve-2025-9042#01",
+      "score": 6.183521
+     }
+    ],
+    "Semantic Search": [
+     {
+      "chunk_id": "cve-2026-3224#00",
+      "score": 0.848913
+     },
+     {
+      "chunk_id": "cve-2026-3224#07",
+      "score": 0.782826
+     },
+     {
+      "chunk_id": "cve-2026-3224#02",
+      "score": 0.763439
+     },
+     {
+      "chunk_id": "cve-2026-3224#03",
+      "score": 0.727355
+     },
+     {
+      "chunk_id": "cve-2026-3224#01",
+      "score": 0.713393
+     }
+    ],
+    "Summe α = 0,5": [
+     {
+      "chunk_id": "cve-2026-3224#00",
+      "score": 0.909893
+     },
+     {
+      "chunk_id": "cve-2026-3224#02",
+      "score": 0.864127
+     },
+     {
+      "chunk_id": "cve-2026-1187#02",
+      "score": 0.566549
+     },
+     {
+      "chunk_id": "cve-2026-3224#07",
+      "score": 0.551695
+     },
+     {
+      "chunk_id": "cve-2026-4410#01",
+      "score": 0.467366
+     }
+    ],
+    "RRF k = 60": [
+     {
+      "chunk_id": "cve-2026-3224#00",
+      "score": 0.032522
+     },
+     {
+      "chunk_id": "cve-2026-3224#02",
+      "score": 0.032266
+     },
+     {
+      "chunk_id": "cve-2026-3224#07",
+      "score": 0.031281
+     },
+     {
+      "chunk_id": "postmortem-2026-03-14-vpn#01",
+      "score": 0.029631
+     },
+     {
+      "chunk_id": "cve-2026-4410#01",
+      "score": 0.029139
+     }
+    ]
+   }
+  },
+  {
+   "frage": "Wie schnell muss ein Notfall-Patch auf Servern eingespielt werden?",
+   "erwartete_dok_ids": [
+    "runbook-patch-management"
+   ],
+   "treffer": {
+    "BM25": [
+     {
+      "chunk_id": "cve-2026-3224#07",
+      "score": 5.266508
+     },
+     {
+      "chunk_id": "policy-logging-und-aufbewahrung#01",
+      "score": 4.566538
+     },
+     {
+      "chunk_id": "runbook-patch-management#00",
+      "score": 4.484177
+     },
+     {
+      "chunk_id": "postmortem-2026-03-14-vpn#02",
+      "score": 3.203125
+     },
+     {
+      "chunk_id": "postmortem-2026-03-14-vpn#01",
+      "score": 2.115351
+     }
+    ],
+    "Semantic Search": [
+     {
+      "chunk_id": "postmortem-2026-03-14-vpn#02",
+      "score": 0.843225
+     },
+     {
+      "chunk_id": "runbook-patch-management#03",
+      "score": 0.763774
+     },
+     {
+      "chunk_id": "cve-2026-3224#07",
+      "score": 0.748501
+     },
+     {
+      "chunk_id": "cve-2025-9042#04",
+      "score": 0.710084
+     },
+     {
+      "chunk_id": "postmortem-2026-03-14-vpn#04",
+      "score": 0.703785
+     }
+    ],
+    "Summe α = 0,5": [
+     {
+      "chunk_id": "cve-2026-3224#07",
+      "score": 0.83853
+     },
+     {
+      "chunk_id": "postmortem-2026-03-14-vpn#02",
+      "score": 0.804103
+     },
+     {
+      "chunk_id": "runbook-patch-management#00",
+      "score": 0.623394
+     },
+     {
+      "chunk_id": "policy-logging-und-aufbewahrung#01",
+      "score": 0.551352
+     },
+     {
+      "chunk_id": "postmortem-2026-03-14-vpn#01",
+      "score": 0.402329
+     }
+    ],
+    "RRF k = 60": [
+     {
+      "chunk_id": "cve-2026-3224#07",
+      "score": 0.032266
+     },
+     {
+      "chunk_id": "postmortem-2026-03-14-vpn#02",
+      "score": 0.032018
+     },
+     {
+      "chunk_id": "cve-2025-9042#04",
+      "score": 0.029911
+     },
+     {
+      "chunk_id": "cve-2025-9042#02",
+      "score": 0.029199
+     },
+     {
+      "chunk_id": "runbook-patch-management#00",
+      "score": 0.028373
+     }
+    ]
+   }
+  },
+  {
+   "frage": "Wer entscheidet, ob ein Vorfall auf SEV-1 eingestuft wird?",
+   "erwartete_dok_ids": [
+    "runbook-incident-response"
+   ],
+   "treffer": {
+    "BM25": [
+     {
+      "chunk_id": "runbook-incident-response#01",
+      "score": 8.164093
+     },
+     {
+      "chunk_id": "runbook-incident-response#02",
+      "score": 6.369329
+     },
+     {
+      "chunk_id": "runbook-incident-response#06",
+      "score": 5.201335
+     },
+     {
+      "chunk_id": "postmortem-2026-03-14-vpn#00",
+      "score": 4.844204
+     },
+     {
+      "chunk_id": "policy-passwoerter-und-mfa#03",
+      "score": 3.943445
+     }
+    ],
+    "Semantic Search": [
+     {
+      "chunk_id": "postmortem-2026-03-14-vpn#04",
+      "score": 0.73613
+     },
+     {
+      "chunk_id": "runbook-incident-response#02",
+      "score": 0.735097
+     },
+     {
+      "chunk_id": "policy-logging-und-aufbewahrung#04",
+      "score": 0.72161
+     },
+     {
+      "chunk_id": "policy-passwoerter-und-mfa#04",
+      "score": 0.703849
+     },
+     {
+      "chunk_id": "cve-2026-3224#01",
+      "score": 0.693018
+     }
+    ],
+    "Summe α = 0,5": [
+     {
+      "chunk_id": "runbook-incident-response#02",
+      "score": 0.887397
+     },
+     {
+      "chunk_id": "runbook-incident-response#01",
+      "score": 0.80643
+     },
+     {
+      "chunk_id": "runbook-incident-response#06",
+      "score": 0.69008
+     },
+     {
+      "chunk_id": "postmortem-2026-03-14-vpn#04",
+      "score": 0.684823
+     },
+     {
+      "chunk_id": "postmortem-2026-03-14-vpn#00",
+      "score": 0.553631
+     }
+    ],
+    "RRF k = 60": [
+     {
+      "chunk_id": "runbook-incident-response#02",
+      "score": 0.032258
+     },
+     {
+      "chunk_id": "postmortem-2026-03-14-vpn#04",
+      "score": 0.031099
+     },
+     {
+      "chunk_id": "runbook-incident-response#06",
+      "score": 0.030798
+     },
+     {
+      "chunk_id": "runbook-incident-response#01",
+      "score": 0.029052
+     },
+     {
+      "chunk_id": "postmortem-2026-03-14-vpn#01",
+      "score": 0.028175
+     }
+    ]
+   }
+  },
+  {
+   "frage": "Wie lange werden Firewall-Logs aufbewahrt?",
+   "erwartete_dok_ids": [
+    "policy-logging-und-aufbewahrung"
+   ],
+   "treffer": {
+    "BM25": [
+     {
+      "chunk_id": "policy-logging-und-aufbewahrung#00",
+      "score": 8.340435
+     },
+     {
+      "chunk_id": "systemdoku-sentinelgrid#12",
+      "score": 4.046867
+     },
+     {
+      "chunk_id": "postmortem-2026-03-14-vpn#06",
+      "score": 3.943445
+     },
+     {
+      "chunk_id": "postmortem-2026-03-14-vpn#03",
+      "score": 3.2637
+     },
+     {
+      "chunk_id": "policy-logging-und-aufbewahrung#02",
+      "score": 2.853728
+     }
+    ],
+    "Semantic Search": [
+     {
+      "chunk_id": "policy-logging-und-aufbewahrung#02",
+      "score": 0.755973
+     },
+     {
+      "chunk_id": "cve-2026-3224#06",
+      "score": 0.738694
+     },
+     {
+      "chunk_id": "policy-logging-und-aufbewahrung#00",
+      "score": 0.72915
+     },
+     {
+      "chunk_id": "cve-2026-3224#03",
+      "score": 0.726079
+     },
+     {
+      "chunk_id": "postmortem-2026-03-14-vpn#06",
+      "score": 0.718233
+     }
+    ],
+    "Summe α = 0,5": [
+     {
+      "chunk_id": "policy-logging-und-aufbewahrung#00",
+      "score": 0.944555
+     },
+     {
+      "chunk_id": "policy-logging-und-aufbewahrung#02",
+      "score": 0.671078
+     },
+     {
+      "chunk_id": "postmortem-2026-03-14-vpn#06",
+      "score": 0.658393
+     },
+     {
+      "chunk_id": "postmortem-2026-03-14-vpn#03",
+      "score": 0.569256
+     },
+     {
+      "chunk_id": "cve-2026-3224#06",
+      "score": 0.464284
+     }
+    ],
+    "RRF k = 60": [
+     {
+      "chunk_id": "policy-logging-und-aufbewahrung#00",
+      "score": 0.032266
+     },
+     {
+      "chunk_id": "policy-logging-und-aufbewahrung#02",
+      "score": 0.031778
+     },
+     {
+      "chunk_id": "postmortem-2026-03-14-vpn#06",
+      "score": 0.031258
+     },
+     {
+      "chunk_id": "postmortem-2026-03-14-vpn#03",
+      "score": 0.030777
+     },
+     {
+      "chunk_id": "cve-2026-3224#06",
+      "score": 0.028034
+     }
+    ]
+   }
+  },
+  {
+   "frage": "Für welche Konten ist ein Phishing-resistentes MFA-Verfahren zwingend?",
+   "erwartete_dok_ids": [
+    "policy-passwoerter-und-mfa"
+   ],
+   "treffer": {
+    "BM25": [
+     {
+      "chunk_id": "policy-passwoerter-und-mfa#02",
+      "score": 7.450689
+     },
+     {
+      "chunk_id": "policy-passwoerter-und-mfa#00",
+      "score": 3.992235
+     },
+     {
+      "chunk_id": "runbook-zugriffskontrolle#05",
+      "score": 3.604299
+     },
+     {
+      "chunk_id": "runbook-incident-response#01",
+      "score": 3.487813
+     },
+     {
+      "chunk_id": "runbook-zugriffskontrolle#01",
+      "score": 3.33187
+     }
+    ],
+    "Semantic Search": [
+     {
+      "chunk_id": "policy-passwoerter-und-mfa#02",
+      "score": 0.863362
+     },
+     {
+      "chunk_id": "policy-passwoerter-und-mfa#03",
+      "score": 0.727914
+     },
+     {
+      "chunk_id": "policy-passwoerter-und-mfa#04",
+      "score": 0.697009
+     },
+     {
+      "chunk_id": "postmortem-2026-03-14-vpn#06",
+      "score": 0.691681
+     },
+     {
+      "chunk_id": "runbook-zugriffskontrolle#05",
+      "score": 0.685861
+     }
+    ],
+    "Summe α = 0,5": [
+     {
+      "chunk_id": "policy-passwoerter-und-mfa#02",
+      "score": 1.0
+     },
+     {
+      "chunk_id": "policy-passwoerter-und-mfa#03",
+      "score": 0.508909
+     },
+     {
+      "chunk_id": "runbook-zugriffskontrolle#05",
+      "score": 0.478911
+     },
+     {
+      "chunk_id": "policy-passwoerter-und-mfa#00",
+      "score": 0.458227
+     },
+     {
+      "chunk_id": "policy-passwoerter-und-mfa#04",
+      "score": 0.4451
+     }
+    ],
+    "RRF k = 60": [
+     {
+      "chunk_id": "policy-passwoerter-und-mfa#02",
+      "score": 0.032787
+     },
+     {
+      "chunk_id": "policy-passwoerter-und-mfa#03",
+      "score": 0.031281
+     },
+     {
+      "chunk_id": "runbook-zugriffskontrolle#05",
+      "score": 0.031258
+     },
+     {
+      "chunk_id": "policy-passwoerter-und-mfa#04",
+      "score": 0.030798
+     },
+     {
+      "chunk_id": "runbook-zugriffskontrolle#01",
+      "score": 0.029083
+     }
+    ]
+   }
+  },
+  {
+   "frage": "Was war die Grundursache des Vorfalls INC-2026-0311 vom 14. März 2026?",
+   "erwartete_dok_ids": [
+    "postmortem-2026-03-14-vpn",
+    "cve-2026-3224"
+   ],
+   "treffer": {
+    "BM25": [
+     {
+      "chunk_id": "postmortem-2026-03-14-vpn#00",
+      "score": 9.311221
+     },
+     {
+      "chunk_id": "postmortem-2026-03-14-vpn#02",
+      "score": 5.403035
+     },
+     {
+      "chunk_id": "cve-2026-3224#07",
+      "score": 5.266508
+     },
+     {
+      "chunk_id": "policy-logging-und-aufbewahrung#03",
+      "score": 3.702187
+     },
+     {
+      "chunk_id": "postmortem-2026-03-14-vpn#01",
+      "score": 3.699401
+     }
+    ],
+    "Semantic Search": [
+     {
+      "chunk_id": "postmortem-2026-03-14-vpn#00",
+      "score": 0.737819
+     },
+     {
+      "chunk_id": "postmortem-2026-03-14-vpn#02",
+      "score": 0.728481
+     },
+     {
+      "chunk_id": "policy-passwoerter-und-mfa#04",
+      "score": 0.722988
+     },
+     {
+      "chunk_id": "systemdoku-sentinelgrid#23",
+      "score": 0.719951
+     },
+     {
+      "chunk_id": "postmortem-2026-03-14-vpn#03",
+      "score": 0.719767
+     }
+    ],
+    "Summe α = 0,5": [
+     {
+      "chunk_id": "postmortem-2026-03-14-vpn#00",
+      "score": 1.0
+     },
+     {
+      "chunk_id": "postmortem-2026-03-14-vpn#02",
+      "score": 0.754301
+     },
+     {
+      "chunk_id": "cve-2026-3224#07",
+      "score": 0.671686
+     },
+     {
+      "chunk_id": "policy-passwoerter-und-mfa#04",
+      "score": 0.614114
+     },
+     {
+      "chunk_id": "policy-logging-und-aufbewahrung#03",
+      "score": 0.52072
+     }
+    ],
+    "RRF k = 60": [
+     {
+      "chunk_id": "postmortem-2026-03-14-vpn#00",
+      "score": 0.032787
+     },
+     {
+      "chunk_id": "postmortem-2026-03-14-vpn#02",
+      "score": 0.032258
+     },
+     {
+      "chunk_id": "policy-passwoerter-und-mfa#04",
+      "score": 0.031025
+     },
+     {
+      "chunk_id": "cve-2026-3224#07",
+      "score": 0.030159
+     },
+     {
+      "chunk_id": "policy-logging-und-aufbewahrung#03",
+      "score": 0.028958
+     }
+    ]
+   }
+  },
+  {
+   "frage": "Wie viele Ereignisse pro Sekunde verarbeitet SentinelGrid im Normalbetrieb?",
+   "erwartete_dok_ids": [
+    "systemdoku-sentinelgrid"
+   ],
+   "treffer": {
+    "BM25": [
+     {
+      "chunk_id": "systemdoku-sentinelgrid#07",
+      "score": 11.075447
+     },
+     {
+      "chunk_id": "systemdoku-sentinelgrid#23",
+      "score": 4.78112
+     },
+     {
+      "chunk_id": "systemdoku-sentinelgrid#24",
+      "score": 4.323653
+     },
+     {
+      "chunk_id": "systemdoku-sentinelgrid#00",
+      "score": 4.023771
+     },
+     {
+      "chunk_id": "runbook-incident-response#03",
+      "score": 3.540397
+     }
+    ],
+    "Semantic Search": [
+     {
+      "chunk_id": "systemdoku-sentinelgrid#07",
+      "score": 0.766938
+     },
+     {
+      "chunk_id": "systemdoku-sentinelgrid#00",
+      "score": 0.755087
+     },
+     {
+      "chunk_id": "policy-logging-und-aufbewahrung#04",
+      "score": 0.739318
+     },
+     {
+      "chunk_id": "cve-2026-4410#03",
+      "score": 0.711257
+     },
+     {
+      "chunk_id": "systemdoku-sentinelgrid#10",
+      "score": 0.687186
+     }
+    ],
+    "Summe α = 0,5": [
+     {
+      "chunk_id": "systemdoku-sentinelgrid#07",
+      "score": 1.0
+     },
+     {
+      "chunk_id": "systemdoku-sentinelgrid#00",
+      "score": 0.65707
+     },
+     {
+      "chunk_id": "policy-logging-und-aufbewahrung#04",
+      "score": 0.544218
+     },
+     {
+      "chunk_id": "runbook-incident-response#03",
+      "score": 0.425146
+     },
+     {
+      "chunk_id": "systemdoku-sentinelgrid#24",
+      "score": 0.414003
+     }
+    ],
+    "RRF k = 60": [
+     {
+      "chunk_id": "systemdoku-sentinelgrid#07",
+      "score": 0.032787
+     },
+     {
+      "chunk_id": "systemdoku-sentinelgrid#00",
+      "score": 0.031754
+     },
+     {
+      "chunk_id": "policy-logging-und-aufbewahrung#04",
+      "score": 0.029958
+     },
+     {
+      "chunk_id": "runbook-incident-response#03",
+      "score": 0.028718
+     },
+     {
+      "chunk_id": "systemdoku-sentinelgrid#20",
+      "score": 0.027746
+     }
+    ]
+   }
+  },
+  {
+   "frage": "Welcher Workaround schützt vor CVE-2026-4410, solange kein Patch verfügbar ist?",
+   "erwartete_dok_ids": [
+    "cve-2026-4410"
+   ],
+   "treffer": {
+    "BM25": [
+     {
+      "chunk_id": "cve-2026-4410#02",
+      "score": 10.559411
+     },
+     {
+      "chunk_id": "cve-2026-4410#00",
+      "score": 8.138749
+     },
+     {
+      "chunk_id": "cve-2026-3224#05",
+      "score": 6.945355
+     },
+     {
+      "chunk_id": "cve-2026-1187#04",
+      "score": 5.133667
+     },
+     {
+      "chunk_id": "systemdoku-sentinelgrid#21",
+      "score": 4.335552
+     }
+    ],
+    "Semantic Search": [
+     {
+      "chunk_id": "cve-2026-3224#05",
+      "score": 0.764401
+     },
+     {
+      "chunk_id": "cve-2025-9042#04",
+      "score": 0.763981
+     },
+     {
+      "chunk_id": "cve-2026-4410#00",
+      "score": 0.762083
+     },
+     {
+      "chunk_id": "cve-2026-4410#02",
+      "score": 0.757639
+     },
+     {
+      "chunk_id": "cve-2026-4410#01",
+      "score": 0.756317
+     }
+    ],
+    "Summe α = 0,5": [
+     {
+      "chunk_id": "cve-2026-4410#02",
+      "score": 0.983035
+     },
+     {
+      "chunk_id": "cve-2026-4410#00",
+      "score": 0.879562
+     },
+     {
+      "chunk_id": "cve-2026-3224#05",
+      "score": 0.82887
+     },
+     {
+      "chunk_id": "cve-2026-1187#04",
+      "score": 0.592011
+     },
+     {
+      "chunk_id": "cve-2026-4410#01",
+      "score": 0.569068
+     }
+    ],
+    "RRF k = 60": [
+     {
+      "chunk_id": "cve-2026-3224#05",
+      "score": 0.032266
+     },
+     {
+      "chunk_id": "cve-2026-4410#02",
+      "score": 0.032018
+     },
+     {
+      "chunk_id": "cve-2026-4410#00",
+      "score": 0.032002
+     },
+     {
+      "chunk_id": "cve-2026-1187#04",
+      "score": 0.029324
+     },
+     {
+      "chunk_id": "cve-2025-9042#04",
+      "score": 0.029287
+     }
+    ]
+   }
+  },
+  {
+   "frage": "Was passiert mit den Zugängen einer Mitarbeiterin an ihrem letzten Arbeitstag?",
+   "erwartete_dok_ids": [
+    "runbook-zugriffskontrolle"
+   ],
+   "treffer": {
+    "BM25": [
+     {
+      "chunk_id": "runbook-zugriffskontrolle#04",
+      "score": 7.418966
+     },
+     {
+      "chunk_id": "runbook-patch-management#03",
+      "score": 3.593277
+     },
+     {
+      "chunk_id": "runbook-patch-management#04",
+      "score": 3.20391
+     },
+     {
+      "chunk_id": "runbook-incident-response#05",
+      "score": 2.825065
+     },
+     {
+      "chunk_id": "cve-2026-1187#03",
+      "score": 2.762642
+     }
+    ],
+    "Semantic Search": [
+     {
+      "chunk_id": "runbook-incident-response#08",
+      "score": 0.663764
+     },
+     {
+      "chunk_id": "runbook-zugriffskontrolle#05",
+      "score": 0.657814
+     },
+     {
+      "chunk_id": "runbook-zugriffskontrolle#02",
+      "score": 0.649464
+     },
+     {
+      "chunk_id": "runbook-zugriffskontrolle#03",
+      "score": 0.643664
+     },
+     {
+      "chunk_id": "runbook-zugriffskontrolle#04",
+      "score": 0.643545
+     }
+    ],
+    "Summe α = 0,5": [
+     {
+      "chunk_id": "runbook-zugriffskontrolle#04",
+      "score": 0.952201
+     },
+     {
+      "chunk_id": "runbook-patch-management#04",
+      "score": 0.606636
+     },
+     {
+      "chunk_id": "runbook-zugriffskontrolle#06",
+      "score": 0.593595
+     },
+     {
+      "chunk_id": "runbook-patch-management#03",
+      "score": 0.585796
+     },
+     {
+      "chunk_id": "runbook-incident-response#08",
+      "score": 0.5
+     }
+    ],
+    "RRF k = 60": [
+     {
+      "chunk_id": "runbook-zugriffskontrolle#04",
+      "score": 0.031778
+     },
+     {
+      "chunk_id": "runbook-patch-management#04",
+      "score": 0.030159
+     },
+     {
+      "chunk_id": "runbook-zugriffskontrolle#06",
+      "score": 0.029851
+     },
+     {
+      "chunk_id": "runbook-patch-management#03",
+      "score": 0.028475
+     },
+     {
+      "chunk_id": "systemdoku-sentinelgrid#18",
+      "score": 0.026541
+     }
+    ]
+   }
+  }
+ ],
+ "umformuliert": [
+  {
+   "frage": "Wie gefährlich ist die Lücke im VPN-Zugang von NorthPeak?",
+   "erwartete_dok_ids": [
+    "cve-2026-3224"
+   ],
+   "treffer": {
+    "BM25": [
+     {
+      "chunk_id": "postmortem-2026-03-14-vpn#06",
+      "score": 4.52065
+     },
+     {
+      "chunk_id": "systemdoku-sentinelgrid#11",
+      "score": 4.388356
+     },
+     {
+      "chunk_id": "cve-2026-3224#00",
+      "score": 4.384606
+     },
+     {
+      "chunk_id": "cve-2026-3224#07",
+      "score": 4.364847
+     },
+     {
+      "chunk_id": "cve-2026-3224#01",
+      "score": 2.94299
+     }
+    ],
+    "Semantic Search": [
+     {
+      "chunk_id": "cve-2026-3224#03",
+      "score": 0.770447
+     },
+     {
+      "chunk_id": "cve-2026-3224#07",
+      "score": 0.743541
+     },
+     {
+      "chunk_id": "cve-2026-3224#00",
+      "score": 0.74332
+     },
+     {
+      "chunk_id": "postmortem-2026-03-14-vpn#01",
+      "score": 0.727317
+     },
+     {
+      "chunk_id": "postmortem-2026-03-14-vpn#03",
+      "score": 0.719461
+     }
+    ],
+    "Summe α = 0,5": [
+     {
+      "chunk_id": "cve-2026-3224#00",
+      "score": 0.929871
+     },
+     {
+      "chunk_id": "cve-2026-3224#07",
+      "score": 0.928133
+     },
+     {
+      "chunk_id": "postmortem-2026-03-14-vpn#06",
+      "score": 0.85839
+     },
+     {
+      "chunk_id": "systemdoku-sentinelgrid#11",
+      "score": 0.666326
+     },
+     {
+      "chunk_id": "postmortem-2026-03-14-vpn#01",
+      "score": 0.606333
+     }
+    ],
+    "RRF k = 60": [
+     {
+      "chunk_id": "cve-2026-3224#07",
+      "score": 0.031754
+     },
+     {
+      "chunk_id": "cve-2026-3224#00",
+      "score": 0.031746
+     },
+     {
+      "chunk_id": "postmortem-2026-03-14-vpn#06",
+      "score": 0.031319
+     },
+     {
+      "chunk_id": "postmortem-2026-03-14-vpn#01",
+      "score": 0.030777
+     },
+     {
+      "chunk_id": "cve-2026-3224#03",
+      "score": 0.029052
+     }
+    ]
+   }
+  },
+  {
+   "frage": "Wie viel Zeit bleibt für ein dringendes Sicherheitsupdate?",
+   "erwartete_dok_ids": [
+    "runbook-patch-management"
+   ],
+   "treffer": {
+    "BM25": [
+     {
+      "chunk_id": "runbook-incident-response#06",
+      "score": 2.781977
+     },
+     {
+      "chunk_id": "systemdoku-sentinelgrid#18",
+      "score": 2.613392
+     },
+     {
+      "chunk_id": "cve-2025-9042#02",
+      "score": 2.525924
+     },
+     {
+      "chunk_id": "systemdoku-sentinelgrid#15",
+      "score": 2.133239
+     },
+     {
+      "chunk_id": "systemdoku-sentinelgrid#09",
+      "score": 2.11827
+     }
+    ],
+    "Semantic Search": [
+     {
+      "chunk_id": "systemdoku-sentinelgrid#19",
+      "score": 0.665236
+     },
+     {
+      "chunk_id": "policy-logging-und-aufbewahrung#04",
+      "score": 0.649354
+     },
+     {
+      "chunk_id": "postmortem-2026-03-14-vpn#01",
+      "score": 0.64547
+     },
+     {
+      "chunk_id": "policy-passwoerter-und-mfa#04",
+      "score": 0.639735
+     },
+     {
+      "chunk_id": "runbook-zugriffskontrolle#01",
+      "score": 0.637853
+     }
+    ],
+    "Summe α = 0,5": [
+     {
+      "chunk_id": "runbook-incident-response#06",
+      "score": 0.83158
+     },
+     {
+      "chunk_id": "systemdoku-sentinelgrid#15",
+      "score": 0.81072
+     },
+     {
+      "chunk_id": "systemdoku-sentinelgrid#18",
+      "score": 0.75763
+     },
+     {
+      "chunk_id": "cve-2025-9042#02",
+      "score": 0.568278
+     },
+     {
+      "chunk_id": "systemdoku-sentinelgrid#19",
+      "score": 0.5
+     }
+    ],
+    "RRF k = 60": [
+     {
+      "chunk_id": "systemdoku-sentinelgrid#15",
+      "score": 0.030777
+     },
+     {
+      "chunk_id": "runbook-incident-response#06",
+      "score": 0.028442
+     },
+     {
+      "chunk_id": "policy-logging-und-aufbewahrung#04",
+      "score": 0.026999
+     },
+     {
+      "chunk_id": "systemdoku-sentinelgrid#18",
+      "score": 0.026882
+     },
+     {
+      "chunk_id": "postmortem-2026-03-14-vpn#01",
+      "score": 0.025873
+     }
+    ]
+   }
+  },
+  {
+   "frage": "Wer stuft einen Vorfall als besonders schwerwiegend ein?",
+   "erwartete_dok_ids": [
+    "runbook-incident-response"
+   ],
+   "treffer": {
+    "BM25": [
+     {
+      "chunk_id": "cve-2026-3224#07",
+      "score": 3.787333
+     },
+     {
+      "chunk_id": "runbook-incident-response#03",
+      "score": 2.726287
+     },
+     {
+      "chunk_id": "runbook-incident-response#06",
+      "score": 2.600668
+     },
+     {
+      "chunk_id": "runbook-incident-response#01",
+      "score": 2.508211
+     },
+     {
+      "chunk_id": "postmortem-2026-03-14-vpn#01",
+      "score": 2.424976
+     }
+    ],
+    "Semantic Search": [
+     {
+      "chunk_id": "policy-passwoerter-und-mfa#04",
+      "score": 0.646522
+     },
+     {
+      "chunk_id": "systemdoku-sentinelgrid#13",
+      "score": 0.643997
+     },
+     {
+      "chunk_id": "systemdoku-sentinelgrid#20",
+      "score": 0.643436
+     },
+     {
+      "chunk_id": "policy-logging-und-aufbewahrung#04",
+      "score": 0.638593
+     },
+     {
+      "chunk_id": "runbook-patch-management#04",
+      "score": 0.638141
+     }
+    ],
+    "Summe α = 0,5": [
+     {
+      "chunk_id": "cve-2026-3224#07",
+      "score": 0.801706
+     },
+     {
+      "chunk_id": "runbook-incident-response#06",
+      "score": 0.749547
+     },
+     {
+      "chunk_id": "postmortem-2026-03-14-vpn#01",
+      "score": 0.731521
+     },
+     {
+      "chunk_id": "runbook-incident-response#03",
+      "score": 0.698769
+     },
+     {
+      "chunk_id": "runbook-incident-response#01",
+      "score": 0.626679
+     }
+    ],
+    "RRF k = 60": [
+     {
+      "chunk_id": "runbook-incident-response#06",
+      "score": 0.029206
+     },
+     {
+      "chunk_id": "postmortem-2026-03-14-vpn#01",
+      "score": 0.029083
+     },
+     {
+      "chunk_id": "runbook-incident-response#03",
+      "score": 0.027118
+     },
+     {
+      "chunk_id": "policy-passwoerter-und-mfa#04",
+      "score": 0.026494
+     },
+     {
+      "chunk_id": "cve-2026-3224#01",
+      "score": 0.026389
+     }
+    ]
+   }
+  },
+  {
+   "frage": "Wie lange bleiben die Aufzeichnungen der Firewall gespeichert?",
+   "erwartete_dok_ids": [
+    "policy-logging-und-aufbewahrung"
+   ],
+   "treffer": {
+    "BM25": [
+     {
+      "chunk_id": "systemdoku-sentinelgrid#20",
+      "score": 4.759803
+     },
+     {
+      "chunk_id": "systemdoku-sentinelgrid#24",
+      "score": 4.475674
+     },
+     {
+      "chunk_id": "policy-logging-und-aufbewahrung#00",
+      "score": 4.383987
+     },
+     {
+      "chunk_id": "systemdoku-sentinelgrid#15",
+      "score": 2.773065
+     },
+     {
+      "chunk_id": "cve-2025-9042#00",
+      "score": 0.0
+     }
+    ],
+    "Semantic Search": [
+     {
+      "chunk_id": "cve-2026-3224#03",
+      "score": 0.721718
+     },
+     {
+      "chunk_id": "postmortem-2026-03-14-vpn#06",
+      "score": 0.716773
+     },
+     {
+      "chunk_id": "policy-logging-und-aufbewahrung#02",
+      "score": 0.71617
+     },
+     {
+      "chunk_id": "runbook-incident-response#04",
+      "score": 0.708751
+     },
+     {
+      "chunk_id": "systemdoku-sentinelgrid#18",
+      "score": 0.695228
+     }
+    ],
+    "Summe α = 0,5": [
+     {
+      "chunk_id": "systemdoku-sentinelgrid#20",
+      "score": 0.869327
+     },
+     {
+      "chunk_id": "policy-logging-und-aufbewahrung#00",
+      "score": 0.747838
+     },
+     {
+      "chunk_id": "systemdoku-sentinelgrid#24",
+      "score": 0.700182
+     },
+     {
+      "chunk_id": "systemdoku-sentinelgrid#15",
+      "score": 0.573106
+     },
+     {
+      "chunk_id": "cve-2026-3224#03",
+      "score": 0.5
+     }
+    ],
+    "RRF k = 60": [
+     {
+      "chunk_id": "systemdoku-sentinelgrid#20",
+      "score": 0.029907
+     },
+     {
+      "chunk_id": "cve-2026-3224#03",
+      "score": 0.029052
+     },
+     {
+      "chunk_id": "cve-2026-3224#02",
+      "score": 0.027313
+     },
+     {
+      "chunk_id": "cve-2026-3224#06",
+      "score": 0.02712
+     },
+     {
+      "chunk_id": "policy-logging-und-aufbewahrung#02",
+      "score": 0.027109
+     }
+    ]
+   }
+  },
+  {
+   "frage": "Was geschieht mit dem Zugang, wenn jemand die Firma verlässt?",
+   "erwartete_dok_ids": [
+    "runbook-zugriffskontrolle"
+   ],
+   "treffer": {
+    "BM25": [
+     {
+      "chunk_id": "runbook-zugriffskontrolle#03",
+      "score": 5.140528
+     },
+     {
+      "chunk_id": "runbook-zugriffskontrolle#02",
+      "score": 4.409338
+     },
+     {
+      "chunk_id": "runbook-zugriffskontrolle#01",
+      "score": 3.593277
+     },
+     {
+      "chunk_id": "policy-passwoerter-und-mfa#03",
+      "score": 3.268301
+     },
+     {
+      "chunk_id": "systemdoku-sentinelgrid#06",
+      "score": 3.08245
+     }
+    ],
+    "Semantic Search": [
+     {
+      "chunk_id": "policy-logging-und-aufbewahrung#01",
+      "score": 0.664553
+     },
+     {
+      "chunk_id": "postmortem-2026-03-14-vpn#07",
+      "score": 0.662212
+     },
+     {
+      "chunk_id": "runbook-zugriffskontrolle#02",
+      "score": 0.659547
+     },
+     {
+      "chunk_id": "runbook-zugriffskontrolle#01",
+      "score": 0.658975
+     },
+     {
+      "chunk_id": "runbook-incident-response#07",
+      "score": 0.656579
+     }
+    ],
+    "Summe α = 0,5": [
+     {
+      "chunk_id": "runbook-zugriffskontrolle#03",
+      "score": 0.932811
+     },
+     {
+      "chunk_id": "runbook-zugriffskontrolle#02",
+      "score": 0.915224
+     },
+     {
+      "chunk_id": "runbook-zugriffskontrolle#01",
+      "score": 0.834289
+     },
+     {
+      "chunk_id": "policy-passwoerter-und-mfa#03",
+      "score": 0.748926
+     },
+     {
+      "chunk_id": "systemdoku-sentinelgrid#06",
+      "score": 0.58173
+     }
+    ],
+    "RRF k = 60": [
+     {
+      "chunk_id": "runbook-zugriffskontrolle#02",
+      "score": 0.032002
+     },
+     {
+      "chunk_id": "runbook-zugriffskontrolle#01",
+      "score": 0.031498
+     },
+     {
+      "chunk_id": "runbook-zugriffskontrolle#03",
+      "score": 0.029727
+     },
+     {
+      "chunk_id": "policy-passwoerter-und-mfa#03",
+      "score": 0.028612
+     },
+     {
+      "chunk_id": "policy-logging-und-aufbewahrung#01",
+      "score": 0.027505
+     }
+    ]
+   }
+  },
+  {
+   "frage": "Wie viel Last hält die SIEM-Plattform im Alltag aus?",
+   "erwartete_dok_ids": [
+    "systemdoku-sentinelgrid"
+   ],
+   "treffer": {
+    "BM25": [
+     {
+      "chunk_id": "runbook-incident-response#01",
+      "score": 3.998327
+     },
+     {
+      "chunk_id": "systemdoku-sentinelgrid#02",
+      "score": 3.201584
+     },
+     {
+      "chunk_id": "cve-2025-9042#00",
+      "score": 0.0
+     },
+     {
+      "chunk_id": "cve-2025-9042#01",
+      "score": 0.0
+     },
+     {
+      "chunk_id": "cve-2025-9042#02",
+      "score": 0.0
+     }
+    ],
+    "Semantic Search": [
+     {
+      "chunk_id": "systemdoku-sentinelgrid#10",
+      "score": 0.689588
+     },
+     {
+      "chunk_id": "runbook-zugriffskontrolle#05",
+      "score": 0.670584
+     },
+     {
+      "chunk_id": "postmortem-2026-03-14-vpn#04",
+      "score": 0.66938
+     },
+     {
+      "chunk_id": "systemdoku-sentinelgrid#00",
+      "score": 0.667186
+     },
+     {
+      "chunk_id": "systemdoku-sentinelgrid#18",
+      "score": 0.66106
+     }
+    ],
+    "Summe α = 0,5": [
+     {
+      "chunk_id": "runbook-incident-response#01",
+      "score": 0.825146
+     },
+     {
+      "chunk_id": "systemdoku-sentinelgrid#02",
+      "score": 0.704413
+     },
+     {
+      "chunk_id": "systemdoku-sentinelgrid#10",
+      "score": 0.5
+     },
+     {
+      "chunk_id": "runbook-zugriffskontrolle#05",
+      "score": 0.454574
+     },
+     {
+      "chunk_id": "postmortem-2026-03-14-vpn#04",
+      "score": 0.451698
+     }
+    ],
+    "RRF k = 60": [
+     {
+      "chunk_id": "runbook-incident-response#01",
+      "score": 0.02692
+     },
+     {
+      "chunk_id": "cve-2025-9042#03",
+      "score": 0.026141
+     },
+     {
+      "chunk_id": "systemdoku-sentinelgrid#02",
+      "score": 0.02603
+     },
+     {
+      "chunk_id": "postmortem-2026-03-14-vpn#04",
+      "score": 0.025774
+     },
+     {
+      "chunk_id": "policy-logging-und-aufbewahrung#04",
+      "score": 0.025
+     }
+    ]
+   }
+  }
+ ]
+}

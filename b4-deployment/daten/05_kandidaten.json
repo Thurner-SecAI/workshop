@@ -1,0 +1,47 @@
+{
+ "stand": "2026-08-15",
+ "quelle": "ollama show für Parameterzahl und Quantisierung, model_cards.json für Lizenz und Kontextlänge",
+ "hinweis": "Die drei Modelle liegen im lokalen Ollama. Der Schlüssel karte verweist auf den Eintrag in model_cards.json, unter dem Lizenz und Kontextlänge nachgeschlagen werden. Wo karte_genau false ist, gibt es für das Ollama-Modell keine eigene Card in der Datei und es steht die Card der nächstgelegenen Größe derselben Familie da — die Lizenz stimmt, die Parameterzahl nicht.",
+ "felder": {
+  "ollama": "Name, unter dem das Modell im lokalen Ollama liegt",
+  "anzeige": "Kurzname für Tabellen und Diagramme",
+  "parameter": "Parameter insgesamt, laut ollama show",
+  "quantisierung": "Format der Gewichte in der lokalen Datei",
+  "reasoning": "true, wenn das Modell vor der Antwort denkt",
+  "betrieb": "was der Betrieb dieses Modells verlangt",
+  "karte": "Eintrag in model_cards.json",
+  "karte_genau": "true, wenn die Card dasselbe Modell beschreibt"
+ },
+ "kandidaten": [
+  {
+   "ollama": "qwen3.5:0.8b",
+   "anzeige": "Qwen3.5 0,8B",
+   "parameter": 873000000,
+   "quantisierung": "Q8_0",
+   "reasoning": true,
+   "betrieb": "Ollama, ein Prozess",
+   "karte": "Qwen/Qwen2.5-0.5B-Instruct",
+   "karte_genau": false
+  },
+  {
+   "ollama": "llama3.2",
+   "anzeige": "Llama 3.2 3B",
+   "parameter": 3210000000,
+   "quantisierung": "Q4_K_M",
+   "reasoning": false,
+   "betrieb": "Ollama, ein Prozess",
+   "karte": "meta-llama/Llama-3.2-3B-Instruct",
+   "karte_genau": true
+  },
+  {
+   "ollama": "gemma4",
+   "anzeige": "Gemma 4 8B",
+   "parameter": 8000000000,
+   "quantisierung": "Q4_K_M",
+   "reasoning": true,
+   "betrieb": "eigene GPU, für mehrere Nutzende eine Serving-Engine",
+   "karte": "google/gemma-2-9b-it",
+   "karte_genau": false
+  }
+ ]
+}

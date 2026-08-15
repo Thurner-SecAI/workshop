@@ -1,0 +1,312 @@
+{
+ "verfahren": "bm25-okapi",
+ "parameter": {
+  "k1": 1.5,
+  "b": 0.75
+ },
+ "fallstricke": {
+  "suchanfrage": "Token rotieren",
+  "ziel_dok": "03_runbook-token-rotation",
+  "tf": {
+   "01_betriebshandbuch-rechenzentrum": 0.6667,
+   "02_wiki-token-sammelseite": 1.5,
+   "03_runbook-token-rotation": 1.0,
+   "04_tokenisierung-sprachmodelle": 1.1538
+  },
+  "tf_idf": {
+   "01_betriebshandbuch-rechenzentrum": 0.024,
+   "02_wiki-token-sammelseite": 0.1438,
+   "03_runbook-token-rotation": 0.0,
+   "04_tokenisierung-sprachmodelle": 0.0443
+  },
+  "bm25": {
+   "01_betriebshandbuch-rechenzentrum": 0.4483,
+   "02_wiki-token-sammelseite": 0.8906,
+   "03_runbook-token-rotation": 0.4214,
+   "04_tokenisierung-sprachmodelle": 0.7307
+  }
+ },
+ "fragen": [
+  {
+   "frage": "Welchen CVSS-Wert hat CVE-2026-3224?",
+   "erwartete_dok_ids": [
+    "cve-2026-3224"
+   ],
+   "treffer": [
+    {
+     "chunk_id": "cve-2025-9042#04",
+     "score": 5.0257
+    },
+    {
+     "chunk_id": "postmortem-2026-03-14-vpn#00",
+     "score": 3.0396
+    },
+    {
+     "chunk_id": "cve-2026-3224#00",
+     "score": 2.6329
+    },
+    {
+     "chunk_id": "postmortem-2026-03-14-vpn#01",
+     "score": 1.9091
+    },
+    {
+     "chunk_id": "cve-2025-9042#00",
+     "score": 0.0
+    }
+   ]
+  },
+  {
+   "frage": "Welche Versionen von NorthPeak SecureGate sind von CVE-2026-3224 betroffen und in welcher Version ist die Schwachstelle behoben?",
+   "erwartete_dok_ids": [
+    "cve-2026-3224"
+   ],
+   "treffer": [
+    {
+     "chunk_id": "cve-2026-3224#02",
+     "score": 13.9229
+    },
+    {
+     "chunk_id": "cve-2026-3224#00",
+     "score": 11.4138
+    },
+    {
+     "chunk_id": "cve-2026-1187#02",
+     "score": 10.0144
+    },
+    {
+     "chunk_id": "cve-2026-4410#01",
+     "score": 6.911
+    },
+    {
+     "chunk_id": "cve-2025-9042#01",
+     "score": 6.1835
+    }
+   ]
+  },
+  {
+   "frage": "Wie schnell muss ein Notfall-Patch auf Servern eingespielt werden?",
+   "erwartete_dok_ids": [
+    "runbook-patch-management"
+   ],
+   "treffer": [
+    {
+     "chunk_id": "cve-2026-3224#07",
+     "score": 5.2665
+    },
+    {
+     "chunk_id": "policy-logging-und-aufbewahrung#01",
+     "score": 4.5665
+    },
+    {
+     "chunk_id": "runbook-patch-management#00",
+     "score": 4.4842
+    },
+    {
+     "chunk_id": "postmortem-2026-03-14-vpn#02",
+     "score": 3.2031
+    },
+    {
+     "chunk_id": "postmortem-2026-03-14-vpn#01",
+     "score": 2.1154
+    }
+   ]
+  },
+  {
+   "frage": "Wer entscheidet, ob ein Vorfall auf SEV-1 eingestuft wird?",
+   "erwartete_dok_ids": [
+    "runbook-incident-response"
+   ],
+   "treffer": [
+    {
+     "chunk_id": "runbook-incident-response#01",
+     "score": 8.1641
+    },
+    {
+     "chunk_id": "runbook-incident-response#02",
+     "score": 6.3693
+    },
+    {
+     "chunk_id": "runbook-incident-response#06",
+     "score": 5.2013
+    },
+    {
+     "chunk_id": "postmortem-2026-03-14-vpn#00",
+     "score": 4.8442
+    },
+    {
+     "chunk_id": "policy-passwoerter-und-mfa#03",
+     "score": 3.9434
+    }
+   ]
+  },
+  {
+   "frage": "Wie lange werden Firewall-Logs aufbewahrt?",
+   "erwartete_dok_ids": [
+    "policy-logging-und-aufbewahrung"
+   ],
+   "treffer": [
+    {
+     "chunk_id": "policy-logging-und-aufbewahrung#00",
+     "score": 8.3404
+    },
+    {
+     "chunk_id": "systemdoku-sentinelgrid#12",
+     "score": 4.0469
+    },
+    {
+     "chunk_id": "postmortem-2026-03-14-vpn#06",
+     "score": 3.9434
+    },
+    {
+     "chunk_id": "postmortem-2026-03-14-vpn#03",
+     "score": 3.2637
+    },
+    {
+     "chunk_id": "policy-logging-und-aufbewahrung#02",
+     "score": 2.8537
+    }
+   ]
+  },
+  {
+   "frage": "Für welche Konten ist ein Phishing-resistentes MFA-Verfahren zwingend?",
+   "erwartete_dok_ids": [
+    "policy-passwoerter-und-mfa"
+   ],
+   "treffer": [
+    {
+     "chunk_id": "policy-passwoerter-und-mfa#02",
+     "score": 7.4507
+    },
+    {
+     "chunk_id": "policy-passwoerter-und-mfa#00",
+     "score": 3.9922
+    },
+    {
+     "chunk_id": "runbook-zugriffskontrolle#05",
+     "score": 3.6043
+    },
+    {
+     "chunk_id": "runbook-incident-response#01",
+     "score": 3.4878
+    },
+    {
+     "chunk_id": "runbook-zugriffskontrolle#01",
+     "score": 3.3319
+    }
+   ]
+  },
+  {
+   "frage": "Was war die Grundursache des Vorfalls INC-2026-0311 vom 14. März 2026?",
+   "erwartete_dok_ids": [
+    "postmortem-2026-03-14-vpn",
+    "cve-2026-3224"
+   ],
+   "treffer": [
+    {
+     "chunk_id": "postmortem-2026-03-14-vpn#00",
+     "score": 9.3112
+    },
+    {
+     "chunk_id": "postmortem-2026-03-14-vpn#02",
+     "score": 5.403
+    },
+    {
+     "chunk_id": "cve-2026-3224#07",
+     "score": 5.2665
+    },
+    {
+     "chunk_id": "policy-logging-und-aufbewahrung#03",
+     "score": 3.7022
+    },
+    {
+     "chunk_id": "postmortem-2026-03-14-vpn#01",
+     "score": 3.6994
+    }
+   ]
+  },
+  {
+   "frage": "Wie viele Ereignisse pro Sekunde verarbeitet SentinelGrid im Normalbetrieb?",
+   "erwartete_dok_ids": [
+    "systemdoku-sentinelgrid"
+   ],
+   "treffer": [
+    {
+     "chunk_id": "systemdoku-sentinelgrid#07",
+     "score": 11.0754
+    },
+    {
+     "chunk_id": "systemdoku-sentinelgrid#23",
+     "score": 4.7811
+    },
+    {
+     "chunk_id": "systemdoku-sentinelgrid#24",
+     "score": 4.3237
+    },
+    {
+     "chunk_id": "systemdoku-sentinelgrid#00",
+     "score": 4.0238
+    },
+    {
+     "chunk_id": "runbook-incident-response#03",
+     "score": 3.5404
+    }
+   ]
+  },
+  {
+   "frage": "Welcher Workaround schützt vor CVE-2026-4410, solange kein Patch verfügbar ist?",
+   "erwartete_dok_ids": [
+    "cve-2026-4410"
+   ],
+   "treffer": [
+    {
+     "chunk_id": "cve-2026-4410#02",
+     "score": 10.5594
+    },
+    {
+     "chunk_id": "cve-2026-4410#00",
+     "score": 8.1387
+    },
+    {
+     "chunk_id": "cve-2026-3224#05",
+     "score": 6.9454
+    },
+    {
+     "chunk_id": "cve-2026-1187#04",
+     "score": 5.1337
+    },
+    {
+     "chunk_id": "systemdoku-sentinelgrid#21",
+     "score": 4.3356
+    }
+   ]
+  },
+  {
+   "frage": "Was passiert mit den Zugängen einer Mitarbeiterin an ihrem letzten Arbeitstag?",
+   "erwartete_dok_ids": [
+    "runbook-zugriffskontrolle"
+   ],
+   "treffer": [
+    {
+     "chunk_id": "runbook-zugriffskontrolle#04",
+     "score": 7.419
+    },
+    {
+     "chunk_id": "runbook-patch-management#03",
+     "score": 3.5933
+    },
+    {
+     "chunk_id": "runbook-patch-management#04",
+     "score": 3.2039
+    },
+    {
+     "chunk_id": "runbook-incident-response#05",
+     "score": 2.8251
+    },
+    {
+     "chunk_id": "cve-2026-1187#03",
+     "score": 2.7626
+    }
+   ]
+  }
+ ]
+}

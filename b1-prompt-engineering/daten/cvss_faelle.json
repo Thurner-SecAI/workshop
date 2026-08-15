@@ -1,0 +1,121 @@
+{
+  "regel": [
+    "Start at level 1.",
+    "Add 1 if the attack vector is network.",
+    "Add 1 if no authentication is required.",
+    "Add 1 if more than 10 systems are affected.",
+    "Level 1 = low, level 2 = medium, level 3 = high, level 4 = critical."
+  ],
+  "faelle": [
+    {
+      "id": "C01",
+      "beschreibung": "An attacker on the internet can forge a session token for the credential vault. No login is needed. 14 servers run the affected release.",
+      "merkmale": {
+        "attack_vector": "network",
+        "authentication": "none",
+        "affected_systems": 14
+      },
+      "antwort": "critical",
+      "system": "Devolutions Server"
+    },
+    {
+      "id": "C02",
+      "beschreibung": "A logged in employee can read wiki pages of other departments over the corporate network. 6 systems host the wiki.",
+      "merkmale": {
+        "attack_vector": "network",
+        "authentication": "required",
+        "affected_systems": 6
+      },
+      "antwort": "medium",
+      "system": "internal wiki"
+    },
+    {
+      "id": "C03",
+      "beschreibung": "A user who is already logged in to a machine can read the backup agent configuration file with the stored share password. 4 machines are affected.",
+      "merkmale": {
+        "attack_vector": "local",
+        "authentication": "required",
+        "affected_systems": 4
+      },
+      "antwort": "low",
+      "system": "backup agent"
+    },
+    {
+      "id": "C04",
+      "beschreibung": "An unauthenticated request to the internet facing VPN gateway returns the firmware version and the list of configured user groups. 3 gateways are affected.",
+      "merkmale": {
+        "attack_vector": "network",
+        "authentication": "none",
+        "affected_systems": 3
+      },
+      "antwort": "high",
+      "system": "VPN gateway"
+    },
+    {
+      "id": "C05",
+      "beschreibung": "A device in the same network segment can send a print job that runs a driver installer without any login. 25 print servers are affected.",
+      "merkmale": {
+        "attack_vector": "adjacent",
+        "authentication": "none",
+        "affected_systems": 25
+      },
+      "antwort": "high",
+      "system": "print server"
+    },
+    {
+      "id": "C06",
+      "beschreibung": "An authenticated employee can change the bank account of another employee over the network. The portal serves 40 application servers.",
+      "merkmale": {
+        "attack_vector": "network",
+        "authentication": "required",
+        "affected_systems": 40
+      },
+      "antwort": "high",
+      "system": "HR portal"
+    },
+    {
+      "id": "C07",
+      "beschreibung": "Anyone with physical access to a console can restart the monitoring agent without logging in. 18 hosts run the agent.",
+      "merkmale": {
+        "attack_vector": "local",
+        "authentication": "none",
+        "affected_systems": 18
+      },
+      "antwort": "high",
+      "system": "monitoring agent"
+    },
+    {
+      "id": "C08",
+      "beschreibung": "A developer with an existing shell account can overwrite the build script of another project. 9 build servers are affected.",
+      "merkmale": {
+        "attack_vector": "local",
+        "authentication": "required",
+        "affected_systems": 9
+      },
+      "antwort": "low",
+      "system": "build server"
+    },
+    {
+      "id": "C09",
+      "beschreibung": "An unauthenticated sender on the internet can relay mail through the gateway and spoof internal addresses. 30 relays are affected.",
+      "merkmale": {
+        "attack_vector": "network",
+        "authentication": "none",
+        "affected_systems": 30
+      },
+      "antwort": "critical",
+      "system": "mail relay"
+    },
+    {
+      "id": "C10",
+      "beschreibung": "A user in the same wireless network who knows the room PIN can change the calendar of a conference room. 7 tablets are affected.",
+      "merkmale": {
+        "attack_vector": "adjacent",
+        "authentication": "required",
+        "affected_systems": 7
+      },
+      "antwort": "low",
+      "system": "conference room tablet"
+    }
+  ]
+}

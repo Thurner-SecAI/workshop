@@ -1,0 +1,108 @@
+{
+  "stand": "August 2026",
+  "runtimes": [
+    {
+      "name": "Transformers · PyTorch",
+      "art": "eigenes Skript",
+      "scheduler": false,
+      "format": "safetensors · bitsandbytes",
+      "api": "keine — Aufruf im selben Prozess",
+      "passt_fuer": "Forschung, Batch-Jobs, Zugriff auf die Logits"
+    },
+    {
+      "name": "LM Studio",
+      "art": "Desktop-Anwendung",
+      "scheduler": false,
+      "format": "GGUF · MLX",
+      "api": "OpenAI-kompatibel, auf Knopfdruck",
+      "passt_fuer": "Modelle laden und vergleichen ohne Python"
+    },
+    {
+      "name": "Ollama",
+      "art": "lokaler Dienst",
+      "scheduler": false,
+      "format": "GGUF",
+      "api": "OpenAI-kompatibel, dauerhaft",
+      "passt_fuer": "Entwicklung, ein Rechner, wenige Nutzende"
+    },
+    {
+      "name": "vLLM",
+      "art": "Serving-Engine",
+      "scheduler": true,
+      "format": "safetensors · AWQ · GPTQ · FP8",
+      "api": "OpenAI-kompatibel",
+      "passt_fuer": "viele parallele Anfragen, mehrere GPUs, Produktion"
+    }
+  ],
+  "zugriffsarten": [
+    {
+      "name": "in process",
+      "wo": "Modell und Anwendung im selben Prozess",
+      "netzwerk": "keins",
+      "authentifizierung": "keine Stelle dafür",
+      "kontingent": "keine Stelle dafür",
+      "logging": "nur in der Anwendung selbst",
+      "grenze": "keine — ein Python-Import lässt sich nicht begrenzen",
+      "passt_fuer": "Batch-Jobs, Forschung, Zugriff auf die Logits"
+    },
+    {
+      "name": "local API",
+      "wo": "Runtime als Dienst auf demselben Rechner",
+      "netzwerk": "127.0.0.1",
+      "authentifizierung": "keine; der Rechner ist die Grenze",
+      "kontingent": "nur die Hardware",
+      "logging": "Log der Runtime, lokal",
+      "grenze": "der Rechner",
+      "passt_fuer": "Entwicklung, eine Person"
+    },
+    {
+      "name": "internal API",
+      "wo": "ein GPU-Server, viele Anwendungen",
+      "netzwerk": "eigenes Netz",
+      "authentifizierung": "Token je Anwendung, im Gateway geprüft",
+      "kontingent": "je Team, im Gateway durchgesetzt",
+      "logging": "zentral, mit Prompt und Antwort",
+      "grenze": "der Endpunkt im eigenen Netz — hier findet Governance statt",
+      "passt_fuer": "mehrere Teams, Produktion im Haus"
+    },
+    {
+      "name": "external API",
+      "wo": "der Provider betreibt alles",
+      "netzwerk": "Internet",
+      "authentifizierung": "Schlüssel des Providers",
+      "kontingent": "Rate Limits und Vertrag des Providers",
+      "logging": "Dashboard des Providers; eigenes Logging nur davor",
+      "grenze": "der Vertrag",
+      "passt_fuer": "kein eigener Betrieb, freigegebene Daten"
+    }
+  ],
+  "ziele": {
+    "lokal": {
+      "beschreibung": "Ollama auf dem eigenen Rechner",
+      "basis_url": "http://localhost:11434/v1",
+      "modell": "qwen3.5:0.8b",
+      "schluessel_fest": "ollama",
+      "schluessel_umgebung": null,
+      "runtime": "ollama",
+      "zugriff": "local API"
+    },
+    "intern": {
+      "beschreibung": "vLLM auf einem GPU-Server im eigenen Netz",
+      "basis_url": "http://gpu-01.internal:8000/v1",
+      "modell": "meta-llama/Llama-3.1-8B-Instruct",
+      "schluessel_fest": null,
+      "schluessel_umgebung": "VLLM_API_KEY",
+      "runtime": "vllm",
+      "zugriff": "internal API"
+    },
+    "extern": {
+      "beschreibung": "ein Provider mit OpenAI-kompatibler API",
+      "basis_url": "https://api.openai.com/v1",
+      "modell": "gpt-4o-mini",
+      "schluessel_fest": null,
+      "schluessel_umgebung": "OPENAI_API_KEY",
+      "runtime": "provider",
+      "zugriff": "external API"
+    }
+  }
+}

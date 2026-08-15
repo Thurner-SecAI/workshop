@@ -1,0 +1,105 @@
+{
+  "CVE-2026-3224": {
+    "id": "CVE-2026-3224",
+    "title": "Authentication bypass in Devolutions Server",
+    "summary": "Improper authentication validation in the JWT verification process lets attackers forge JSON Web Tokens and authenticate as any Entra ID user, including administrators, without valid credentials.",
+    "severity": "critical",
+    "cvss": 9.8,
+    "cwe": "CWE-287",
+    "component": "Devolutions Server",
+    "affected_versions": "<= 2025.3.15.0 with Microsoft Entra ID authentication",
+    "fixed_version": "2025.3.16.0",
+    "published": "2026-04-02",
+    "exploit_status": "public proof of concept",
+    "recommended_action": "upgrade",
+    "references": [
+      "https://www.cve.org/CVERecord?id=CVE-2026-3224",
+      "https://cwe.mitre.org/data/definitions/287.html"
+    ]
+  },
+  "CVE-2026-1180": {
+    "id": "CVE-2026-1180",
+    "title": "Heap buffer overflow in the nginx HTTP/3 parser",
+    "summary": "A crafted QUIC frame crashes the worker process and can lead to remote code execution in the worker context.",
+    "severity": "high",
+    "cvss": 8.2,
+    "cwe": "CWE-122",
+    "component": "nginx",
+    "affected_versions": "1.27.0 - 1.27.4",
+    "fixed_version": "1.27.5",
+    "published": "2026-02-18",
+    "exploit_status": "none known",
+    "recommended_action": "upgrade",
+    "references": [
+      "https://www.cve.org/CVERecord?id=CVE-2026-1180"
+    ]
+  },
+  "CVE-2026-0455": {
+    "id": "CVE-2026-0455",
+    "title": "Credentials written to the Jenkins console log",
+    "summary": "When a pipeline step fails, Jenkins writes the plain text value of build credentials into the job console log.",
+    "severity": "high",
+    "cvss": 7.5,
+    "cwe": "CWE-532",
+    "component": "Jenkins",
+    "affected_versions": "2.440.0 - 2.462.1",
+    "fixed_version": "2.462.2",
+    "published": "2026-01-24",
+    "exploit_status": "none known",
+    "recommended_action": "rotate_credentials",
+    "references": [
+      "https://www.cve.org/CVERecord?id=CVE-2026-0455"
+    ]
+  },
+  "CVE-2026-2790": {
+    "id": "CVE-2026-2790",
+    "title": "Deserialization flaw in the Apache Tomcat reporting servlet",
+    "summary": "An authenticated user with the manager role can run arbitrary commands through a crafted serialized object.",
+    "severity": "high",
+    "cvss": 8.8,
+    "cwe": "CWE-502",
+    "component": "Apache Tomcat",
+    "affected_versions": "10.1.0 - 10.1.20",
+    "fixed_version": "10.1.21",
+    "published": "2026-03-11",
+    "exploit_status": "public proof of concept",
+    "recommended_action": "upgrade",
+    "references": [
+      "https://www.cve.org/CVERecord?id=CVE-2026-2790"
+    ]
+  },
+  "CVE-2026-4012": {
+    "id": "CVE-2026-4012",
+    "title": "Remote code execution in the PostgreSQL extension pg_geo",
+    "summary": "A crafted geometry query runs shell commands as the database user. No authentication is required when the extension is exposed through a public API.",
+    "severity": "critical",
+    "cvss": 9.6,
+    "cwe": "CWE-78",
+    "component": "pg_geo",
+    "affected_versions": "3.0.0 - 3.2.1",
+    "fixed_version": "none",
+    "published": "2026-04-08",
+    "exploit_status": "exploited in the wild",
+    "recommended_action": "disable_feature",
+    "references": [
+      "https://www.cve.org/CVERecord?id=CVE-2026-4012"
+    ]
+  },
+  "CVE-2026-0913": {
+    "id": "CVE-2026-0913",
+    "title": "Stored cross site scripting in GitLab CE comments",
+    "summary": "A project member can store script code in a comment field that runs in the browser of other project members.",
+    "severity": "medium",
+    "cvss": 5.4,
+    "cwe": "CWE-79",
+    "component": "GitLab CE",
+    "affected_versions": "17.3.0 - 17.4.1",
+    "fixed_version": "17.4.2",
+    "published": "2026-02-02",
+    "exploit_status": "none known",
+    "recommended_action": "upgrade",
+    "references": [
+      "https://www.cve.org/CVERecord?id=CVE-2026-0913"
+    ]
+  }
+}

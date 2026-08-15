@@ -1,0 +1,86 @@
+[
+  {
+    "id": "T01",
+    "text": "CVE-2026-3224: An authentication bypass in Devolutions Server up to and including 2025.3.15.0 allows unauthenticated attackers to forge JSON Web Tokens and sign in as any Entra ID user, including administrators. CVSS 9.8. A fixed release (2025.3.16.0) is available.",
+    "severity": "critical",
+    "component": "Devolutions Server",
+    "action": "upgrade"
+  },
+  {
+    "id": "T02",
+    "text": "A heap buffer overflow in the HTTP/3 request parser of nginx 1.27.0 through 1.27.4 lets a remote attacker crash the worker process with a crafted QUIC frame. CVSS 8.2. Version 1.27.5 contains the fix.",
+    "severity": "high",
+    "component": "nginx",
+    "action": "upgrade"
+  },
+  {
+    "id": "T03",
+    "text": "Jenkins 2.462.1 writes the plain text values of build credentials into the job console log when a pipeline step fails. Any user with read access to the job can retrieve them. CVSS 7.5. The affected credentials must be considered exposed.",
+    "severity": "high",
+    "component": "Jenkins",
+    "action": "rotate_credentials"
+  },
+  {
+    "id": "T04",
+    "text": "A deserialization flaw in the reporting servlet of Apache Tomcat 10.1.20 allows an authenticated user with the manager role to run arbitrary commands on the server. CVSS 8.8. Apache released 10.1.21 with a corrected object filter.",
+    "severity": "high",
+    "component": "Apache Tomcat",
+    "action": "upgrade"
+  },
+  {
+    "id": "T05",
+    "text": "The legacy SMBv1 file sharing protocol is still enabled on Windows Server 2022 file servers. No patch removes the protocol; Microsoft recommends turning the feature off, because the protocol has no message signing and is used by ransomware for lateral movement. CVSS 7.1.",
+    "severity": "high",
+    "component": "Windows Server 2022",
+    "action": "disable_feature"
+  },
+  {
+    "id": "T06",
+    "text": "An unauthenticated remote code execution flaw in the PostgreSQL extension pg_geo 3.2.1 allows attackers to run shell commands through a crafted geometry query. CVSS 9.6. No fixed release exists yet; the vendor advises removing the extension.",
+    "severity": "critical",
+    "component": "pg_geo",
+    "action": "disable_feature"
+  },
+  {
+    "id": "T07",
+    "text": "A stored cross site scripting flaw in the comment field of GitLab CE 17.4.0 lets a project member run script code in the browser of another member of the same project. CVSS 5.4. GitLab 17.4.2 escapes the field correctly.",
+    "severity": "medium",
+    "component": "GitLab CE",
+    "action": "upgrade"
+  },
+  {
+    "id": "T08",
+    "text": "OpenSSH 9.6p1 accepts a client certificate whose principal list is empty and maps it to the account name given by the client. Exploitation requires a certificate signed by the internal CA. CVSS 6.8. OpenSSH 9.7p1 rejects such certificates.",
+    "severity": "medium",
+    "component": "OpenSSH",
+    "action": "patch"
+  },
+  {
+    "id": "T09",
+    "text": "The management interface of a Fortinet FortiGate 600F firewall running FortiOS 7.4.3 is reachable from the internet. A published exploit chain grants full device administration without credentials. CVSS 9.4. Until the firmware update is scheduled, the interface must be taken off the public network.",
+    "severity": "critical",
+    "component": "FortiGate 600F",
+    "action": "isolate"
+  },
+  {
+    "id": "T10",
+    "text": "Grafana 11.1.0 leaks the internal host name of the data source in an error message shown to viewers. No credentials or query results are disclosed. CVSS 3.7. Grafana 11.1.3 shortens the message.",
+    "severity": "low",
+    "component": "Grafana",
+    "action": "upgrade"
+  },
+  {
+    "id": "T11",
+    "text": "A timing difference in the password comparison of Keycloak 25.0.2 allows an attacker on the same network segment to learn the length of a user password over many attempts. Exploitation is slow and noisy. CVSS 3.1. The vendor plans a fix for the next minor release and recommends watching the authentication logs.",
+    "severity": "low",
+    "component": "Keycloak",
+    "action": "monitor"
+  },
+  {
+    "id": "T12",
+    "text": "An SQL injection in the search endpoint of the internal ticket system Zammad 6.4.0 lets an authenticated agent read the full user table including password hashes. CVSS 8.1. Zammad 6.4.1 parameterises the query.",
+    "severity": "high",
+    "component": "Zammad",
+    "action": "upgrade"
+  }
+]

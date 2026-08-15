@@ -1,0 +1,13 @@
+{
+  "id": "IR-2026-0417",
+  "titel": "Ransomware-Verdacht in der Finanzabteilung",
+  "report": "Incident IR-2026-0417, opened 2026-04-17 06:20 UTC by the on call analyst.\n\nAt 02:14 UTC the EDR agent on WKS-114, a workstation of the finance department,\nquarantined a file named invoice_april.iso.exe. The file had been downloaded\nthrough the browser 90 seconds earlier from a link in a mail that passed the\ngateway because the sending domain was on the internal allow list.\n\nAt 02:31 UTC the proxy logged three outbound connections from WKS-114 to\n91.201.66.8 on port 4444, each of them a few kilobytes in size. The connection\nwas not blocked; the address was unknown to the threat feed at that time.\n\nAt 03:02 UTC the domain controller recorded a successful logon of the account\nsvc_backup from WKS-114. That service account is meant to run only on the backup\nservers and has local administrator rights on all file servers. The password of\nthe account was last changed 14 months ago and is stored in the credential vault\non srv-pam01.\n\nAt 03:40 UTC srv-pam01 answered 220 vault read requests within four minutes,\nall of them authenticated with a token issued for svc_backup. The server runs\nDevolutions Server 2025.3.15.0 and is therefore affected by CVE-2026-3224.\n\nAt 04:05 UTC the file server srv-fs02 logged the creation of 1,400 files with\nthe extension .locked in the department share of the finance team. The backup\njob of the same share had been disabled by the account svc_backup at 03:55 UTC.\n\nAt 06:20 UTC the on call analyst isolated WKS-114 from the network and opened\nthis incident. srv-pam01, srv-fs02 and the backup infrastructure are still\nonline. No customer facing system has reported an outage so far.",
+  "frage": "Which systems must be taken off the network first, and in which order should the response team act during the next four hours?",
+  "pruefpunkte": [
+    "names srv-pam01 as affected by CVE-2026-3224",
+    "names the service account svc_backup as compromised",
+    "mentions rotating or disabling the credentials in the vault",
+    "mentions the encrypted share on srv-fs02",
+    "gives an order, not only a list of measures"
+  ]
+}

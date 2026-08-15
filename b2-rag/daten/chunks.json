@@ -1,0 +1,722 @@
+[
+ {
+  "chunk_id": "cve-2025-9042#00",
+  "dok_id": "cve-2025-9042",
+  "titel": "CVE-2025-9042 — Privilege Escalation im Kernel-Modul vboxdrv-ng",
+  "quelle": "wissensbasis/cve-2025-9042.md",
+  "text": "# CVE-2025-9042 — Privilege Escalation im Kernel-Modul vboxdrv-ng\n\n**Status:** behoben · **Veröffentlicht:** 2025-11-06 · **Letzte Änderung:** 2025-12-02 · **Quelle:** Distributions-Advisory DSA-2025-4471\n\n## Kurzfassung\n\nDas Kernel-Modul `vboxdrv-ng` prüft beim Einhängen eines gemeinsamen Ordners die Länge des übergebenen Pfads erst nach dem Kopieren in einen Puffer fester Größe. Ein lokaler Benutzer mit Zugriff auf `/dev/vboxdrv` kann damit Kernelspeicher überschreiben und Root-Rechte auf dem Hostsystem erlangen. Ein Angriff aus der Ferne ist nicht möglich; der Angreifer braucht bereits ein Konto auf dem Host.",
+  "position": 0
+ },
+ {
+  "chunk_id": "cve-2025-9042#01",
+  "dok_id": "cve-2025-9042",
+  "titel": "CVE-2025-9042 — Privilege Escalation im Kernel-Modul vboxdrv-ng",
+  "quelle": "wissensbasis/cve-2025-9042.md",
+  "text": "## Bewertung\n\n| Feld | Wert |\n|---|---|\n| CVSS v3.1 Base Score | 7.8 (high) |\n| Vektor | CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H |\n| CWE | CWE-787 Out-of-bounds Write |\n| EPSS (Stand 2025-12-02) | 0.04 |\n| Exploit öffentlich | ja, seit 2025-11-21 |\n| Aktiv ausgenutzt | keine Hinweise |\n\n## Betroffene Versionen\n\n| Produkt | Betroffen | Behoben in |\n|---|---|---|\n| vboxdrv-ng | 6.1.0 – 7.0.14 | 7.0.16 |\n| Kernel-Paket linux-image-6.8 | 6.8.0-31 und älter | 6.8.0-33 |",
+  "position": 1
+ },
+ {
+  "chunk_id": "cve-2025-9042#02",
+  "dok_id": "cve-2025-9042",
+  "titel": "CVE-2025-9042 — Privilege Escalation im Kernel-Modul vboxdrv-ng",
+  "quelle": "wissensbasis/cve-2025-9042.md",
+  "text": "## Betroffene Systeme bei Nordlicht Logistik\n\nBetroffen waren 38 Entwicklerarbeitsplätze und die beiden Build-Server `build-ham-02` und `build-ham-03`. Server im Rechenzentrum nutzen KVM und laden das Modul nicht.\n\n## Behebung\n\nDas Paket wurde am 11.11.2025 über das interne Repository verteilt und mit dem Neustartfenster am 15.11.2025 wirksam. Bis dahin galt der Workaround, das Modul zu entladen:\n\n```\nsudo rmmod vboxdrv-ng\necho \"blacklist vboxdrv-ng\" | sudo tee /etc/modprobe.d/blacklist-vboxdrv.conf\n```\n\nDie Nacharbeit ist abgeschlossen. Der Eintrag bleibt in der Wissensbasis, weil die Frage nach lokaler Rechteausweitung regelmäßig aufkommt.",
+  "position": 2
+ },
+ {
+  "chunk_id": "cve-2025-9042#03",
+  "dok_id": "cve-2025-9042",
+  "titel": "CVE-2025-9042 — Privilege Escalation im Kernel-Modul vboxdrv-ng",
+  "quelle": "wissensbasis/cve-2025-9042.md",
+  "text": "## Erkennung\n\nEin Ausnutzungsversuch hinterlässt im Kernel-Log Einträge der Form `vboxdrv-ng: shfl_map: name too long`. Die SentinelGrid-Regel `SG-HOST-0208` wertet diese Meldung aus und meldet sie als mittlere Priorität. Ein einzelner Treffer ist meist ein Fehler in einem Skript; mehrere Treffer innerhalb weniger Minuten auf demselben Host sind ein Angriffsversuch.",
+  "position": 3
+ },
+ {
+  "chunk_id": "cve-2025-9042#04",
+  "dok_id": "cve-2025-9042",
+  "titel": "CVE-2025-9042 — Privilege Escalation im Kernel-Modul vboxdrv-ng",
+  "quelle": "wissensbasis/cve-2025-9042.md",
+  "text": "## Bewertung im Kontext\n\nDie Einstufung Hoch ergibt sich aus dem CVSS-Wert. Für die Fristsetzung war zusätzlich maßgeblich, dass die betroffenen Systeme nicht aus dem Internet erreichbar sind und der Angreifer bereits ein Konto braucht. Die Frist von 30 Tagen aus dem Runbook Patch-Management wurde deutlich unterschritten, weil das Distributionspaket ohnehin im November-Zyklus lag.",
+  "position": 4
+ },
+ {
+  "chunk_id": "cve-2026-1187#00",
+  "dok_id": "cve-2026-1187",
+  "titel": "CVE-2026-1187 — SQL Injection im Reporting-Modul von Helios ITSM",
+  "quelle": "wissensbasis/cve-2026-1187.md",
+  "text": "# CVE-2026-1187 — SQL Injection im Reporting-Modul von Helios ITSM\n\n**Status:** aktiv · **Veröffentlicht:** 2026-01-28 · **Letzte Änderung:** 2026-02-04 · **Quelle:** Helios Software Advisory HS-2026-003\n\n## Kurzfassung\n\nDas Reporting-Modul von Helios ITSM übergibt den Parameter `sortBy` der Berichtsansicht ungeprüft an die Datenbank. Ein angemeldeter Benutzer mit der Rolle `reporting.viewer` kann damit beliebige SQL-Abfragen ausführen und die gesamte Ticketdatenbank auslesen, einschließlich der Anhänge mit Passwortzurücksetzungen und Kundendaten. Schreibender Zugriff ist möglich, wenn die Datenbankverbindung mit dem Standardkonto `helios_app` läuft, das in der Voreinstellung Schreibrechte auf allen Tabellen hat.",
+  "position": 0
+ },
+ {
+  "chunk_id": "cve-2026-1187#01",
+  "dok_id": "cve-2026-1187",
+  "titel": "CVE-2026-1187 — SQL Injection im Reporting-Modul von Helios ITSM",
+  "quelle": "wissensbasis/cve-2026-1187.md",
+  "text": "## Bewertung\n\n| Feld | Wert |\n|---|---|\n| CVSS v3.1 Base Score | 8.1 (high) |\n| Vektor | CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:N |\n| CWE | CWE-89 SQL Injection |\n| EPSS (Stand 2026-02-04) | 0.31 |\n| Exploit öffentlich | Proof of Concept in einem Blogbeitrag |\n| Aktiv ausgenutzt | keine Hinweise |",
+  "position": 1
+ },
+ {
+  "chunk_id": "cve-2026-1187#02",
+  "dok_id": "cve-2026-1187",
+  "titel": "CVE-2026-1187 — SQL Injection im Reporting-Modul von Helios ITSM",
+  "quelle": "wissensbasis/cve-2026-1187.md",
+  "text": "## Betroffene Versionen\n\n| Produkt | Betroffen | Behoben in |\n|---|---|---|\n| Helios ITSM Server | 5.8.0 – 5.11.2 | 5.11.3 |\n| Helios ITSM Server | 6.0.0 – 6.1.0 | 6.1.1 |\n| Helios ITSM Cloud | nicht betroffen | — |\n\n## Betroffene Systeme bei Nordlicht Logistik\n\nBetroffen ist die Instanz `itsm-prod-01` in Hamburg, Version 6.0.4. Die Vorproduktionsumgebung `itsm-stage-01` läuft auf 6.1.1 und ist nicht betroffen. Der Zugriff auf `itsm-prod-01` ist auf das interne Netz beschränkt; aus dem Internet ist das System nicht erreichbar.",
+  "position": 2
+ },
+ {
+  "chunk_id": "cve-2026-1187#03",
+  "dok_id": "cve-2026-1187",
+  "titel": "CVE-2026-1187 — SQL Injection im Reporting-Modul von Helios ITSM",
+  "quelle": "wissensbasis/cve-2026-1187.md",
+  "text": "## Behebung\n\n1. Update auf 6.1.1. Das Update ist rückwärtskompatibel und benötigt kein Datenbankschema-Upgrade.\n2. Rechte des Datenbankkontos `helios_app` auf `SELECT`, `INSERT` und `UPDATE` der Anwendungstabellen einschränken.\n3. Zugriffs-Logs der Reporting-Ansicht der letzten 90 Tage auf ungewöhnliche `sortBy`-Werte prüfen.",
+  "position": 3
+ },
+ {
+  "chunk_id": "cve-2026-1187#04",
+  "dok_id": "cve-2026-1187",
+  "titel": "CVE-2026-1187 — SQL Injection im Reporting-Modul von Helios ITSM",
+  "quelle": "wissensbasis/cve-2026-1187.md",
+  "text": "## Workaround, wenn kein Patch möglich ist\n\nDie Berichtsansicht kann über die Rollenverwaltung deaktiviert werden, indem das Recht `reporting.view` allen Rollen entzogen wird. Der Nachtlauf für die Managementberichte nutzt einen eigenen Datenpfad und läuft weiter.\n\n## Erkennung\n\nDie SentinelGrid-Regel `SG-WEB-0117` meldet Anfragen an `/helios/report/list`, deren Parameter `sortBy` eines der Zeichen `'`, `;` oder eine der Zeichenfolgen `UNION`, `SLEEP(`, `--` enthält. Falsch-positive Meldungen entstehen selten, weil reguläre Werte auf eine Liste von 14 Spaltennamen beschränkt sind.",
+  "position": 4
+ },
+ {
+  "chunk_id": "cve-2026-1187#05",
+  "dok_id": "cve-2026-1187",
+  "titel": "CVE-2026-1187 — SQL Injection im Reporting-Modul von Helios ITSM",
+  "quelle": "wissensbasis/cve-2026-1187.md",
+  "text": "## Referenzen\n\n* Helios Software Advisory HS-2026-003\n* Runbook Patch-Management, Abschnitt Fristen",
+  "position": 5
+ },
+ {
+  "chunk_id": "cve-2026-3224#00",
+  "dok_id": "cve-2026-3224",
+  "titel": "CVE-2026-3224 — Authentication Bypass in NorthPeak SecureGate",
+  "quelle": "wissensbasis/cve-2026-3224.md",
+  "text": "# CVE-2026-3224 — Authentication Bypass in NorthPeak SecureGate\n\n**Status:** aktiv · **Veröffentlicht:** 2026-03-11 · **Letzte Änderung:** 2026-03-19 · **Quelle:** NorthPeak Security Advisory NP-SA-2026-014\n\n## Kurzfassung\n\nIn der Web-Oberfläche des VPN-Gateways NorthPeak SecureGate lässt sich die Anmeldung vollständig umgehen. Ein nicht authentifizierter Angreifer erreicht über eine präparierte Anfrage an den Endpunkt `/api/v2/session/resume` eine gültige Administrator-Session. Der Fehler liegt in der Prüfung des Session-Cookies: Der Wert wird dekodiert und die enthaltene Benutzerkennung übernommen, bevor die Signatur geprüft wird. Schlägt die Signaturprüfung fehl, bricht die Funktion ab — die Session ist zu diesem Zeitpunkt aber bereits angelegt.\n\nDer Fehler ist aus dem Internet ausnutzbar, benötigt keine Vorkenntnisse über das Ziel und keine Benutzerinteraktion. Öffentlicher Exploit-Code kursiert seit dem 13.03.2026.",
+  "position": 0
+ },
+ {
+  "chunk_id": "cve-2026-3224#01",
+  "dok_id": "cve-2026-3224",
+  "titel": "CVE-2026-3224 — Authentication Bypass in NorthPeak SecureGate",
+  "quelle": "wissensbasis/cve-2026-3224.md",
+  "text": "## Bewertung\n\n| Feld | Wert |\n|---|---|\n| CVSS v3.1 Base Score | 9.8 (critical) |\n| Vektor | CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H |\n| CWE | CWE-287 Improper Authentication |\n| EPSS (Stand 2026-03-19) | 0.87 |\n| Exploit öffentlich | ja, seit 2026-03-13 |\n| Aktiv ausgenutzt | ja, bestätigt durch NorthPeak PSIRT |",
+  "position": 1
+ },
+ {
+  "chunk_id": "cve-2026-3224#02",
+  "dok_id": "cve-2026-3224",
+  "titel": "CVE-2026-3224 — Authentication Bypass in NorthPeak SecureGate",
+  "quelle": "wissensbasis/cve-2026-3224.md",
+  "text": "## Betroffene Versionen\n\n| Produkt | Betroffen | Behoben in |\n|---|---|---|\n| SecureGate Appliance | 7.2.0 – 7.4.3 | 7.4.4 |\n| SecureGate Appliance | 8.0.0 – 8.1.1 | 8.1.2 |\n| SecureGate Virtual | 8.0.0 – 8.1.1 | 8.1.2 |\n| SecureGate Cloud (SaaS) | nicht betroffen | — |\n\nÄltere Zweige vor 7.2.0 haben den betroffenen Endpunkt nicht und sind damit nicht verwundbar. Die Cloud-Instanzen wurden vom Hersteller am 12.03.2026 zentral gepatcht.",
+  "position": 2
+ },
+ {
+  "chunk_id": "cve-2026-3224#03",
+  "dok_id": "cve-2026-3224",
+  "titel": "CVE-2026-3224 — Authentication Bypass in NorthPeak SecureGate",
+  "quelle": "wissensbasis/cve-2026-3224.md",
+  "text": "## Betroffene Systeme bei Nordlicht Logistik\n\nNach Abgleich mit dem Asset-Inventar sind vier Appliances betroffen: `vpn-gw-ham-01` und `vpn-gw-ham-02` im Rechenzentrum Hamburg, `vpn-gw-rot-01` in Rotterdam sowie die Testinstanz `vpn-gw-lab-03`. Alle vier liefen zum Zeitpunkt der Veröffentlichung auf 8.1.0.",
+  "position": 3
+ },
+ {
+  "chunk_id": "cve-2026-3224#04",
+  "dok_id": "cve-2026-3224",
+  "titel": "CVE-2026-3224 — Authentication Bypass in NorthPeak SecureGate",
+  "quelle": "wissensbasis/cve-2026-3224.md",
+  "text": "## Behebung\n\n1. Update auf 8.1.2 beziehungsweise 7.4.4 einspielen. Das Update erfordert einen Neustart der Appliance und dauert rund zwölf Minuten je Gerät.\n2. Nach dem Update alle bestehenden Sessions verwerfen: `secgate-cli session flush --all`.\n3. Alle lokalen Administratorkonten mit neuen Passwörtern versehen, da ein Angreifer die Passwort-Hashes über die Konfigurationssicherung ausgelesen haben kann.\n4. API-Token der Appliance rotieren.",
+  "position": 4
+ },
+ {
+  "chunk_id": "cve-2026-3224#05",
+  "dok_id": "cve-2026-3224",
+  "titel": "CVE-2026-3224 — Authentication Bypass in NorthPeak SecureGate",
+  "quelle": "wissensbasis/cve-2026-3224.md",
+  "text": "## Workaround, wenn kein Patch möglich ist\n\nDer Endpunkt `/api/v2/session/resume` wird von keiner produktiven Funktion benötigt und kann im vorgelagerten Reverse Proxy blockiert werden:\n\n```\nlocation /api/v2/session/resume { return 403; }\n```\n\nDer Workaround verhindert die Ausnutzung vollständig, ersetzt das Update aber nicht — spätere Angriffsvarianten könnten andere Endpunkte nutzen.",
+  "position": 5
+ },
+ {
+  "chunk_id": "cve-2026-3224#06",
+  "dok_id": "cve-2026-3224",
+  "titel": "CVE-2026-3224 — Authentication Bypass in NorthPeak SecureGate",
+  "quelle": "wissensbasis/cve-2026-3224.md",
+  "text": "## Erkennung\n\nIm Access-Log der Appliance zeigt ein erfolgreicher Angriff eine Anfrage an `/api/v2/session/resume` mit Statuscode 200 und einem Cookie, dessen Signaturteil kürzer als 43 Zeichen ist. Reguläre Clients rufen diesen Endpunkt nie auf. Die SentinelGrid-Regel `SG-VPN-0042` meldet jede Anfrage an diesen Pfad.\n\nZusätzlich prüfen: Administrator-Logins außerhalb der Geschäftszeiten, neu angelegte lokale Konten und geänderte Split-Tunnel-Regeln.",
+  "position": 6
+ },
+ {
+  "chunk_id": "cve-2026-3224#07",
+  "dok_id": "cve-2026-3224",
+  "titel": "CVE-2026-3224 — Authentication Bypass in NorthPeak SecureGate",
+  "quelle": "wissensbasis/cve-2026-3224.md",
+  "text": "## Referenzen\n\n* NorthPeak Security Advisory NP-SA-2026-014\n* Interner Vorfall INC-2026-0311 und das zugehörige Post-Mortem\n* Runbook Patch-Management, Abschnitt Notfall-Patch",
+  "position": 7
+ },
+ {
+  "chunk_id": "cve-2026-4410#00",
+  "dok_id": "cve-2026-4410",
+  "titel": "CVE-2026-4410 — Denial of Service im TLS-Terminator Vertexa Edge",
+  "quelle": "wissensbasis/cve-2026-4410.md",
+  "text": "# CVE-2026-4410 — Denial of Service im TLS-Terminator Vertexa Edge\n\n**Status:** aktiv, kein Patch verfügbar · **Veröffentlicht:** 2026-04-22 · **Letzte Änderung:** 2026-05-06 · **Quelle:** Vertexa Advisory VX-2026-009\n\n## Kurzfassung\n\nVertexa Edge beendet die TLS-Verbindung für alle von außen erreichbaren Webanwendungen. Beim Aushandeln der Verbindung akzeptiert der Dienst eine `key_share`-Erweiterung mit beliebig vielen Einträgen und rechnet jeden davon durch. Rund 200 Verbindungen pro Sekunde mit jeweils 64 Einträgen lasten alle Kerne einer Instanz aus. Bestehende Verbindungen brechen ab, neue kommen nicht zustande.\n\nVertraulichkeit und Integrität der Daten sind nicht betroffen. Der Angriff funktioniert ohne Anmeldung und aus dem Internet.",
+  "position": 0
+ },
+ {
+  "chunk_id": "cve-2026-4410#01",
+  "dok_id": "cve-2026-4410",
+  "titel": "CVE-2026-4410 — Denial of Service im TLS-Terminator Vertexa Edge",
+  "quelle": "wissensbasis/cve-2026-4410.md",
+  "text": "## Bewertung\n\n| Feld | Wert |\n|---|---|\n| CVSS v3.1 Base Score | 5.9 (medium) |\n| Vektor | CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H |\n| CWE | CWE-400 Uncontrolled Resource Consumption |\n| EPSS (Stand 2026-05-06) | 0.12 |\n| Exploit öffentlich | nein |\n| Aktiv ausgenutzt | keine Hinweise |\n\n## Betroffene Versionen\n\n| Produkt | Betroffen | Behoben in |\n|---|---|---|\n| Vertexa Edge | 3.4.0 – 4.2.7 | kein Patch, Auslieferung angekündigt für Juni 2026 |\n| Vertexa Edge LTS | 3.2.x | nicht betroffen |",
+  "position": 1
+ },
+ {
+  "chunk_id": "cve-2026-4410#02",
+  "dok_id": "cve-2026-4410",
+  "titel": "CVE-2026-4410 — Denial of Service im TLS-Terminator Vertexa Edge",
+  "quelle": "wissensbasis/cve-2026-4410.md",
+  "text": "## Betroffene Systeme bei Nordlicht Logistik\n\nBetroffen sind die vier Instanzen `edge-ham-01` bis `edge-ham-04` vor dem Kundenportal, alle auf Version 4.2.5.\n\n## Workaround, solange kein Patch verfügbar ist\n\nDer Hersteller empfiehlt zwei Maßnahmen, die zusammen wirken:\n\n1. Die Zahl der `key_share`-Einträge im Konfigurationsabschnitt `tls.limits` begrenzen: `max_key_share_entries = 4`. Reguläre Browser senden höchstens zwei Einträge. Die Einstellung ist ab 4.1.0 verfügbar und wirkt ohne Neustart nach `vertexa-cli reload`.\n2. Im vorgelagerten Load Balancer die Zahl neuer TLS-Handshakes je Quell-IP auf 50 pro Sekunde begrenzen.\n\nBeide Maßnahmen sind seit dem 24.04.2026 auf allen vier Instanzen aktiv. Der Restrisiko-Eintrag RIS-2026-017 läuft bis zur Auslieferung des Patches.",
+  "position": 2
+ },
+ {
+  "chunk_id": "cve-2026-4410#03",
+  "dok_id": "cve-2026-4410",
+  "titel": "CVE-2026-4410 — Denial of Service im TLS-Terminator Vertexa Edge",
+  "quelle": "wissensbasis/cve-2026-4410.md",
+  "text": "## Erkennung\n\nDie SentinelGrid-Regel `SG-EDGE-0031` meldet, wenn die CPU-Auslastung einer Edge-Instanz über zwei Minuten oberhalb von 90 Prozent liegt und gleichzeitig die Zahl abgebrochener Handshakes steigt. Der Zähler steht in der Metrik `vertexa_handshake_aborted_total`.\n\n## Referenzen\n\n* Vertexa Advisory VX-2026-009\n* Restrisiko-Eintrag RIS-2026-017",
+  "position": 3
+ },
+ {
+  "chunk_id": "policy-logging-und-aufbewahrung#00",
+  "dok_id": "policy-logging-und-aufbewahrung",
+  "titel": "Richtlinie Logging und Aufbewahrung",
+  "quelle": "wissensbasis/policy-logging-und-aufbewahrung.md",
+  "text": "# Richtlinie Logging und Aufbewahrung\n\n**Gültig ab:** 2025-09-01 · **Verantwortlich:** CISO, abgestimmt mit dem Betriebsrat · **Version:** 3.4\n\n## Zweck\n\nDiese Richtlinie legt fest, welche Ereignisse protokolliert werden, wie lange die Protokolle aufbewahrt werden und wer sie einsehen darf. Sie schafft die Grundlage für Erkennung, Nachvollziehbarkeit und Beweissicherung.",
+  "position": 0
+ },
+ {
+  "chunk_id": "policy-logging-und-aufbewahrung#01",
+  "dok_id": "policy-logging-und-aufbewahrung",
+  "titel": "Richtlinie Logging und Aufbewahrung",
+  "quelle": "wissensbasis/policy-logging-und-aufbewahrung.md",
+  "text": "## Was protokolliert wird\n\nVerpflichtend für jedes System im Asset-Inventar:\n\n* Anmeldungen, erfolgreich und fehlgeschlagen, mit Konto, Quelle und Zeitstempel\n* Änderungen an Berechtigungen und Gruppenmitgliedschaften\n* Start, Stopp und Konfigurationsänderungen sicherheitsrelevanter Dienste\n* administrative Kommandos auf Servern\n* Zugriffe auf personenbezogene Daten in den dafür gekennzeichneten Anwendungen\n\nNicht protokolliert werden Inhalte privater Kommunikation, Tastatureingaben und der Inhalt aufgerufener Webseiten jenseits des Domänennamens.",
+  "position": 1
+ },
+ {
+  "chunk_id": "policy-logging-und-aufbewahrung#02",
+  "dok_id": "policy-logging-und-aufbewahrung",
+  "titel": "Richtlinie Logging und Aufbewahrung",
+  "quelle": "wissensbasis/policy-logging-und-aufbewahrung.md",
+  "text": "## Aufbewahrungsfristen\n\n| Datenart | Aufbewahrung im schnellen Zugriff | Archiv | Summe |\n|---|---|---|---|\n| Firewall-Logs | 90 Tage | 275 Tage | 365 Tage |\n| VPN- und Fernzugriffs-Logs | 90 Tage | 275 Tage | 365 Tage |\n| Anmeldungen Verzeichnisdienst | 180 Tage | 545 Tage | 730 Tage |\n| Systemprotokolle Server | 30 Tage | 335 Tage | 365 Tage |\n| Anwendungsprotokolle | 30 Tage | 155 Tage | 185 Tage |\n| Proxy- und DNS-Logs | 30 Tage | 60 Tage | 90 Tage |\n| Beweissicherungen aus Vorfällen | dauerhaft bis Abschluss | 10 Jahre | — |\n\nDer schnelle Zugriff bedeutet: durchsuchbar in SentinelGrid, Antwortzeit unter zehn Sekunden. Das Archiv liegt auf Objektspeicher, ist unveränderlich abgelegt und wird auf Anforderung innerhalb von vier Stunden bereitgestellt.",
+  "position": 2
+ },
+ {
+  "chunk_id": "policy-logging-und-aufbewahrung#03",
+  "dok_id": "policy-logging-und-aufbewahrung",
+  "titel": "Richtlinie Logging und Aufbewahrung",
+  "quelle": "wissensbasis/policy-logging-und-aufbewahrung.md",
+  "text": "## Zeitsynchronisation\n\nAlle Systeme synchronisieren ihre Uhr gegen `ntp1.nordlicht.internal` und `ntp2.nordlicht.internal`. Eine Abweichung von mehr als zwei Sekunden erzeugt eine Meldung. Ohne gemeinsame Zeitbasis ist eine Auswertung über mehrere Systeme hinweg wertlos.\n\n## Zugriff auf Protokolle\n\nLesenden Zugriff auf Rohdaten hat ausschließlich das SOC. Auswertungen mit Personenbezug sind nur zur Aufklärung eines konkreten Vorfalls zulässig und werden im Vier-Augen-Prinzip durchgeführt: eine Person aus dem SOC, eine Person aus dem Datenschutz. Jede solche Auswertung wird selbst protokolliert.\n\nFührungskräfte erhalten keine personenbezogenen Auswertungen. Eine Verhaltens- oder Leistungskontrolle findet nicht statt; das ist mit dem Betriebsrat in der Betriebsvereinbarung BV-2025-07 festgehalten.",
+  "position": 3
+ },
+ {
+  "chunk_id": "policy-logging-und-aufbewahrung#04",
+  "dok_id": "policy-logging-und-aufbewahrung",
+  "titel": "Richtlinie Logging und Aufbewahrung",
+  "quelle": "wissensbasis/policy-logging-und-aufbewahrung.md",
+  "text": "## Schutz der Protokolle\n\nProtokolle werden innerhalb von 60 Sekunden nach ihrer Entstehung an SentinelGrid weitergeleitet. Lokale Kopien dürfen gelöscht werden, sobald die Weiterleitung bestätigt ist. Im Archiv sind die Daten schreibgeschützt abgelegt; auch das SOC kann sie nicht ändern oder vorzeitig löschen.",
+  "position": 4
+ },
+ {
+  "chunk_id": "policy-logging-und-aufbewahrung#05",
+  "dok_id": "policy-logging-und-aufbewahrung",
+  "titel": "Richtlinie Logging und Aufbewahrung",
+  "quelle": "wissensbasis/policy-logging-und-aufbewahrung.md",
+  "text": "## Prüfung\n\nDer Nachweis vollständiger Protokollierung ist Teil der jährlichen Prüfung. Systeme, die keine Ereignisse liefern, erscheinen im Bericht `Stille Quellen` und werden innerhalb von 30 Tagen angebunden oder außer Betrieb genommen.",
+  "position": 5
+ },
+ {
+  "chunk_id": "policy-passwoerter-und-mfa#00",
+  "dok_id": "policy-passwoerter-und-mfa",
+  "titel": "Richtlinie Passwörter und Multi-Faktor-Authentisierung",
+  "quelle": "wissensbasis/policy-passwoerter-und-mfa.md",
+  "text": "# Richtlinie Passwörter und Multi-Faktor-Authentisierung\n\n**Gültig ab:** 2026-02-01 · **Verantwortlich:** CISO · **Version:** 5.0 · **Ersetzt:** Version 4.3 vom 2024-05-01\n\n## Geltungsbereich\n\nDiese Richtlinie gilt für alle Konten der Nordlicht Logistik SE: persönliche Konten, administrative Konten, technische Konten und Zugänge von Dienstleistern.",
+  "position": 0
+ },
+ {
+  "chunk_id": "policy-passwoerter-und-mfa#01",
+  "dok_id": "policy-passwoerter-und-mfa",
+  "titel": "Richtlinie Passwörter und Multi-Faktor-Authentisierung",
+  "quelle": "wissensbasis/policy-passwoerter-und-mfa.md",
+  "text": "## Passwörter\n\n| Kontoart | Mindestlänge | Ablauf | Sperre nach Fehlversuchen |\n|---|---|---|---|\n| persönliches Konto | 12 Zeichen | kein Ablauf | 10 Versuche, 15 Minuten |\n| administratives Konto (`adm-`) | 16 Zeichen | kein Ablauf | 5 Versuche, 30 Minuten |\n| technisches Konto | 32 Zeichen, zufällig | 365 Tage | keine Sperre, Meldung an das SOC |\n| Dienstleisterzugang | 16 Zeichen | 90 Tage | 5 Versuche, 30 Minuten |\n\nEin regelmäßiger Passwortwechsel ohne Anlass ist mit Version 5.0 entfallen. Er führte zu vorhersehbaren Mustern und häufigeren Zurücksetzungen. Gewechselt wird bei Verdacht auf Kompromittierung, nach einem Vorfall auf dem betroffenen System und bei jedem Treffer im Abgleich mit veröffentlichten Datensammlungen.\n\nVerboten sind: Wiederverwendung eines Passworts aus einem anderen Dienst, Weitergabe an Dritte, Ablage in unverschlüsselten Dateien. Der Passwortmanager `Vaultbird` ist für alle Mitarbeitenden bereitgestellt und für dienstliche Zugangsdaten verpflichtend.",
+  "position": 1
+ },
+ {
+  "chunk_id": "policy-passwoerter-und-mfa#02",
+  "dok_id": "policy-passwoerter-und-mfa",
+  "titel": "Richtlinie Passwörter und Multi-Faktor-Authentisierung",
+  "quelle": "wissensbasis/policy-passwoerter-und-mfa.md",
+  "text": "## Multi-Faktor-Authentisierung\n\nMFA ist für alle Konten verpflichtend, die von außerhalb des internen Netzes erreichbar sind, und für alle administrativen Konten.\n\n**Phishing-resistente Verfahren** sind für die folgenden Konten zwingend: administrative Konten (`adm-`), Konten mit Zugriff auf das Finanzsystem, Konten der Geschäftsführung sowie alle Zugänge zum VPN-Gateway und zur Verwaltungsoberfläche von SentinelGrid. Zugelassen sind ausschließlich FIDO2-Sicherheitsschlüssel und Passkeys, die an das Gerät gebunden sind.\n\nFür alle übrigen Konten sind zusätzlich zugelassen: Einmalpasswörter aus einer Authentisierungs-App (TOTP) und Push-Bestätigungen mit Nummernabgleich.\n\nNicht mehr zugelassen sind seit dem 01.02.2026: SMS, Sprachanruf und einfache Push-Bestätigung ohne Nummernabgleich.",
+  "position": 2
+ },
+ {
+  "chunk_id": "policy-passwoerter-und-mfa#03",
+  "dok_id": "policy-passwoerter-und-mfa",
+  "titel": "Richtlinie Passwörter und Multi-Faktor-Authentisierung",
+  "quelle": "wissensbasis/policy-passwoerter-und-mfa.md",
+  "text": "## Ausnahmen\n\nWo ein System kein MFA unterstützt, ist der Zugang auf das interne Netz zu beschränken und im Restrisiko-Register zu führen. Die Ausnahme wird jährlich überprüft.\n\n## Technische Konten\n\nTechnische Konten nutzen bevorzugt zertifikatsbasierte Anmeldung oder kurzlebige Token. Wo ein Passwort nötig ist, wird es im Secret-Store `Vaultbird Machine` erzeugt und abgelegt; niemand kennt es im Klartext. Der Verantwortliche prüft jährlich, ob das Konto noch benötigt wird.",
+  "position": 3
+ },
+ {
+  "chunk_id": "policy-passwoerter-und-mfa#04",
+  "dok_id": "policy-passwoerter-und-mfa",
+  "titel": "Richtlinie Passwörter und Multi-Faktor-Authentisierung",
+  "quelle": "wissensbasis/policy-passwoerter-und-mfa.md",
+  "text": "## Durchsetzung\n\nDer Verzeichnisdienst setzt Länge, Sperre und MFA-Pflicht technisch durch. Konten, die eine Vorgabe nicht erfüllen, erscheinen im wöchentlichen Abweichungsbericht an das SOC und werden nach 14 Tagen ohne Nachbesserung gesperrt.",
+  "position": 4
+ },
+ {
+  "chunk_id": "postmortem-2026-03-14-vpn#00",
+  "dok_id": "postmortem-2026-03-14-vpn",
+  "titel": "Post-Mortem INC-2026-0311 — Kompromittierung des VPN-Gateways",
+  "quelle": "wissensbasis/postmortem-2026-03-14-vpn.md",
+  "text": "# Post-Mortem INC-2026-0311 — Kompromittierung des VPN-Gateways\n\n**Vorfall:** INC-2026-0311 · **Schweregrad:** SEV-1 · **Zeitraum:** 2026-03-11 bis 2026-03-14 · **Autor:** Incident Lead der Spätschicht · **Freigegeben:** 2026-03-24\n\n## Zusammenfassung\n\nEin Angreifer hat über CVE-2026-3224 eine Administrator-Session auf dem VPN-Gateway `vpn-gw-ham-01` erlangt, ein zusätzliches lokales Konto angelegt und über drei Tage hinweg Verbindungen in das interne Netz aufgebaut. Der Zugriff wurde am 14.03.2026 um 02:41 Uhr erkannt und innerhalb von 38 Minuten unterbunden. Kundendaten sind nach heutigem Stand nicht abgeflossen. Der Ausfall des Fernzugriffs betrug vier Stunden.",
+  "position": 0
+ },
+ {
+  "chunk_id": "postmortem-2026-03-14-vpn#01",
+  "dok_id": "postmortem-2026-03-14-vpn",
+  "titel": "Post-Mortem INC-2026-0311 — Kompromittierung des VPN-Gateways",
+  "quelle": "wissensbasis/postmortem-2026-03-14-vpn.md",
+  "text": "## Zeitleiste\n\n| Zeitpunkt | Ereignis |\n|---|---|\n| 11.03. 09:00 | NorthPeak veröffentlicht Advisory NP-SA-2026-014 zu CVE-2026-3224 |\n| 11.03. 11:20 | Advisory-Feed legt Ticket VUL-2026-0442 an, Einstufung zunächst Kritisch |\n| 11.03. 23:14 | erster erfolgreicher Zugriff auf `/api/v2/session/resume` von 198.51.100.77 |\n| 12.03. 00:02 | Angreifer legt das lokale Konto `svc-backup2` an |\n| 12.03. 08:30 | Bewertung im SOC, Einstufung auf Notfall, Change CHG-2026-0771 erstellt |\n| 13.03. 22:00 | Wartungsfenster verstreicht, Patch wird auf das nächste Fenster verschoben |\n| 14.03. 02:41 | SentinelGrid meldet Anmeldung von `svc-backup2` außerhalb der Geschäftszeit |\n| 14.03. 02:55 | Incident Lead stuft auf SEV-1, Krisenstab wird einberufen |\n| 14.03. 03:19 | Endpunkt im Reverse Proxy blockiert, alle Sessions verworfen |\n| 14.03. 04:10 | Forensische Sicherung abgeschlossen, Patch 8.1.2 eingespielt |\n| 14.03. 07:05 | Fernzugriff wieder verfügbar |\n| 18.03. | Abschluss der Nacharbeiten, Rezertifizierung aller VPN-Konten |",
+  "position": 1
+ },
+ {
+  "chunk_id": "postmortem-2026-03-14-vpn#02",
+  "dok_id": "postmortem-2026-03-14-vpn",
+  "titel": "Post-Mortem INC-2026-0311 — Kompromittierung des VPN-Gateways",
+  "quelle": "wissensbasis/postmortem-2026-03-14-vpn.md",
+  "text": "## Grundursache\n\nDie Grundursache ist ein nicht fristgerecht eingespielter Notfall-Patch. Die Schwachstelle war seit dem 11.03. bekannt, das Advisory lag vor, das Asset war im Inventar korrekt erfasst und die Einstufung Notfall war am 12.03. um 08:30 Uhr gesetzt. Der Patch wurde trotzdem in das reguläre Wartungsfenster gelegt, das am 13.03. um 22:00 Uhr ohne Umsetzung verstrich, weil der zuständige Administrator im Urlaub war und die Vertretung den Change nicht kannte.\n\nDer Notfallweg im Runbook Patch-Management hätte den Patch innerhalb von 72 Stunden verlangt und das Wartungsfenster übergangen. Er wurde nicht ausgelöst, weil der Change bereits im Regelweg lief und niemand ihn umgehängt hat.",
+  "position": 2
+ },
+ {
+  "chunk_id": "postmortem-2026-03-14-vpn#03",
+  "dok_id": "postmortem-2026-03-14-vpn",
+  "titel": "Post-Mortem INC-2026-0311 — Kompromittierung des VPN-Gateways",
+  "quelle": "wissensbasis/postmortem-2026-03-14-vpn.md",
+  "text": "## Beitragende Faktoren\n\n* Die Vertretungsregelung für Changes war nicht dokumentiert. Ein Change ohne aktiven Bearbeiter erzeugte keine Meldung.\n* Die Erkennungsregel `SG-VPN-0042` für Anfragen an den betroffenen Endpunkt wurde erst am 13.03. um 16:00 Uhr aktiviert, 29 Stunden nach dem ersten Zugriff.\n* Das Anlegen eines lokalen Kontos auf der Appliance erzeugte keine Meldung. Die Appliance protokollierte das Ereignis, die Regel dafür fehlte.\n* Die Zeitleiste ließ sich nur deshalb lückenlos rekonstruieren, weil die VPN-Logs 365 Tage aufbewahrt werden.",
+  "position": 3
+ },
+ {
+  "chunk_id": "postmortem-2026-03-14-vpn#04",
+  "dok_id": "postmortem-2026-03-14-vpn",
+  "titel": "Post-Mortem INC-2026-0311 — Kompromittierung des VPN-Gateways",
+  "quelle": "wissensbasis/postmortem-2026-03-14-vpn.md",
+  "text": "## Was gut lief\n\nDie Erkennung am 14.03. war eine Regel, kein Zufall. Vom ersten Alarm bis zur Eindämmung vergingen 38 Minuten, die Vorgabe für SEV-1 liegt bei 60 Minuten. Die forensische Sicherung erfolgte vor dem Patch, damit blieben alle Spuren erhalten. Der Krisenstab war um 03:15 Uhr vollständig erreichbar.",
+  "position": 4
+ },
+ {
+  "chunk_id": "postmortem-2026-03-14-vpn#05",
+  "dok_id": "postmortem-2026-03-14-vpn",
+  "titel": "Post-Mortem INC-2026-0311 — Kompromittierung des VPN-Gateways",
+  "quelle": "wissensbasis/postmortem-2026-03-14-vpn.md",
+  "text": "## Maßnahmen\n\n| Nr. | Maßnahme | Verantwortlich | Frist | Status |\n|---|---|---|---|---|\n| 1 | Changes mit Einstufung Notfall erzeugen bei Fristüberschreitung eine Meldung an die SOC-Leitung | IT-Betrieb | 2026-04-15 | umgesetzt |\n| 2 | Vertretungsregelung für Changes dokumentieren und im Werkzeug hinterlegen | IT-Betrieb | 2026-04-30 | umgesetzt |\n| 3 | Erkennungsregeln für neue kritische CVEs innerhalb von 24 Stunden nach Advisory aktivieren | SOC | 2026-05-31 | in Arbeit |\n| 4 | Kontenanlage auf allen Netzkomponenten als Ereignis anbinden | SOC | 2026-06-30 | in Arbeit |\n| 5 | Lokale Administratorkonten auf allen Appliances inventarisieren | IT-Betrieb | 2026-05-15 | umgesetzt |",
+  "position": 5
+ },
+ {
+  "chunk_id": "postmortem-2026-03-14-vpn#06",
+  "dok_id": "postmortem-2026-03-14-vpn",
+  "titel": "Post-Mortem INC-2026-0311 — Kompromittierung des VPN-Gateways",
+  "quelle": "wissensbasis/postmortem-2026-03-14-vpn.md",
+  "text": "## Bewertung des Datenabflusses\n\nDer Angreifer hatte über den VPN-Zugang Netzzugriff auf die Segmente `dmz-ham` und `office-ham`. Die Auswertung der Firewall-Logs zeigt 41 Verbindungen zum Dateiserver `fs-ham-02` mit insgesamt 3,2 Megabyte übertragener Daten. Die abgerufenen Dateien liegen im Ordner `IT/Netzplaene` und enthalten keine personenbezogenen Daten. Eine Meldung an die Aufsichtsbehörde war damit nicht erforderlich; die Prüfung dieser Frage ist im Ticket dokumentiert.",
+  "position": 6
+ },
+ {
+  "chunk_id": "postmortem-2026-03-14-vpn#07",
+  "dok_id": "postmortem-2026-03-14-vpn",
+  "titel": "Post-Mortem INC-2026-0311 — Kompromittierung des VPN-Gateways",
+  "quelle": "wissensbasis/postmortem-2026-03-14-vpn.md",
+  "text": "## Lehre\n\nEine Frist ist erst dann eine Frist, wenn ihre Überschreitung jemanden erreicht. Der Notfallweg existierte, war beschrieben und war allen bekannt — er wurde nur nicht ausgelöst, weil kein Mechanismus den Regelweg unterbrochen hat.",
+  "position": 7
+ },
+ {
+  "chunk_id": "runbook-incident-response#00",
+  "dok_id": "runbook-incident-response",
+  "titel": "Runbook Incident Response",
+  "quelle": "wissensbasis/runbook-incident-response.md",
+  "text": "# Runbook Incident Response\n\n**Gültig ab:** 2026-01-15 · **Verantwortlich:** SOC-Leitung · **Version:** 4.2 · **Prüfzyklus:** halbjährlich\n\n## Zweck und Geltungsbereich\n\nDieses Runbook beschreibt, wie das Security Operations Center der Nordlicht Logistik SE einen Sicherheitsvorfall aufnimmt, bewertet, eindämmt und abschließt. Es gilt für alle Systeme im Asset-Inventar, für alle Standorte und für alle Vorfälle, die über SentinelGrid, den Service Desk oder eine externe Meldung eingehen.",
+  "position": 0
+ },
+ {
+  "chunk_id": "runbook-incident-response#01",
+  "dok_id": "runbook-incident-response",
+  "titel": "Runbook Incident Response",
+  "quelle": "wissensbasis/runbook-incident-response.md",
+  "text": "## Rollen\n\n| Rolle | Besetzung | Aufgabe |\n|---|---|---|\n| Incident Lead | Schichtführung SOC | führt den Vorfall, entscheidet über Maßnahmen |\n| Analyst | SOC-Schicht | untersucht, dokumentiert, sammelt Beweise |\n| System Owner | laut Asset-Inventar | setzt Maßnahmen auf dem betroffenen System um |\n| Kommunikation | Unternehmenskommunikation | jede Aussage nach außen |\n| Krisenstab | CISO, CIO, Rechtsabteilung | ab Stufe SEV-1 |\n\nDer Incident Lead ist nicht zwingend die fachlich erfahrenste Person. Die Rolle ist eine Führungsrolle: Sie hält den Überblick, verteilt Aufgaben und trifft Entscheidungen.",
+  "position": 1
+ },
+ {
+  "chunk_id": "runbook-incident-response#02",
+  "dok_id": "runbook-incident-response",
+  "titel": "Runbook Incident Response",
+  "quelle": "wissensbasis/runbook-incident-response.md",
+  "text": "## Schweregrade\n\n| Stufe | Kriterium | Reaktionszeit | Eskalation |\n|---|---|---|---|\n| SEV-1 | Produktionsausfall, Datenabfluss oder aktiv ausgenutzte kritische Schwachstelle | 15 Minuten, rund um die Uhr | CISO sofort, Krisenstab innerhalb von 60 Minuten |\n| SEV-2 | Einzelnes System kompromittiert, keine Kundendaten betroffen | 1 Stunde während der Geschäftszeit | SOC-Leitung |\n| SEV-3 | Verdacht ohne Bestätigung, Richtlinienverstoß | 1 Arbeitstag | keine |\n| SEV-4 | Beobachtung ohne unmittelbaren Handlungsbedarf | 5 Arbeitstage | keine |\n\nÜber die Einstufung auf SEV-1 entscheidet der Incident Lead. Die Entscheidung wird nicht verhandelt, sondern im Ticket begründet. Eine spätere Herabstufung ist möglich und wird ebenfalls begründet.",
+  "position": 2
+ },
+ {
+  "chunk_id": "runbook-incident-response#03",
+  "dok_id": "runbook-incident-response",
+  "titel": "Runbook Incident Response",
+  "quelle": "wissensbasis/runbook-incident-response.md",
+  "text": "## Ablauf\n\n### 1. Aufnahme\n\nJeder Vorfall bekommt ein Ticket in Helios ITSM mit dem Präfix `INC-`. Pflichtfelder sind Zeitpunkt der Erkennung, Quelle der Meldung, betroffene Assets und die erste Einschätzung. Ohne Ticket keine Maßnahme — auch nicht bei offensichtlichen Fällen.\n\n### 2. Triage\n\nDer Analyst prüft innerhalb der Reaktionszeit: Ist die Meldung echt? Welche Systeme sind betroffen? Läuft der Angriff noch? Grundlage sind die Ereignisse in SentinelGrid, das Asset-Inventar und die Kontaktliste der System Owner.",
+  "position": 3
+ },
+ {
+  "chunk_id": "runbook-incident-response#04",
+  "dok_id": "runbook-incident-response",
+  "titel": "Runbook Incident Response",
+  "quelle": "wissensbasis/runbook-incident-response.md",
+  "text": "### 3. Eindämmung\n\nVor der Bereinigung steht die Eindämmung. Übliche Maßnahmen in der Reihenfolge ihrer Schwere:\n\n* Netzsegment des betroffenen Systems isolieren\n* betroffene Konten sperren und Sessions verwerfen\n* eingehenden Zugriff aus dem Internet auf den betroffenen Dienst blockieren\n* System vom Netz nehmen, nur nach Rücksprache mit dem System Owner\n\nEin System wird **nicht** neu gestartet und **nicht** neu installiert, bevor eine forensische Sicherung vorliegt. Der Arbeitsspeicher ist nach einem Neustart verloren.",
+  "position": 4
+ },
+ {
+  "chunk_id": "runbook-incident-response#05",
+  "dok_id": "runbook-incident-response",
+  "titel": "Runbook Incident Response",
+  "quelle": "wissensbasis/runbook-incident-response.md",
+  "text": "### 4. Beweissicherung\n\nGesichert werden mindestens: Systemabbild oder Snapshot, relevante Logdateien, Netzwerkmitschnitt der letzten Stunde, Liste der laufenden Prozesse und offenen Verbindungen. Alle Artefakte werden im Beweisspeicher `evidence.nordlicht.internal` abgelegt, mit Prüfsumme und Zeitstempel. Zugriff darauf hat nur das SOC.",
+  "position": 5
+ },
+ {
+  "chunk_id": "runbook-incident-response#06",
+  "dok_id": "runbook-incident-response",
+  "titel": "Runbook Incident Response",
+  "quelle": "wissensbasis/runbook-incident-response.md",
+  "text": "### 5. Bereinigung und Wiederanlauf\n\nDie Bereinigung folgt der Ursache, nicht dem Symptom. Ein System geht erst zurück in den Betrieb, wenn die ausgenutzte Schwachstelle geschlossen ist, alle Zugangsdaten des Systems erneuert sind und die Überwachung eine Woche lang unauffällig bleibt.\n\n### 6. Abschluss\n\nEin Vorfall gilt als abgeschlossen, wenn das Ticket alle Maßnahmen dokumentiert, der System Owner den Wiederanlauf bestätigt hat und die Nacharbeiten als eigene Tickets erfasst sind. Für SEV-1 und SEV-2 ist innerhalb von zehn Arbeitstagen ein Post-Mortem zu erstellen.",
+  "position": 6
+ },
+ {
+  "chunk_id": "runbook-incident-response#07",
+  "dok_id": "runbook-incident-response",
+  "titel": "Runbook Incident Response",
+  "quelle": "wissensbasis/runbook-incident-response.md",
+  "text": "## Meldepflichten\n\nBei Verdacht auf einen Abfluss personenbezogener Daten informiert der Incident Lead unverzüglich die Rechtsabteilung. Die Frist gegenüber der Aufsichtsbehörde beträgt 72 Stunden ab Kenntnis. Die Frist läuft ab dem Zeitpunkt, an dem der Verdacht begründet ist, nicht ab der Bestätigung.",
+  "position": 7
+ },
+ {
+  "chunk_id": "runbook-incident-response#08",
+  "dok_id": "runbook-incident-response",
+  "titel": "Runbook Incident Response",
+  "quelle": "wissensbasis/runbook-incident-response.md",
+  "text": "## Was nicht getan wird\n\nKeine Kommunikation an Kunden, Presse oder Sozialkanäle ohne die Unternehmenskommunikation. Kein Kontakt zu einem Angreifer. Keine Gegenangriffe. Keine Analyse von Schadsoftware auf einem Arbeitsplatzrechner — dafür gibt es die abgeschottete Analyseumgebung `lab-sandbox-01`.",
+  "position": 8
+ },
+ {
+  "chunk_id": "runbook-patch-management#00",
+  "dok_id": "runbook-patch-management",
+  "titel": "Runbook Patch-Management",
+  "quelle": "wissensbasis/runbook-patch-management.md",
+  "text": "# Runbook Patch-Management\n\n**Gültig ab:** 2025-10-01 · **Verantwortlich:** IT-Betrieb, fachliche Freigabe SOC · **Version:** 3.1\n\n## Zweck\n\nDieses Runbook regelt, wie Sicherheitsupdates bei der Nordlicht Logistik SE bewertet, freigegeben, eingespielt und nachgewiesen werden. Es beschreibt den Regelweg und den Notfallweg.",
+  "position": 0
+ },
+ {
+  "chunk_id": "runbook-patch-management#01",
+  "dok_id": "runbook-patch-management",
+  "titel": "Runbook Patch-Management",
+  "quelle": "wissensbasis/runbook-patch-management.md",
+  "text": "## Fristen\n\nDie Frist läuft ab Freigabe durch das SOC, nicht ab Veröffentlichung durch den Hersteller.\n\n| Einstufung | Kriterium | Frist für Server | Frist für Arbeitsplätze |\n|---|---|---|---|\n| Notfall | CVSS ≥ 9.0 und aktiv ausgenutzt | 72 Stunden | 72 Stunden |\n| Kritisch | CVSS ≥ 9.0 | 7 Tage | 14 Tage |\n| Hoch | CVSS 7.0 – 8.9 | 30 Tage | 30 Tage |\n| Mittel | CVSS 4.0 – 6.9 | 90 Tage | 90 Tage |\n| Niedrig | CVSS < 4.0 | nächster Wartungszyklus | nächster Wartungszyklus |\n\nIst ein System aus dem Internet erreichbar, gilt die nächsthöhere Stufe. Ist ein System nicht erreichbar und durch einen wirksamen Workaround geschützt, kann das SOC die Frist um eine Stufe verlängern und trägt das im Restrisiko-Register ein.",
+  "position": 1
+ },
+ {
+  "chunk_id": "runbook-patch-management#02",
+  "dok_id": "runbook-patch-management",
+  "titel": "Runbook Patch-Management",
+  "quelle": "wissensbasis/runbook-patch-management.md",
+  "text": "## Regelweg\n\n1. **Erfassung.** Der Schwachstellen-Scanner meldet täglich um 04:00 Uhr an SentinelGrid. Neue Herstelleradvisories werden zusätzlich über die Advisory-Feeds eingelesen.\n2. **Bewertung.** Das SOC bewertet innerhalb von zwei Arbeitstagen: Ist ein Asset betroffen? Ist es erreichbar? Gibt es einen Exploit? Grundlage sind CVSS, EPSS und das Asset-Inventar.\n3. **Freigabe.** Die Freigabe erfolgt als Change in Helios ITSM mit Präfix `CHG-`. Der Change enthält Fenster, Rückfallplan und den Test, der den Erfolg belegt.\n4. **Einspielen.** Zuerst Vorproduktion, dann Produktion. Zwischen beiden liegen mindestens 24 Stunden, in denen die Vorproduktion beobachtet wird.\n5. **Nachweis.** Nach dem Einspielen wird die Version im Asset-Inventar aktualisiert und der Scan wiederholt. Erst der wiederholte Scan schließt den Change.",
+  "position": 2
+ },
+ {
+  "chunk_id": "runbook-patch-management#03",
+  "dok_id": "runbook-patch-management",
+  "titel": "Runbook Patch-Management",
+  "quelle": "wissensbasis/runbook-patch-management.md",
+  "text": "## Notfallweg\n\nDer Notfallweg gilt für die Einstufung Notfall. Er verkürzt die Bewertung auf zwei Stunden und ersetzt die Freigabe im Change-Board durch die Freigabe des Incident Lead. Vorproduktion und Produktion dürfen am selben Tag gepatcht werden.\n\nDer Notfallweg braucht dieselbe Dokumentation wie der Regelweg — sie wird nur nachgereicht, spätestens am folgenden Arbeitstag.",
+  "position": 3
+ },
+ {
+  "chunk_id": "runbook-patch-management#04",
+  "dok_id": "runbook-patch-management",
+  "titel": "Runbook Patch-Management",
+  "quelle": "wissensbasis/runbook-patch-management.md",
+  "text": "## Wartungsfenster\n\n| Umgebung | Fenster | Vorlauf |\n|---|---|---|\n| Vorproduktion | dienstags 18:00 – 22:00 | 1 Arbeitstag |\n| Produktion Hamburg | donnerstags 22:00 – 02:00 | 5 Arbeitstage |\n| Produktion Rotterdam | sonntags 02:00 – 06:00 | 5 Arbeitstage |\n| Arbeitsplätze | fortlaufend, Neustart erzwungen nach 7 Tagen | keiner |\n\nAußerhalb der Fenster wird nur im Notfallweg gepatcht.",
+  "position": 4
+ },
+ {
+  "chunk_id": "runbook-patch-management#05",
+  "dok_id": "runbook-patch-management",
+  "titel": "Runbook Patch-Management",
+  "quelle": "wissensbasis/runbook-patch-management.md",
+  "text": "## Ausnahmen\n\nEin System, das nicht fristgerecht gepatcht werden kann, braucht einen Eintrag im Restrisiko-Register mit Begründung, kompensierender Maßnahme, Verantwortlichem und Enddatum. Ausnahmen ohne Enddatum werden nicht erteilt. Das Register wird monatlich mit dem CISO durchgesehen.\n\n## Nachweis und Berichterstattung\n\nDer Monatsbericht an die Geschäftsführung enthält: Zahl der offenen Schwachstellen je Einstufung, Zahl der überschrittenen Fristen, älteste offene kritische Schwachstelle und die Liste der aktiven Ausnahmen.",
+  "position": 5
+ },
+ {
+  "chunk_id": "runbook-zugriffskontrolle#00",
+  "dok_id": "runbook-zugriffskontrolle",
+  "titel": "Runbook Zugriffskontrolle",
+  "quelle": "wissensbasis/runbook-zugriffskontrolle.md",
+  "text": "# Runbook Zugriffskontrolle\n\n**Gültig ab:** 2025-07-01 · **Verantwortlich:** Identity & Access Management · **Version:** 2.6\n\n## Zweck\n\nDieses Runbook beschreibt, wie Zugänge bei Eintritt, Wechsel und Austritt einer Person angelegt, geändert und entzogen werden, und wie Berechtigungen regelmäßig überprüft werden.",
+  "position": 0
+ },
+ {
+  "chunk_id": "runbook-zugriffskontrolle#01",
+  "dok_id": "runbook-zugriffskontrolle",
+  "titel": "Runbook Zugriffskontrolle",
+  "quelle": "wissensbasis/runbook-zugriffskontrolle.md",
+  "text": "## Grundsätze\n\n* Jeder Zugang gehört zu genau einer Person. Gemeinsam genutzte Konten sind nicht zulässig.\n* Rechte werden über Rollen vergeben, nicht einzeln. Eine Rolle bündelt die Rechte einer Tätigkeit.\n* Es gilt das Prinzip der geringsten Rechte. Erweiterte Rechte sind befristet.\n* Technische Konten haben einen benannten menschlichen Verantwortlichen.",
+  "position": 1
+ },
+ {
+  "chunk_id": "runbook-zugriffskontrolle#02",
+  "dok_id": "runbook-zugriffskontrolle",
+  "titel": "Runbook Zugriffskontrolle",
+  "quelle": "wissensbasis/runbook-zugriffskontrolle.md",
+  "text": "## Eintritt\n\nDie Personalabteilung legt die Person im HR-System an. Der nächtliche Abgleich erzeugt daraus das Konto im Verzeichnisdienst und die Basisrolle des Standorts. Fachliche Rollen beantragt die Führungskraft über Helios ITSM mit dem Formular `Zugang beantragen`. Der Antrag braucht die Freigabe des Rollenverantwortlichen.\n\nDer Zugang wird frühestens am Tag vor dem Eintritt aktiv. Zugangsdaten werden über zwei Wege übergeben: der Benutzername per E-Mail an die Führungskraft, das Einmalpasswort per SMS an die Person.",
+  "position": 2
+ },
+ {
+  "chunk_id": "runbook-zugriffskontrolle#03",
+  "dok_id": "runbook-zugriffskontrolle",
+  "titel": "Runbook Zugriffskontrolle",
+  "quelle": "wissensbasis/runbook-zugriffskontrolle.md",
+  "text": "## Wechsel\n\nBei einem Wechsel der Tätigkeit werden alle bisherigen fachlichen Rollen entzogen und die neuen beantragt. Das Ansammeln von Rechten über mehrere Stationen hinweg ist der häufigste Befund der internen Revision. Der Entzug geschieht automatisch mit dem Wirksamwerden der neuen Stelle im HR-System; er wird nicht beantragt.",
+  "position": 3
+ },
+ {
+  "chunk_id": "runbook-zugriffskontrolle#04",
+  "dok_id": "runbook-zugriffskontrolle",
+  "titel": "Runbook Zugriffskontrolle",
+  "quelle": "wissensbasis/runbook-zugriffskontrolle.md",
+  "text": "## Austritt\n\n| Schritt | Zeitpunkt | Verantwortlich |\n|---|---|---|\n| Konto im Verzeichnisdienst deaktivieren | letzter Arbeitstag, 18:00 | automatisch aus HR |\n| Alle Sessions und Token verwerfen | letzter Arbeitstag, 18:05 | automatisch |\n| VPN-Zertifikat sperren | letzter Arbeitstag, 18:05 | automatisch |\n| Hardware-Token einziehen | letzter Arbeitstag | Führungskraft |\n| Postfach auf Vertretung umleiten | letzter Arbeitstag | IT-Betrieb |\n| Konto löschen | nach 90 Tagen | automatisch |\n\nBei einer fristlosen Trennung meldet die Personalabteilung den Fall telefonisch an den Service Desk. Die Deaktivierung erfolgt dann sofort und nicht zum Feierabend. Das SOC prüft im Anschluss die Zugriffe der letzten 30 Tage.",
+  "position": 4
+ },
+ {
+  "chunk_id": "runbook-zugriffskontrolle#05",
+  "dok_id": "runbook-zugriffskontrolle",
+  "titel": "Runbook Zugriffskontrolle",
+  "quelle": "wissensbasis/runbook-zugriffskontrolle.md",
+  "text": "## Erweiterte Rechte\n\nAdministrative Rechte werden über getrennte Konten mit dem Präfix `adm-` vergeben. Diese Konten sind nicht für E-Mail, Internet oder Büroanwendungen zugelassen und werden nur von einem privilegierten Arbeitsplatz aus benutzt. Anmeldungen mit `adm-`-Konten von einem regulären Arbeitsplatz erzeugen eine Meldung in SentinelGrid.\n\nRechte für einen einzelnen Einsatz werden befristet über die Notfallfreigabe vergeben. Die Freigabe läuft nach acht Stunden automatisch ab und wird protokolliert.",
+  "position": 5
+ },
+ {
+  "chunk_id": "runbook-zugriffskontrolle#06",
+  "dok_id": "runbook-zugriffskontrolle",
+  "titel": "Runbook Zugriffskontrolle",
+  "quelle": "wissensbasis/runbook-zugriffskontrolle.md",
+  "text": "## Rezertifizierung\n\nJede Führungskraft bestätigt vierteljährlich die Rollen ihrer Mitarbeitenden. Rollenverantwortliche bestätigen halbjährlich die Rechte, die in ihrer Rolle stecken. Wird eine Rezertifizierung nach zwei Erinnerungen nicht abgeschlossen, werden die betroffenen Rollen entzogen.\n\nTechnische Konten werden jährlich überprüft. Ein technisches Konto ohne Anmeldung in den letzten 180 Tagen wird deaktiviert.",
+  "position": 6
+ },
+ {
+  "chunk_id": "systemdoku-sentinelgrid#00",
+  "dok_id": "systemdoku-sentinelgrid",
+  "titel": "Systemdokumentation SentinelGrid",
+  "quelle": "wissensbasis/systemdoku-sentinelgrid.md",
+  "text": "# Systemdokumentation SentinelGrid\n\n**Stand:** 2026-05-20 · **Verantwortlich:** Plattformteam SOC · **Version:** 9.3 · **Klassifikation:** intern\n\n## 1 Überblick\n\nSentinelGrid ist die zentrale Plattform für Ereignisdaten der Nordlicht Logistik SE. Sie nimmt Protokolle aus rund 4.100 Quellen entgegen, normalisiert sie auf ein gemeinsames Schema, wertet sie gegen Erkennungsregeln aus und stellt sie dem Security Operations Center zur Suche bereit. Die Plattform ist selbst betrieben und läuft auf eigener Hardware in den Rechenzentren Hamburg und Rotterdam.\n\nDiese Dokumentation beschreibt Aufbau, Betrieb und Grenzen der Plattform. Sie richtet sich an das Plattformteam, an die Analysten im SOC und an System Owner, die eine neue Quelle anbinden wollen.\n\nWas SentinelGrid **nicht** ist: kein Werkzeug für Anwendungs-Monitoring, keine Ablage für Geschäftsdaten und kein Ersatz für die Protokollierung auf den Quellsystemen selbst. Anwendungsmetriken laufen über eine getrennte Zeitreihendatenbank; SentinelGrid sieht davon nur die sicherheitsrelevanten Ereignisse.",
+  "position": 0
+ },
+ {
+  "chunk_id": "systemdoku-sentinelgrid#01",
+  "dok_id": "systemdoku-sentinelgrid",
+  "titel": "Systemdokumentation SentinelGrid",
+  "quelle": "wissensbasis/systemdoku-sentinelgrid.md",
+  "text": "## 2 Architektur\n\nDie Plattform besteht aus fünf Schichten. Jede Schicht ist unabhängig skalierbar und hat einen eigenen Ausfallpfad.\n\n| Schicht | Aufgabe | Komponenten | Standort |\n|---|---|---|---|\n| Erfassung | Ereignisse entgegennehmen | 8 Collector-Knoten | Hamburg, Rotterdam |\n| Aufbereitung | Normalisieren, Anreichern | 6 Prozessor-Knoten | Hamburg |\n| Speicherung | Indexieren, Vorhalten | 12 Index-Knoten, Objektspeicher | Hamburg, Rotterdam |\n| Auswertung | Regeln, Korrelation | 4 Regel-Knoten | Hamburg |\n| Zugriff | Suche, Dashboards, API | 3 Frontend-Knoten | Hamburg |",
+  "position": 1
+ },
+ {
+  "chunk_id": "systemdoku-sentinelgrid#02",
+  "dok_id": "systemdoku-sentinelgrid",
+  "titel": "Systemdokumentation SentinelGrid",
+  "quelle": "wissensbasis/systemdoku-sentinelgrid.md",
+  "text": "### 2.1 Erfassung\n\nDie Collector-Knoten nehmen Daten über vier Wege entgegen: Syslog über TCP mit TLS auf Port 6514, den SentinelGrid-Agenten auf Port 9443, HTTP-Einlieferung über die API `/ingest/v1/events` und Abholung aus Warteschlangen für Cloud-Dienste. Jeder Weg schreibt in denselben Puffer.\n\nDer Puffer ist eine verteilte Warteschlange mit einer Vorhaltezeit von sechs Stunden. Fällt die Aufbereitung aus, laufen die Daten nicht verloren, sondern stauen sich. Sechs Stunden sind so bemessen, dass ein ungeplanter Ausfall über Nacht ohne Datenverlust überstanden wird.\n\nQuellen liefern nicht direkt an einen Knoten, sondern an den Namen `ingest.nordlicht.internal`. Dahinter steht ein Load Balancer, der auf beide Standorte verteilt. Fällt ein Standort aus, übernimmt der andere die volle Last; dafür ist jeder Standort auf 60 Prozent der Gesamtlast ausgelegt.",
+  "position": 2
+ },
+ {
+  "chunk_id": "systemdoku-sentinelgrid#03",
+  "dok_id": "systemdoku-sentinelgrid",
+  "titel": "Systemdokumentation SentinelGrid",
+  "quelle": "wissensbasis/systemdoku-sentinelgrid.md",
+  "text": "### 2.2 Aufbereitung\n\nDie Prozessor-Knoten bringen jedes Ereignis auf das gemeinsame Schema. Das Schema folgt dem Elastic Common Schema in der Fassung 8.11 und ist um sieben eigene Felder erweitert, darunter `nl.asset_id`, `nl.standort` und `nl.kritikalitaet`.\n\nDie Anreicherung ergänzt jedes Ereignis um:\n\n* die Asset-Kennung aus dem Asset-Inventar, ermittelt über IP-Adresse und Zeitpunkt\n* den Standort und die Kritikalität des Assets\n* den Namen des System Owners\n* geografische Angaben zu öffentlichen IP-Adressen\n* Treffer aus den Threat-Intelligence-Listen\n\nEreignisse, die sich keiner Asset-Kennung zuordnen lassen, bekommen den Wert `unbekannt` und erscheinen im täglichen Bericht `Unbekannte Quellen`. Ein hoher Anteil unbekannter Ereignisse ist fast immer ein Hinweis auf ein Asset, das im Inventar fehlt.",
+  "position": 3
+ },
+ {
+  "chunk_id": "systemdoku-sentinelgrid#04",
+  "dok_id": "systemdoku-sentinelgrid",
+  "titel": "Systemdokumentation SentinelGrid",
+  "quelle": "wissensbasis/systemdoku-sentinelgrid.md",
+  "text": "### 2.3 Speicherung\n\nDie Index-Knoten halten die Daten für den schnellen Zugriff. Die Vorhaltezeit im schnellen Zugriff richtet sich nach der Datenart und ist in der Richtlinie Logging und Aufbewahrung festgelegt. Nach Ablauf wird ein Index in den Objektspeicher verschoben, dort unveränderlich abgelegt und aus dem schnellen Zugriff entfernt.\n\nJeder Index existiert zweimal: einmal in Hamburg, einmal in Rotterdam. Der Abgleich läuft asynchron mit einem Rückstand von typischerweise unter zwei Minuten. Bei einem Ausfall in Hamburg ist die Suche in Rotterdam sofort möglich, es können aber die letzten Minuten fehlen.",
+  "position": 4
+ },
+ {
+  "chunk_id": "systemdoku-sentinelgrid#05",
+  "dok_id": "systemdoku-sentinelgrid",
+  "titel": "Systemdokumentation SentinelGrid",
+  "quelle": "wissensbasis/systemdoku-sentinelgrid.md",
+  "text": "### 2.4 Auswertung\n\nDie Regel-Knoten werten den Datenstrom gegen die Erkennungsregeln aus. Regeln sind in Sigma geschrieben und liegen im Git-Repository `soc/detections`. Jede Regel hat eine Kennung nach dem Muster `SG-<Bereich>-<Nummer>`, eine Beschreibung, eine Einstufung, einen Verweis auf die Gegenmaßnahme und mindestens einen Test.\n\nEine Regel geht erst in den Betrieb, wenn sie gegen die Ereignisse der letzten 30 Tage geprüft wurde. Erzeugt sie dabei mehr als 50 Treffer pro Tag, gilt sie als zu unscharf und wird überarbeitet.\n\nDie Korrelation fasst zusammengehörende Treffer zu einem Fall zusammen. Grundlage ist ein Zeitfenster von 30 Minuten und mindestens ein gemeinsames Feld — üblicherweise Asset, Konto oder Quell-IP. Aus einem Fall entsteht automatisch ein Ticket in Helios ITSM.",
+  "position": 5
+ },
+ {
+  "chunk_id": "systemdoku-sentinelgrid#06",
+  "dok_id": "systemdoku-sentinelgrid",
+  "titel": "Systemdokumentation SentinelGrid",
+  "quelle": "wissensbasis/systemdoku-sentinelgrid.md",
+  "text": "### 2.5 Zugriff\n\nAnalysten arbeiten über die Weboberfläche unter `https://sentinelgrid.nordlicht.internal`. Der Zugang erfordert ein persönliches Konto, MFA mit FIDO2 und die Rolle `soc.analyst` oder `soc.lead`. Die Suchsprache ist SGQL, eine Teilmenge von KQL mit eigenen Erweiterungen für Zeitfenster.\n\nDie API unter `/api/v3` liefert dieselben Daten für Automatisierung und Berichte. Zugriff über die API erfolgt mit kurzlebigen Token, die höchstens acht Stunden gültig sind.",
+  "position": 6
+ },
+ {
+  "chunk_id": "systemdoku-sentinelgrid#07",
+  "dok_id": "systemdoku-sentinelgrid",
+  "titel": "Systemdokumentation SentinelGrid",
+  "quelle": "wissensbasis/systemdoku-sentinelgrid.md",
+  "text": "## 3 Kapazität und Leistung\n\nIm Normalbetrieb verarbeitet SentinelGrid rund 42.000 Ereignisse pro Sekunde. Die Spitzenlast liegt bei 78.000 Ereignissen pro Sekunde und tritt werktags zwischen 07:30 und 08:30 Uhr auf, wenn sich die Belegschaft anmeldet. Die Auslegungsgrenze der aktuellen Hardware liegt bei 110.000 Ereignissen pro Sekunde.\n\n| Kennzahl | Wert |\n|---|---|\n| Ereignisse pro Tag | rund 3,6 Milliarden |\n| Datenvolumen pro Tag nach Komprimierung | 2,1 Terabyte |\n| Speicher im schnellen Zugriff | 340 Terabyte |\n| Speicher im Archiv | 4,8 Petabyte |\n| Angebundene Quellen | 4.100 |\n| Aktive Erkennungsregeln | 612 |\n| Fälle pro Tag im Mittel | 34 |\n\nDie Antwortzeit einer Suche über 24 Stunden liegt im Mittel bei 1,8 Sekunden, über 30 Tage bei 11 Sekunden. Suchen über das Archiv dauern länger, weil die Daten zuerst zurückgeholt werden; die Bereitstellung ist innerhalb von vier Stunden zugesagt.\n\nDie Verzögerung zwischen dem Entstehen eines Ereignisses und seiner Sichtbarkeit in der Suche beträgt im Mittel 24 Sekunden. Der vereinbarte Wert liegt bei 60 Sekunden und wird als Kennzahl `ingest_lag_p95` überwacht.",
+  "position": 7
+ },
+ {
+  "chunk_id": "systemdoku-sentinelgrid#08",
+  "dok_id": "systemdoku-sentinelgrid",
+  "titel": "Systemdokumentation SentinelGrid",
+  "quelle": "wissensbasis/systemdoku-sentinelgrid.md",
+  "text": "## 4 Anbindung einer neuen Quelle\n\nEine neue Quelle wird über das Formular `Quelle anbinden` in Helios ITSM beantragt. Der Antrag enthält Asset-Kennung, Art der Quelle, erwartetes Volumen und den fachlichen Grund. Das Plattformteam prüft, ob ein Parser vorhanden ist.\n\n1. **Parser prüfen.** Für 140 Produkte liegt ein Parser bereit. Fehlt einer, wird er geschrieben; der Aufwand liegt bei ein bis drei Tagen.\n2. **Testeinlieferung.** Die Quelle liefert zunächst in den Index `staging-*`. Dort wird geprüft, ob Felder korrekt belegt sind und die Zeitstempel stimmen.\n3. **Volumenabschätzung.** Liegt das erwartete Volumen über 500 Ereignissen pro Sekunde, wird die Kapazitätsplanung angepasst.\n4. **Freigabe.** Nach erfolgreicher Testeinlieferung wird die Quelle auf den produktiven Index umgestellt und im Quellenverzeichnis eingetragen.\n5. **Regeln.** Der Antragsteller benennt, welche Ereignisse sicherheitsrelevant sind. Daraus entstehen Regeln oder Ergänzungen bestehender Regeln.\n\nEine Quelle ohne Eintrag im Quellenverzeichnis wird nach 14 Tagen verworfen. Das verhindert, dass Testsysteme dauerhaft Volumen erzeugen.",
+  "position": 8
+ },
+ {
+  "chunk_id": "systemdoku-sentinelgrid#09",
+  "dok_id": "systemdoku-sentinelgrid",
+  "titel": "Systemdokumentation SentinelGrid",
+  "quelle": "wissensbasis/systemdoku-sentinelgrid.md",
+  "text": "### 4.1 Parser\n\nEin Parser besteht aus einer Erkennungsbedingung, einer Zerlegungsvorschrift und einer Abbildung auf das gemeinsame Schema. Die Erkennungsbedingung entscheidet, welcher Parser für ein Rohereignis zuständig ist; sie prüft üblicherweise Programmname und Format der ersten Zeichen. Die Zerlegung arbeitet mit Grok-Mustern für Textformate und direkt mit Feldern für JSON-Quellen.\n\nJeder Parser liegt im Repository `soc/parsers` und braucht mindestens fünf Testereignisse mit erwartetem Ergebnis. Die Tests laufen bei jeder Änderung; ein Parser ohne grüne Tests wird nicht ausgeliefert. Änderungen an einem Parser wirken nur auf neu eintreffende Ereignisse, nicht rückwirkend auf bereits indexierte Daten.\n\nFällt ein Parser aus, weil eine Quelle ihr Format geändert hat, landet das Ereignis mit dem Feld `nl.parse_error` im Index und bleibt durchsuchbar. Diese Ereignisse erscheinen im Bericht `Parse-Fehler` und werden innerhalb von fünf Arbeitstagen bearbeitet.",
+  "position": 9
+ },
+ {
+  "chunk_id": "systemdoku-sentinelgrid#10",
+  "dok_id": "systemdoku-sentinelgrid",
+  "titel": "Systemdokumentation SentinelGrid",
+  "quelle": "wissensbasis/systemdoku-sentinelgrid.md",
+  "text": "## 5 Betrieb\n\n### 5.1 Überwachung der Plattform\n\nSentinelGrid überwacht sich selbst. Die wichtigsten Kennzahlen und ihre Schwellen:\n\n| Kennzahl | Warnung | Alarm |\n|---|---|---|\n| `ingest_lag_p95` | 60 Sekunden | 300 Sekunden |\n| Puffer-Füllstand | 40 Prozent | 70 Prozent |\n| Ausgefallene Quellen | 5 | 20 |\n| Freier Speicher schneller Zugriff | 20 Prozent | 10 Prozent |\n| Abgleichsrückstand Rotterdam | 5 Minuten | 30 Minuten |\n\nAlarme gehen an die Rufbereitschaft des Plattformteams. Der Ausfall einer einzelnen Quelle ist kein Alarm, sondern erscheint im Bericht `Stille Quellen`.",
+  "position": 10
+ },
+ {
+  "chunk_id": "systemdoku-sentinelgrid#11",
+  "dok_id": "systemdoku-sentinelgrid",
+  "titel": "Systemdokumentation SentinelGrid",
+  "quelle": "wissensbasis/systemdoku-sentinelgrid.md",
+  "text": "### 5.2 Wartung\n\nUpdates der Plattform laufen im Wartungsfenster der Produktion Hamburg, donnerstags ab 22:00 Uhr. Die Knoten werden nacheinander aktualisiert; die Erfassung läuft dabei weiter, weil der Puffer die Lücke überbrückt. Ein Update dauert je nach Umfang zwei bis vier Stunden.\n\nGrößere Versionssprünge werden zuerst in der Umgebung `sg-stage` geprüft, die einen Zehntel der Produktionslast aus gespiegelten Daten erhält.",
+  "position": 11
+ },
+ {
+  "chunk_id": "systemdoku-sentinelgrid#12",
+  "dok_id": "systemdoku-sentinelgrid",
+  "titel": "Systemdokumentation SentinelGrid",
+  "quelle": "wissensbasis/systemdoku-sentinelgrid.md",
+  "text": "### 5.3 Sicherung\n\nGesichert werden Konfiguration, Regelwerk, Dashboards und die Zuordnungstabellen — nicht die Ereignisdaten selbst, die durch die Spiegelung nach Rotterdam und das Archiv abgedeckt sind. Die Sicherung läuft täglich um 01:00 Uhr, wird 90 Tage aufbewahrt und vierteljährlich durch eine Rücksicherung in `sg-stage` geprüft.",
+  "position": 12
+ },
+ {
+  "chunk_id": "systemdoku-sentinelgrid#13",
+  "dok_id": "systemdoku-sentinelgrid",
+  "titel": "Systemdokumentation SentinelGrid",
+  "quelle": "wissensbasis/systemdoku-sentinelgrid.md",
+  "text": "### 5.4 Wiederanlauf\n\nFür den vollständigen Verlust des Standorts Hamburg ist ein Wiederanlauf in Rotterdam vorgesehen. Die Zielvorgaben lauten: Wiederherstellungszeit vier Stunden, maximaler Datenverlust fünf Minuten. Der Wiederanlauf wird jährlich geprobt, zuletzt am 08.02.2026 mit einer gemessenen Wiederherstellungszeit von drei Stunden und zehn Minuten.",
+  "position": 13
+ },
+ {
+  "chunk_id": "systemdoku-sentinelgrid#14",
+  "dok_id": "systemdoku-sentinelgrid",
+  "titel": "Systemdokumentation SentinelGrid",
+  "quelle": "wissensbasis/systemdoku-sentinelgrid.md",
+  "text": "## 6 Schnittstellen\n\n| Gegenstelle | Richtung | Zweck | Technik |\n|---|---|---|---|\n| Asset-Inventar AssetHub | lesend | Anreicherung, Kritikalität | REST, stündlich |\n| Helios ITSM | schreibend | Tickets aus Fällen | REST, ereignisgesteuert |\n| Verzeichnisdienst | lesend | Kontodaten, Gruppen | LDAP, stündlich |\n| Threat-Intelligence-Feeds | lesend | Indikatoren | STIX/TAXII, alle 30 Minuten |\n| Schwachstellen-Scanner | lesend | Scanergebnisse | REST, täglich 04:00 |\n| Beweisspeicher | schreibend | Exporte für Vorfälle | S3-kompatibel |\n\nAlle Schnittstellen nutzen technische Konten mit kurzlebigen Token. Die Konten sind im Secret-Store hinterlegt und haben einen benannten Verantwortlichen im Plattformteam.",
+  "position": 14
+ },
+ {
+  "chunk_id": "systemdoku-sentinelgrid#15",
+  "dok_id": "systemdoku-sentinelgrid",
+  "titel": "Systemdokumentation SentinelGrid",
+  "quelle": "wissensbasis/systemdoku-sentinelgrid.md",
+  "text": "## 7 Bekannte Grenzen\n\n* **Zeitstempel aus der Zukunft.** Ereignisse mit einem Zeitstempel mehr als fünf Minuten in der Zukunft werden auf die Empfangszeit gesetzt und markiert. Ursache ist fast immer eine falsch gesetzte Zeitzone auf der Quelle.\n* **Sehr lange Einzelereignisse.** Ereignisse über 32 Kilobyte werden abgeschnitten. Betroffen sind vor allem Prozessaufrufe mit sehr langen Kommandozeilen; das relevante Feld bleibt in der Regel erhalten, der Rest nicht.\n* **Suche über mehr als 90 Tage.** Solche Suchen greifen auf das Archiv zu und laufen asynchron. Das Ergebnis kommt als Benachrichtigung, nicht als direkte Antwort in der Oberfläche.\n* **Keine Volltextsuche über Anhänge.** Dateien aus Tickets oder E-Mails werden nicht indexiert, nur ihre Prüfsummen.\n* **Regeln über mehrere Standorte.** Korrelationen, die Ereignisse aus Hamburg und Rotterdam verbinden, greifen erst nach Abschluss des Abgleichs. Bei erhöhtem Rückstand verzögern sich diese Regeln entsprechend.",
+  "position": 15
+ },
+ {
+  "chunk_id": "systemdoku-sentinelgrid#16",
+  "dok_id": "systemdoku-sentinelgrid",
+  "titel": "Systemdokumentation SentinelGrid",
+  "quelle": "wissensbasis/systemdoku-sentinelgrid.md",
+  "text": "## 8 Zuständigkeiten\n\n| Bereich | Zuständig | Vertretung |\n|---|---|---|\n| Plattform, Knoten, Speicher | Plattformteam SOC | IT-Betrieb Hamburg |\n| Regelwerk und Korrelation | Detection Engineering | SOC-Leitung |\n| Anbindung neuer Quellen | Plattformteam SOC | — |\n| Zugriffsrechte auf die Oberfläche | Identity & Access Management | SOC-Leitung |\n| Verträge und Lizenzen | Einkauf IT | CISO |",
+  "position": 16
+ },
+ {
+  "chunk_id": "systemdoku-sentinelgrid#17",
+  "dok_id": "systemdoku-sentinelgrid",
+  "titel": "Systemdokumentation SentinelGrid",
+  "quelle": "wissensbasis/systemdoku-sentinelgrid.md",
+  "text": "## 9 Häufige Störungen und ihre Behandlung\n\n### 9.1 Der Puffer läuft voll\n\nEin steigender Puffer-Füllstand bedeutet, dass die Aufbereitung langsamer arbeitet als die Erfassung liefert. Übliche Ursachen sind ein Prozessor-Knoten, der nach einem Update nicht wieder in die Gruppe zurückgekehrt ist, ein neuer Parser mit einem teuren regulären Ausdruck oder eine Quelle, die plötzlich das Zehnfache ihres üblichen Volumens sendet.\n\nVorgehen: zuerst die Zahl der aktiven Prozessor-Knoten prüfen, dann die Rangliste der Quellen nach Volumen der letzten Stunde. Eine einzelne entgleiste Quelle wird über die Sperrliste am Collector angehalten; das ist eine bewusste Entscheidung des Incident Lead und wird im Ticket festgehalten. Der Puffer leert sich danach mit etwa dem Doppelten der Zulaufrate.",
+  "position": 17
+ },
+ {
+  "chunk_id": "systemdoku-sentinelgrid#18",
+  "dok_id": "systemdoku-sentinelgrid",
+  "titel": "Systemdokumentation SentinelGrid",
+  "quelle": "wissensbasis/systemdoku-sentinelgrid.md",
+  "text": "### 9.2 Eine Quelle liefert nicht mehr\n\nDer Bericht `Stille Quellen` erscheint werktags um 09:00 Uhr und listet jede Quelle, die in den letzten 24 Stunden weniger als zehn Prozent ihres üblichen Volumens geliefert hat. Häufigste Ursachen sind ein abgelaufenes Zertifikat auf der Quelle, eine geänderte Firewall-Regel und ein Neustart des Quellsystems ohne Start des Agenten.\n\nDer Bericht geht an das Plattformteam und an den jeweiligen System Owner. Bleibt eine Quelle länger als 30 Tage still, wird sie aus dem Quellenverzeichnis entfernt und das Asset im Inventar als nicht angebunden markiert.",
+  "position": 18
+ },
+ {
+  "chunk_id": "systemdoku-sentinelgrid#19",
+  "dok_id": "systemdoku-sentinelgrid",
+  "titel": "Systemdokumentation SentinelGrid",
+  "quelle": "wissensbasis/systemdoku-sentinelgrid.md",
+  "text": "### 9.3 Suchen sind langsam\n\nLangsame Suchen haben fast immer eine der drei Ursachen: ein zu großes Zeitfenster, eine Suche mit führendem Platzhalter oder eine gleichzeitige Archivrückholung, die Speicherbandbreite belegt. Führende Platzhalter lassen sich meist durch ein Feldkriterium ersetzen; die Oberfläche weist beim Absenden darauf hin.\n\nFür wiederkehrende Auswertungen über große Zeiträume gibt es gespeicherte Suchen, die nachts laufen und ihr Ergebnis als Tabelle ablegen.",
+  "position": 19
+ },
+ {
+  "chunk_id": "systemdoku-sentinelgrid#20",
+  "dok_id": "systemdoku-sentinelgrid",
+  "titel": "Systemdokumentation SentinelGrid",
+  "quelle": "wissensbasis/systemdoku-sentinelgrid.md",
+  "text": "### 9.4 Doppelte Ereignisse\n\nDoppelte Ereignisse entstehen, wenn eine Quelle sowohl über Syslog als auch über den Agenten liefert. Das kommt bei Umstellungen vor. Die Aufbereitung erkennt Duplikate über eine Prüfsumme aus Zeitstempel, Quelle und Rohtext innerhalb eines Fensters von fünf Minuten und verwirft sie. Über das Fenster hinaus bleiben Duplikate bestehen und müssen an der Quelle abgestellt werden.",
+  "position": 20
+ },
+ {
+  "chunk_id": "systemdoku-sentinelgrid#21",
+  "dok_id": "systemdoku-sentinelgrid",
+  "titel": "Systemdokumentation SentinelGrid",
+  "quelle": "wissensbasis/systemdoku-sentinelgrid.md",
+  "text": "### 9.5 Abgleich nach Rotterdam hängt\n\nEin Rückstand über 30 Minuten ist ein Alarm. Ursache ist meistens die Netzstrecke zwischen den Standorten, seltener ein voller Index-Knoten in Rotterdam. Solange der Rückstand besteht, sind Suchen in Rotterdam unvollständig und standortübergreifende Korrelationsregeln verzögert. Die Erfassung ist davon nicht betroffen.",
+  "position": 21
+ },
+ {
+  "chunk_id": "systemdoku-sentinelgrid#22",
+  "dok_id": "systemdoku-sentinelgrid",
+  "titel": "Systemdokumentation SentinelGrid",
+  "quelle": "wissensbasis/systemdoku-sentinelgrid.md",
+  "text": "## 10 Rollen in der Oberfläche\n\n| Rolle | Rechte | Vergabe |\n|---|---|---|\n| `soc.analyst` | Suche über alle Indizes, Fälle bearbeiten | IAM, nach Freigabe der SOC-Leitung |\n| `soc.lead` | zusätzlich Regeln ändern, Quellen sperren | IAM, nach Freigabe des CISO |\n| `soc.plattform` | zusätzlich Knoten und Konfiguration verwalten | IAM, nach Freigabe des CISO |\n| `owner.readonly` | Suche nur über die eigenen Assets | IAM, nach Freigabe des Plattformteams |\n| `audit.readonly` | Suche über Metadaten, keine Rohdaten | IAM, befristet auf die Prüfung |\n\nDie Rolle `owner.readonly` filtert über das Feld `nl.asset_id`. Ein System Owner sieht damit die Ereignisse seiner eigenen Systeme, aber keine Ereignisse anderer Bereiche. Diese Trennung ist mit dem Betriebsrat abgestimmt und Voraussetzung dafür, dass Fachbereiche überhaupt Zugriff bekommen.\n\nJede Suche wird protokolliert: Konto, Zeitpunkt, Suchausdruck, Zahl der Treffer. Diese Protokolle liegen in einem eigenen Index, auf den nur die Rolle `audit.readonly` und der Datenschutz Zugriff haben.",
+  "position": 22
+ },
+ {
+  "chunk_id": "systemdoku-sentinelgrid#23",
+  "dok_id": "systemdoku-sentinelgrid",
+  "titel": "Systemdokumentation SentinelGrid",
+  "quelle": "wissensbasis/systemdoku-sentinelgrid.md",
+  "text": "## 11 Datenschutz\n\nDie Plattform verarbeitet personenbezogene Daten, weil Anmeldungen und administrative Kommandos einem Konto zugeordnet sind. Grundlage ist die Betriebsvereinbarung BV-2025-07. Die Verarbeitung ist auf den Zweck der Erkennung und Aufklärung von Sicherheitsvorfällen beschränkt.\n\nDrei Vorkehrungen setzen das technisch um: die Filterung nach Asset für Fachbereiche, das Vier-Augen-Prinzip bei personenbezogenen Auswertungen und die Protokollierung jeder Suche. Auswertungen zur Verhaltens- oder Leistungskontrolle finden nicht statt.\n\nAnfragen betroffener Personen nach Auskunft beantwortet der Datenschutz mit Unterstützung des Plattformteams. Die Auskunft umfasst die zu einer Person gespeicherten Ereignisse im schnellen Zugriff; Archivdaten werden auf ausdrückliche Anforderung zurückgeholt.",
+  "position": 23
+ },
+ {
+  "chunk_id": "systemdoku-sentinelgrid#24",
+  "dok_id": "systemdoku-sentinelgrid",
+  "titel": "Systemdokumentation SentinelGrid",
+  "quelle": "wissensbasis/systemdoku-sentinelgrid.md",
+  "text": "## 12 Glossar\n\n| Begriff | Bedeutung |\n|---|---|\n| Quelle | ein System, das Ereignisse an SentinelGrid liefert |\n| Ereignis | eine einzelne Zeile im gemeinsamen Schema |\n| Treffer | ein Ereignis, auf das eine Erkennungsregel zutrifft |\n| Fall | mehrere zusammengehörende Treffer, aus denen ein Ticket entsteht |\n| Parser | die Vorschrift, die aus einem Rohtext Felder macht |\n| Index | die Einheit, in der Ereignisse gespeichert und gealtert werden |\n| Rückstand | die Verzögerung des Abgleichs zwischen den Standorten |",
+  "position": 24
+ },
+ {
+  "chunk_id": "systemdoku-sentinelgrid#25",
+  "dok_id": "systemdoku-sentinelgrid",
+  "titel": "Systemdokumentation SentinelGrid",
+  "quelle": "wissensbasis/systemdoku-sentinelgrid.md",
+  "text": "## 13 Änderungsverzeichnis\n\n| Version | Datum | Änderung |\n|---|---|---|\n| 9.3 | 2026-05-20 | Kapazitätszahlen aktualisiert, Abschnitt Grenzen ergänzt |\n| 9.2 | 2026-02-11 | Wiederanlauf-Probe dokumentiert, Schwellen angepasst |\n| 9.1 | 2025-11-30 | Schema auf ECS 8.11 gehoben |\n| 9.0 | 2025-09-15 | Zweiter Standort Rotterdam in Betrieb genommen |",
+  "position": 25
+ }
+]

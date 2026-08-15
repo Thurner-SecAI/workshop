@@ -1,0 +1,9 @@
+__pycache__/
+.ipynb_checkpoints/
+.DS_Store
+.venv/
+venv/
+
+# Wird beim Durcharbeiten erzeugt
+02_rag/daten/chroma/
+*/ausgabe/

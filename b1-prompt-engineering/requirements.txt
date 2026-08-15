@@ -1,0 +1,4 @@
+# Kapitel 1 · Prompt Engineering
+# Installation:  pip install -r requirements.txt
+openai>=1.40
+jupyter>=1.0
