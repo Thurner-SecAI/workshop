@@ -49,4 +49,4 @@ Bis auf die oben genannte Ausnahme lesen die Notebooks ihre Daten aus dem
 Ordner daneben (`data/` bzw. `daten/`). Sie laufen deshalb lokal, nicht in
 Google Colab: dort fehlen die Dateien.
 
-Stand: 15.08.2026
+Stand: 17.08.2026

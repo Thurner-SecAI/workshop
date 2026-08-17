@@ -11,7 +11,7 @@ Bausteine der vorherigen Teile fertig mit.
 | [`teil1.ipynb`](teil1.ipynb) | Tokenizer, Byte Pair Encoding, Word Embedding, Positional Encoding | 4 |
 | [`teil2.ipynb`](teil2.ipynb) | Kausale Maske, Query/Key/Value, Aufmerksamkeitskopf, mehrere Köpfe | 1 |
 | [`teil3.ipynb`](teil3.ipynb) | Feed-Forward, Skip Connection, Norm Layer, Block, MiniGPT | 4 |
-| [`teil4.ipynb`](teil4.ipynb) | Batches, Cross-Entropy, Training, Textgenerierung | 3 |
+| [`teil4.ipynb`](teil4.ipynb) | Batches, Cross-Entropy, Training, Textgenerierung, Sampling | 3 + Bonus |
 
 Zu jedem Teil liegt eine `_solved.ipynb` daneben: dieselbe Datei ausgefüllt und einmal
 durchgelaufen, zum Vorführen. **Verteilt wird nur die Fassung ohne `_solved`.**
