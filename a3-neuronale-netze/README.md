@@ -22,7 +22,6 @@ Genau das ist die Botschaft des Kapitels, und das Notebook sagt sie an vier Stel
 | `neuronale_netze_solved.ipynb` | dieselbe Datei ausgefüllt und einmal durchgelaufen, zum Vorführen |
 | `build_nn.py` | erzeugt **beide** Notebooks aus einer Quelle |
 | `data/mnist.npz` | 70.000 Ziffernbilder (11 MB) |
-| `requirements.txt` | Abhängigkeiten für den lokalen Start |
 | `01_digit_recognition_workshop.ipynb` | **alte Fassung (v1, englisch, Keras)** — dient nur noch als Vorlage, kann weg |
 
 > ⚠️ **Die `.ipynb` nicht direkt bearbeiten.** Beide Notebooks werden aus `build_nn.py` erzeugt,
@@ -78,8 +77,10 @@ und laden.
 
 ### Variante B — lokal
 
+Die Pakete stehen zentral in der `requirements.txt` im Wurzelverzeichnis des Repos — einmal
+`pip install -r requirements.txt` dort, dann laufen alle Ordner. Danach:
+
 ```bash
-pip install -r requirements.txt
 jupyter lab neuronale_netze.ipynb
 ```
 

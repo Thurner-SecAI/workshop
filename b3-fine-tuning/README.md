@@ -30,6 +30,8 @@ einen Selbsttest und eine aufklappbare Lösung.
 
 ## Setup
 
+Im Wurzelverzeichnis des Repos, wo die gemeinsame `requirements.txt` liegt:
+
 ```bash
 python -m venv .venv
 source .venv/bin/activate
@@ -51,7 +53,6 @@ in Sekunden.
 ```
 03_fine-tuning/
 ├── README.md
-├── requirements.txt
 ├── helfer.py                        Gerätewahl, Modelle laden, Batch-Generierung
 ├── daten/
 │   ├── erzeuge_trainingsdaten.py    Generator mit festem Seed

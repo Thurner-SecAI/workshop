@@ -22,6 +22,8 @@ vorgegeben. Die Reihenfolge ist sinnvoll, aber keine Pflicht.
 
 ## Setup
 
+Im Wurzelverzeichnis des Repos, wo die gemeinsame `requirements.txt` liegt:
+
 ```bash
 python -m venv .venv
 .venv/bin/pip install -r requirements.txt
@@ -70,7 +72,6 @@ nötig; die Rechenabschnitte laufen auch ohne Modell.
 ```
 04_deployment/
 ├── helfer.py                  gemeinsame Funktionen, von allen Notebooks importiert
-├── requirements.txt
 ├── daten/
 │   ├── model_cards.json       12 offene Modelle mit ihren Architekturzahlen
 │   ├── hardware.json          10 Karten und Geräte mit VRAM und Speicherbandbreite

@@ -25,8 +25,11 @@ die Zwischenergebnisse liegen als Datei in `daten/`.
 
 ## Setup
 
+Die Pakete stehen zentral in der `requirements.txt` im Wurzelverzeichnis des
+Repos — eine Liste für alle Ordner.
+
 ```bash
-pip install -r requirements.txt
+pip install -r requirements.txt      # im Wurzelverzeichnis
 
 ollama pull qwen3.5:0.8b
 ollama pull nomic-embed-text

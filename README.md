@@ -15,9 +15,14 @@ cd workshop
 
 Wer kein Git hat: oben rechts **Code → Download ZIP**.
 
+Danach die passende Schritt-für-Schritt-Anleitung durcharbeiten:
+[`Windows`](SETUP-Windows.md) · [`Linux`](SETUP-Linux.md) · [`macOS`](SETUP-Mac.md).
+Sie richtet die virtuelle Umgebung, Pakete, Jupyter und Ollama ein.
+**Vor** dem Workshop erledigen, nicht darin.
+
 ## Modul A · Machine-Learning-Grundlagen
 
-Reines Python mit NumPy, scikit-learn und PyTorch. Kein Sprachmodell, kein Ollama. Die `requirements.txt` im jeweiligen Ordner reicht.
+Reines Python mit NumPy, scikit-learn und PyTorch. Kein Sprachmodell, kein Ollama. Virtuelle Umgebung und Jupyter einrichten: Schritt 0 bis 2 in [`SETUP.md`](SETUP.md), rund 10 Minuten.
 
 | Ordner | Thema | Notebooks |
 |---|---|:--:|
@@ -30,7 +35,7 @@ Reines Python mit NumPy, scikit-learn und PyTorch. Kein Sprachmodell, kein Ollam
 
 ## Modul B · LLM Engineering
 
-Braucht ein Sprachmodell auf dem eigenen Rechner. Die Anleitung steht in [`SETUP.md`](SETUP.md) und gehört **vor** den Workshop erledigt — rund 1,3 GB Download.
+Zusätzlich ein Sprachmodell auf dem eigenen Rechner. Die vollständige Anleitung steht in [`SETUP.md`](SETUP.md) und gehört **vor** den Workshop erledigt — rund 1,3 GB Download.
 
 | Ordner | Thema | Notebooks |
 |---|---|:--:|
@@ -49,4 +54,4 @@ Bis auf die oben genannte Ausnahme lesen die Notebooks ihre Daten aus dem
 Ordner daneben (`data/` bzw. `daten/`). Sie laufen deshalb lokal, nicht in
 Google Colab: dort fehlen die Dateien.
 
-Stand: 17.08.2026
+Stand: 19.08.2026

@@ -1,8 +1,0 @@
-# Für das Notebook
-numpy>=1.26
-matplotlib>=3.8
-scikit-learn>=1.4
-joblib>=1.3
-jupyterlab>=4.0
-
-# pandas wird hier nicht gebraucht — die Daten sind Bilder, keine Tabelle.

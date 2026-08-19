@@ -27,7 +27,6 @@ die zeigt: **es sind zwei ausgetauschte Bausteine, kein neues Verfahren.**
 | `build_logreg.py` | erzeugt beide Notebooks. **Einzige Quelle der Wahrheit für den Inhalt.** |
 | `erzeuge_tumordaten.py` | erzeugt `data/tumor_daten.csv` |
 | `data/tumor_daten.csv` | 300 synthetische Fälle, 2 Spalten: `tumor_groesse_mm`, `boesartig` |
-| `requirements.txt` | numpy, pandas, matplotlib, scikit-learn, jupyterlab |
 
 Die `.ipynb` **nicht direkt bearbeiten** — der nächste Lauf von `build_logreg.py` überschreibt
 sie. Ändern, neu bauen, Lösungsfassung ausführen:

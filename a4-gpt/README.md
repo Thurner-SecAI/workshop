@@ -21,8 +21,10 @@ durchgelaufen, zum Vorführen. **Verteilt wird nur die Fassung ohne `_solved`.**
 In Google Colab hochladen und loslegen — für Teil 4 den Laufzeittyp *T4 GPU* wählen, sonst dauert
 das Training mehrere Minuten. Lokal:
 
+Die Pakete stehen zentral in der `requirements.txt` im Wurzelverzeichnis des Repos — einmal
+`pip install -r requirements.txt` dort, dann laufen alle Ordner. Danach:
+
 ```bash
-pip install "torch>=2.2" "numpy>=1.26" "matplotlib>=3.8" jupyterlab
 jupyter lab teil1.ipynb
 ```
 

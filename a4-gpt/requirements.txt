@@ -1,8 +1,0 @@
-# Für die vier Teile
-torch>=2.2
-numpy>=1.26
-matplotlib>=3.8
-jupyterlab>=4.0
-
-# Der Faust-Text wird in Abschnitt 0 von Project Gutenberg geladen, requests
-# braucht es dafür nicht — das erledigt urllib aus der Standardbibliothek.

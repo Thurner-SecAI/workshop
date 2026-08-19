@@ -35,7 +35,6 @@ den Nachbarn helfen, während die anderen fertig werden.
 | `bonus_gradientenabstieg_challenge.ipynb` | Bonus 2 — Gradientenabstieg selbst gebaut, 4 Challenges |
 | `data/haus_preise_einfach.csv` | 21.613 Häuser, 2 Spalten: `wohnflaeche_qm`, `preis_usd` |
 | `data/haus_preise_multi.csv` | dieselben Häuser, 4 Spalten: `wohnflaeche_qm`, `qualitaet`, `baujahr`, `preis_usd` |
-| `requirements.txt` | Abhängigkeiten für den lokalen Start |
 
 **Verteilt wird nur `lineare_regression.ipynb`** plus die beiden CSVs. Die `_solved`-Fassung ist
 für dich: zum Vorführen, zum Nachschlagen und um zu sehen, was am Ende herauskommen soll.
@@ -65,8 +64,10 @@ den Teilnehmenden vorab einen Ordner mit den Notebooks und den zwei CSVs bereit
 
 ### Variante B — lokal
 
+Die Pakete stehen zentral in der `requirements.txt` im Wurzelverzeichnis des Repos — einmal
+`pip install -r requirements.txt` dort, dann laufen alle Ordner. Danach:
+
 ```bash
-pip install -r requirements.txt
 jupyter lab lineare_regression.ipynb
 ```
 

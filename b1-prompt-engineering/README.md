@@ -41,7 +41,8 @@ ollama serve          # läuft danach im Hintergrund auf Port 11434
 ollama pull qwen3.5:0.8b
 ```
 
-**3. Python-Pakete installieren:**
+**3. Python-Pakete installieren** — eine Liste für alle Ordner, im Wurzelverzeichnis
+des Repos:
 
 ```bash
 pip install -r requirements.txt
@@ -93,7 +94,6 @@ werden.
 ```
 01_prompt-engineering/
 ├── README.md
-├── requirements.txt
 ├── helfer.py                 Modell-Zugang, Datenlader, Ausgabe, Messung
 ├── daten/                    alle Beispieldaten als JSON
 └── NN_thema[_solved].ipynb

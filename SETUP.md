@@ -1,32 +1,111 @@
 # Setup — vor dem Workshop erledigen
 
-Die Notebooks in Modul B sprechen ein Sprachmodell an, das **auf deinem eigenen
-Rechner läuft**. Dafür brauchst du zwei Dinge: Ollama als Modellserver und eine
-Python-Umgebung.
+Direkt zur Anleitung für dein Betriebssystem:
+[`Windows`](SETUP-Windows.md) · [`Linux`](SETUP-Linux.md) · [`macOS`](SETUP-Mac.md)
 
-> **Mach das zu Hause, nicht im Workshop.** Es sind rund 1,3 GB Download. Wenn
+Alle Aufgaben laufen als Jupyter-Notebooks auf deinem eigenen Rechner. Du
+brauchst dafür Python und eine virtuelle Umgebung; für Modul B zusätzlich einen
+Modellserver, der ein Sprachmodell lokal bereitstellt.
+
+| | Modul A · ML-Grundlagen | Modul B · LLM Engineering |
+|---|---|---|
+| Python 3.10+ mit venv | ja | ja |
+| Jupyter | ja | ja |
+| Ollama + Modelle (~1,3 GB) | **nein** | ja |
+| Aufwand | ~10 Minuten | ~20 Minuten |
+
+> **Mach das zu Hause, nicht im Workshop.** Modul B lädt rund 1,3 GB Modelle,
+> dazu kommen die Python-Pakete — `torch` allein ist mehrere hundert MB. Wenn
 > das dreißig Leute gleichzeitig über dasselbe WLAN ziehen, wird es ein langer
 > Vormittag.
 
-Rechne mit **20 Minuten**, davon der größte Teil Wartezeit.
+Schritt 0 bis 2 gelten für beide Module. Ab Schritt 3 geht es nur noch um
+Modul B — wer nur Modul A macht, ist nach Schritt 2 fertig.
 
 ---
 
-## Was du am Ende haben willst
+## Schritt 0 · Repo holen
 
+```bash
+git clone https://github.com/Thurner-SecAI/workshop.git
+cd workshop
 ```
-$ ollama list
-NAME                       SIZE
-qwen3.5:0.8b               1.0 GB
-nomic-embed-text:latest    274 MB
 
-$ python -c "import openai, chromadb; print('ok')"
-ok
-```
+Wer kein Git hat: auf der Repo-Seite oben rechts **Code → Download ZIP**,
+entpacken, in den entpackten Ordner wechseln.
 
 ---
 
-## Schritt 1 · Ollama installieren
+## Schritt 1 · Python-Umgebung anlegen
+
+Du brauchst **Python 3.10 oder neuer**:
+
+```bash
+python3 --version
+```
+
+Kommt hier nichts oder etwas Älteres: <https://www.python.org/downloads/>
+(Windows: beim Installieren **„Add python.exe to PATH"** ankreuzen).
+
+Eine virtuelle Umgebung ist ein Ordner, in dem die Pakete dieses Workshops
+landen — getrennt von allem anderen auf deinem Rechner. Angelegt wird sie
+**einmal, im Wurzelverzeichnis des Repos**:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate         # Windows: .venv\Scripts\activate
+```
+
+Wenn es geklappt hat, steht `(.venv)` vorn in deiner Eingabezeile. **Diese
+Zeile brauchst du in jedem neuen Terminal wieder** — die Umgebung gilt nur für
+die Shell, in der du sie aktiviert hast.
+
+---
+
+## Schritt 2 · Pakete installieren
+
+Es gibt **eine** Paketliste für alle Ordner, im Wurzelverzeichnis des Repos.
+Ein Befehl, mit aktiver `.venv`:
+
+```bash
+pip install -r requirements.txt
+```
+
+Das dauert ein paar Minuten — `torch` allein ist mehrere hundert MB.
+
+**Jupyter musst du nicht extra installieren**, es steht mit in der Liste. Ebenso
+die Pakete für Modul B: du installierst sie auch dann mit, wenn du nur Modul A
+machst. Das ist Absicht — eine Liste, die immer stimmt, ist weniger Ärger als
+acht, von denen du die richtige heraussuchen musst.
+
+Probe, dass die Umgebung steht:
+
+```bash
+python -c "import numpy, matplotlib; print('ok')"     # Modul A
+jupyter --version
+```
+
+### Notebook starten
+
+```bash
+jupyter lab
+```
+
+Das öffnet im Browser eine Dateiübersicht. Dort in den Ordner klicken und das
+erste Notebook öffnen. Zellen laufen mit **Shift + Enter**.
+
+> Wichtig: `jupyter lab` **aus derselben Shell** starten, in der `(.venv)`
+> aktiv ist. Sonst benutzt das Notebook ein anderes Python und findet die
+> Pakete nicht.
+
+**Wer nur Modul A macht, ist hier fertig.** Modul A rechnet mit NumPy,
+scikit-learn und PyTorch — kein Sprachmodell, kein Ollama. Die Daten liegen
+fertig im Ordner `data/` neben den Notebooks; einzige Ausnahme ist `a4-gpt`,
+das seinen Trainingstext in Abschnitt 0 selbst herunterlädt.
+
+---
+
+## Schritt 3 · Ollama installieren (nur Modul B)
 
 Ollama lädt Sprachmodelle herunter und stellt sie unter
 `http://localhost:11434` bereit — mit derselben API, die auch OpenAI benutzt.
@@ -67,7 +146,7 @@ klemmt".
 
 ---
 
-## Schritt 2 · Modelle laden
+## Schritt 4 · Modelle laden (nur Modul B)
 
 ```bash
 ollama pull qwen3.5:0.8b        # 1,0 GB — das Chat-Modell für alle Notebooks
@@ -91,35 +170,10 @@ ein. Der Abschnitt rechnet dann mit deinen Zahlen weiter.
 
 ---
 
-## Schritt 3 · Python-Umgebung
+## Schritt 5 · Prüfen, ob alles zusammenspielt (nur Modul B)
 
-Du brauchst **Python 3.10 oder neuer** (`python3 --version`).
-
-```bash
-cd 01_prompt-engineering          # oder der Ordner, mit dem du anfängst
-
-python3 -m venv .venv
-source .venv/bin/activate         # Windows: .venv\Scripts\activate
-
-pip install -r requirements.txt
-```
-
-Jeder der vier Ordner hat seine eigene `requirements.txt`. Wer alles
-durcharbeiten will, installiert der Reihe nach alle vier in dieselbe Umgebung —
-sie vertragen sich.
-
-| Ordner | Was dazukommt |
-|---|---|
-| `01_prompt-engineering` | `openai`, `jupyter` |
-| `02_rag` | `chromadb`, `langchain-text-splitters`, `rank-bm25`, `tiktoken` |
-| `03_fine-tuning` | `torch`, `transformers`, `peft` — kein Ollama nötig |
-| `04_deployment` | `pandas`, `tiktoken`, für ein Notebook auch `torch` und `transformers` |
-
----
-
-## Schritt 4 · Prüfen, ob alles zusammenspielt
-
-Diesen Test einmal laufen lassen, bevor du ins Notebook gehst:
+Diesen Test einmal laufen lassen, bevor du ins Notebook gehst — mit aktiver
+`.venv`:
 
 ```bash
 python -c "
@@ -148,40 +202,46 @@ Die `768` dagegen ist fest: so viele Dimensionen hat ein Embedding von
 Der erste Aufruf dauert ein paar Sekunden — Ollama lädt das Modell in den
 Speicher. Danach geht es schnell.
 
----
-
-## Schritt 5 · Notebook starten
-
-```bash
-jupyter lab
-```
-
-Im Browser das erste Notebook des Ordners öffnen und Abschnitt 0 ausführen. Es
-meldet, welches Modell es benutzt und ob der Server antwortet.
+Im Notebook selbst macht Abschnitt 0 dieselbe Probe: er meldet, welches Modell
+benutzt wird und ob der Server antwortet.
 
 ---
 
 ## Welches Notebook braucht was
 
+Die Pakete sind mit Schritt 2 alle installiert. Die Spalte sagt nur, womit der
+Ordner tatsächlich rechnet.
+
+**Modul A** — kein Ollama, keine Modelle.
+
+| Ordner | Benutzt | Sonstiges |
+|---|---|---|
+| `a1-lineare-regression` | numpy, pandas, matplotlib, scikit-learn | Daten in `data/` |
+| `a2-logistische-regression` | dieselben | Daten in `data/` |
+| `a3-neuronale-netze` | numpy, matplotlib, scikit-learn, joblib | Daten in `data/` (11 MB Bilder) |
+| `a4-gpt` | torch, numpy, matplotlib | lädt den Faust-Text in Abschnitt 0 selbst — läuft auch in Colab |
+
+**Modul B**
+
 | Notebook | Ollama | Modelle | Sonstiges |
 |---|:--:|---|---|
-| 1.1–1.7 Prompt Engineering | ja | `qwen3.5:0.8b` | — |
-| 2.1 Chunking | ja | `qwen3.5:0.8b`, `nomic-embed-text` | — |
-| 2.2 Keyword Search | **nein** | — | rechnet vollständig deterministisch |
-| 2.3 Semantic Search | ja | `nomic-embed-text`, für die letzte Challenge `bge-m3` | — |
-| 2.4 Augmented Prompt | ja | `qwen3.5:0.8b`, `nomic-embed-text` | — |
-| Bonus Hybrid Search | ja | `nomic-embed-text` | — |
-| Bonus HNSW | **nein** | — | benutzt die zwischengespeicherten Embeddings |
-| 3 Fine-Tuning | **nein** | — | lädt `SmolLM2-135M` von Hugging Face (~540 MB, einmalig) |
-| 4.1 Model Cards | ja | `qwen3.5:0.8b` und ein zweites Chat-Modell | — |
-| 4.2 Quantisierung | **nein** | — | lädt `SmolLM2-135M` von Hugging Face |
+| `b1` 1.1–1.7 Prompt Engineering | ja | `qwen3.5:0.8b` | — |
+| `b2` 2.1 Chunking | ja | `qwen3.5:0.8b`, `nomic-embed-text` | — |
+| `b2` 2.2 Keyword Search | **nein** | — | rechnet vollständig deterministisch |
+| `b2` 2.3 Semantic Search | ja | `nomic-embed-text`, für die letzte Challenge `bge-m3` | — |
+| `b2` 2.4 Augmented Prompt | ja | `qwen3.5:0.8b`, `nomic-embed-text` | — |
+| `b2` Bonus Hybrid Search | ja | `nomic-embed-text` | — |
+| `b2` Bonus HNSW | **nein** | — | benutzt die zwischengespeicherten Embeddings |
+| `b3` Fine-Tuning | **nein** | — | lädt `SmolLM2-135M` von Hugging Face (~540 MB, einmalig) |
+| `b4` 4.1 Model Cards | ja | `qwen3.5:0.8b` und ein zweites Chat-Modell | — |
+| `b4` 4.2 Quantisierung | **nein** | — | lädt `SmolLM2-135M` von Hugging Face |
 
 ---
 
 ## Ohne lokales Ollama: einen Anbieter eintragen
 
 Wenn dein Rechner zu klein ist oder du lieber einen API-Key benutzt: Der
-Zugang steht in jedem Ordner an genau einer Stelle, in `helfer.py`.
+Zugang steht in jedem Modul-B-Ordner an genau einer Stelle, in `helfer.py`.
 
 ```python
 BASIS_URL = "http://localhost:11434/v1"
@@ -211,14 +271,22 @@ Chain-of-Thought richtig — dann ist die Messung langweilig.
 
 ### Google Colab
 
-In Colab gibt es kein lokales Ollama, dort ist die Anbieter-Variante nötig.
-Außerdem müssen `helfer.py` und der Ordner `daten/` nach `/content`
-hochgeladen werden. Die Notebooks installieren fehlende Pakete selbst.
+Die meisten Notebooks lesen ihre Daten aus dem Ordner daneben (`data/` bzw.
+`daten/`) und laufen deshalb lokal, nicht in Colab: dort fehlen die Dateien.
 
-Die beiden Notebooks ohne Ollama — Fine-Tuning und Quantisierung — laufen in
-Colab dagegen sehr gut, und für den QLoRA-Bonus im Fine-Tuning-Notebook ist
-Colab sogar nötig: `bitsandbytes` braucht eine CUDA-GPU und läuft auf macOS
-nicht.
+Zwei Ausnahmen laufen in Colab problemlos:
+
+* **`a4-gpt`** braucht keine Datendateien — die vier Teile laden den Text
+  selbst, und für das Training in Teil 4 ist eine Colab-GPU sogar der bequemere
+  Weg. Links stehen in der README des Repos.
+* **`b3` Fine-Tuning und `b4` 4.2 Quantisierung** brauchen kein Ollama. Für den
+  QLoRA-Bonus im Fine-Tuning-Notebook ist Colab sogar nötig: `bitsandbytes`
+  braucht eine CUDA-GPU und läuft auf macOS nicht.
+
+Für alles Übrige in Modul B gilt in Colab: es gibt dort kein lokales Ollama,
+also ist die Anbieter-Variante von oben nötig. Außerdem müssen `helfer.py` und
+der Ordner `daten/` nach `/content` hochgeladen werden. Die Notebooks
+installieren fehlende Pakete selbst.
 
 ---
 
@@ -317,6 +385,33 @@ baue_chroma(lade_chunks(), neu=True)
 
 ## Wenn etwas klemmt
 
+### Umgebung und Notebook (beide Module)
+
+**`ModuleNotFoundError` mitten im Notebook**
+Die Umgebung ist nicht aktiv oder das Notebook läuft in einem anderen Kernel.
+`source .venv/bin/activate`, dann `jupyter lab` aus derselben Shell starten.
+
+**`python3: command not found` unter Windows**
+Dort heißt der Befehl `python`, nicht `python3` — auch beim Anlegen der
+Umgebung: `python -m venv .venv`.
+
+**`.venv\Scripts\activate` wird von PowerShell blockiert**
+PowerShell verbietet Skripte standardmäßig. Einmalig in derselben Sitzung:
+`Set-ExecutionPolicy -Scope Process RemoteSigned`. Oder die Eingabeaufforderung
+(`cmd`) statt PowerShell benutzen.
+
+**`FileNotFoundError` beim Laden der Daten**
+Das Notebook wurde aus dem falschen Verzeichnis gestartet. Die Notebooks
+erwarten den Ordner `data/` bzw. `daten/` direkt daneben — also `jupyter lab`
+im Repo starten und das Notebook dort öffnen, nicht die `.ipynb` einzeln
+woandershin kopieren.
+
+**`NameError` bei einer Funktion, die es geben müsste**
+Die Zellen wurden nicht der Reihe nach ausgeführt. *Kernel → Restart Kernel and
+Run All Cells*.
+
+### Ollama (nur Modul B)
+
 **`Connection refused` oder `Failed to connect to localhost port 11434`**
 Der Server läuft nicht. macOS: Ollama-App starten, oder `brew services start
 ollama`. Linux: `ollama serve` in einem eigenen Terminal. Windows: prüfen, ob
@@ -342,10 +437,6 @@ Selbsttests prüfen deshalb die Struktur deiner Lösung, nicht den Wortlaut der
 Modellantwort. Auch gemessene Quoten schwanken um ein paar Prozentpunkte — die
 Richtung zählt, nicht die zweite Nachkommastelle.
 
-**`ModuleNotFoundError` mitten im Notebook**
-Die Umgebung ist nicht aktiv oder das Notebook läuft in einem anderen Kernel.
-`source .venv/bin/activate`, dann `jupyter lab` aus derselben Shell starten.
-
 **Der Fine-Tuning-Download hängt**
 `SmolLM2-135M` kommt von Hugging Face, nicht von Ollama. Einmal geladen, liegt
 er im Cache unter `~/.cache/huggingface`.
@@ -354,8 +445,16 @@ er im Cache unter `~/.cache/huggingface`.
 
 ## Checkliste
 
+**Beide Module**
+
+- [ ] `python3 --version` zeigt 3.10 oder neuer
+- [ ] `(.venv)` steht vorn in der Eingabezeile
+- [ ] `pip install -r requirements.txt` ist ohne Fehler durchgelaufen
+- [ ] `jupyter lab` öffnet sich im Browser
+- [ ] Das erste Notebook läuft bis Abschnitt 1 ohne Fehler durch
+
+**Zusätzlich für Modul B**
+
 - [ ] `ollama --version` gibt eine Version aus
 - [ ] `ollama list` zeigt `qwen3.5:0.8b` und `nomic-embed-text`
-- [ ] Der Prüf-Schnipsel aus Schritt 4 druckt eine Antwort und `768`
-- [ ] `jupyter lab` öffnet sich im Browser
-- [ ] Abschnitt 0 des ersten Notebooks läuft ohne Fehler durch
+- [ ] Der Prüf-Schnipsel aus Schritt 5 druckt eine Antwort und `768`
